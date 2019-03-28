@@ -1,37 +1,62 @@
 <?php
+include ('config.php');
 class SQL
 {   
 
     protected $tableName;
-    protected $tableFilds;
-    protected $condition;
-    public $link;
+    protected $tableFild_1;
+    protected $tableFild_2;
+    public $condition ;
+    
+    
 
-    function __construct()
+    public function con()
     {
-        $this->link=mysql_connect('localhost', 'user15', 'user15' ); 
+        $link=mysql_connect(LOCAL_HOST, USER_15, PASSWD ); 
+       // print_r($link);
+        if($link)
+        {
+           $sel_db= mysql_select_db(DB_NAME, $link);
+           echo mysql_errno($link) . ": " . mysql_error($link). "\n";
+        //    mysql_query("insert students (FirstName,LastName) VALUES ('Sergei','Kobelia')", $link);
+        //     echo mysql_errno($link) . ": " . mysql_error($link) . "\n";
+        }
     }
     public function SetName()
     {
         $this->tableName=$_POST['name'];
     }
-    public function SetFilds()
-    {
-        
-    }
-    public function SetCond()
-    {
-        
+     public function SetFild_1()
+     {
+         $this->tableFild_1=$_POST['fild_1'];
+     }
+     public function SetFild_2()
+     {
+         $this->tableFild_2=$_POST['fild_2'];
+     }
+    // public function SetCond()
+    // {
+    //     $this->condition=$_POST['where'];
+    // }
+
+    public function insert()
+    {   $link=mysql_connect(LOCAL_HOST, USER_15, PASSWD); 
+        // print_r($link);
+         if($link)
+         {
+            $sel_db= mysql_select_db(DB_NAME, $link); 
+            echo mysql_errno($link) . ": " . mysql_error($link). "\n";
+            $rez=mysql_query("insert $this->tableName ($this->tableFild_1) VALUES ($this->tableFild_2)", $link);
+            echo mysql_errno($link) . ": " . mysql_error($link) . "\n";
+            return $rez; 
+         }   
+         
     }
 
-    public function select()
+
+    protected function select()
     {
-        $sql="select * from students;";
-        return $this->sql;
-    }
-    protected function insert()
-    {
-        $sql="insert students (id, firstName,secondName) VALUES (2, 'Sergei','Kobelia') ;";
+        $sql="insert students (id, firstName,secondName) VALUES (2, 'Sergei','Kobelia')";
         return $this->sql;
     }
     protected function delete()
@@ -46,6 +71,7 @@ class SQL
         WHERE secondName = 'Syniavskyi';";
         return $this->sql;
     }
+    
 }
 
 ?>
