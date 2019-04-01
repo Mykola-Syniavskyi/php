@@ -2,7 +2,7 @@
 include'config.php';
 
 class Calculator
-    {
+{
         private $a;
         private $b;
         private $memVal;
@@ -16,23 +16,24 @@ class Calculator
 
         public function SetA($valueA)
         {             
-                 if(is_numeric($valueA) && is_int($valueA)) //checking for integer and number
+                if($valueA) 
                 { 
                    return $this->a = $valueA ; 
                 }else
                 {    
-                    return $this->a = ERR_NUM1_1;    
+                    return false;    
                 }
         }
 
         public function SetB($valueB)
         {
-            if(is_numeric($valueB) && is_int($valueB))//checking for integer and number
+            if($valueB) 
                 {
-                  return  $this->b= $valueB;   
-                }else
-                {
-                    return $this->b = ERR_NUM2_1;
+                    return $this->b = $valueB ; 
+                }
+                else
+                {    
+                    return false;    
                 }
         }
             
@@ -43,11 +44,10 @@ class Calculator
                     return $this->a; 
                  }else
                  {
-                     echo $this->ERR_NUM1_2;
+                     echo $this->ERR_2;
                  }
         }
 
-        
         public function GetB()
         {
                  if($this->$b != NULL)
@@ -55,179 +55,139 @@ class Calculator
                     return $this->b;
                  }else
                  {
-                     echo $this->ERR_NUM2_2;
+                     echo $this->ERR_2;
                  }
         }
 
         public function Sum($a, $b)// function for Sum
-        {        
-            if($a == ERR_NUM1_1)
+        {      
+            if(is_int($a) && is_int($b))
             {
-               return $a;  
-            }
-            elseif($b == ERR_NUM2_1)
-            {
-               return $b;  
+               return $rez = $this->a + $this->b; 
             }
             else
             {
-                return $this->rez = $a + $b; 
-            }
-                 
-                 
-                          
+                return ERR_1;
+            }                      
         }
 
         public function Substr($a, $b)// function for Substruction
         {
-            if($a == ERR_NUM1_1)
-                {
-                    return $a;  
-                }
-            elseif($b == ERR_NUM2_1)
-                {
-                    return $b;  
-                }
+            if(is_int($a) && is_int($b))
+            {
+                return $this->rez = $a - $b;
+            }
             else
-                {
-                    return $this->rez = $a - $b;
-                }      
+            {
+                return ERR_1;
+            }      
         }
         
-
-
         public function Multiply($a, $b) // function for multiplication
         {
-            echo "<br>000  ".$this->getError($a, $b)."<br>  ";
-             //{
-                 
-            // }
-            // else
-            // {
-            //     return $this->rez = $a * $b;
-            //}      
-                  
+            if(is_int($a) && is_int($b))
+            {
+                return $this->rez = $a * $b;
+            }
+            else
+            {
+                return ERR_1;
+            }      
         }
-
+        
         public function Divide($a, $b)// function for Devision
-        {
-            
-            if($b == 0){
-                return $b = ERR_NUM2_2;  
-            }
-            if($a && $b)
-                { 
-                if($a == ERR_NUM1_1)
-                {
-                    return $a;  
-                }
-                else if($b == ERR_NUM2_1)
-                {
-                    return $b;  
-                }
-                else
-                {
-                    return $this->rez = $a / $b;
-                }      
-            }      
-            
-        }
-
-        public function getError()
-        {
-            if($b == 0)
+        {   if($b==0)
             {
-                return $b = ERR_NUM2_2;  
+                return ERR_2;
             }
-            if($a == 0)
+            if( is_int($a) &&  is_int($b))
+            {   
+               return $this->rez=  $a / $b;      
+            } 
+            else     
             {
-                return $a = ERR_NUM1_2;  
-            }
-            if($a && $b)
-            { 
-                if($a == ERR_NUM1_1)
-                {
-                    return $a;  
-                }
-                else if($b == ERR_NUM2_1)
-                {
-                    return $b;  
-                }
-                else
-                {
-                    return true;
-                }      
-            }      
+                return ERR_1; 
+            }          
         }
 
         public function DevideByOne($b)//function for Devision By One
         {
-            if($b!=0)
-                 { 
-                    $this->rez = 1 / $b;
-                    print_r("Divide by one is: " . $this->rez . "<br>");
-                 } else  
-                 echo " Divide by zero  is forbidden, ". ERR_NUM2_2;
-                 
+            if($b==0)
+            {
+                return ERR_2;
+            }
+            elseif(  !is_int($b))
+            { 
+                return  ERR_1;
+            } 
+            else
+            {
+                return $this->rez= 1 / $b;
+            }                  
         }
 
         public function SqrRoot($a)//function for Radical
         { 
-            if($a);
+            if(is_int($a))
             {   
-                print_r( "Radical is: ".sqrt($a) . "<br>") ;                
+                return sqrt($a);                
+            }
+            else
+            {
+                return  ERR_1;
             }
         }
 
-
         public function percent($a, $b) //function for get percent
         { 
-          if ($a && $b)
-          {  //echo "<br>".$a, "<br>".$b ;
-            $rez= $a / 100 * $b; 
-            print_r("Percent is:".$rez . "<br>") ;
-          } else 
-            return false;
+          if (is_int($a) && is_int($b))
+          { 
+            return $rez=  $b * $a / 100;            
+          } 
+          else
+          {
+            return ERR_1;
+          } 
         }
 
         public function mSave($a)//function for saving nomber in memory
         {
-            if($a)
+            if(is_int($a))
             {
                 $this->memVal=$a; 
             }
-            else echo"there is not nomber in tme memory!";
-            
-
+            else 
+            {
+                return ERR_1;
+            }           
         }
     
         public function mRead()//function for reading nomber from the memory
         {   
            if($this->memVal) 
-           return print_r("number in memory :" .$this->memVal."<br>"); 
-           else   echo "there is not nomber in tme memory!";  
+           return $this->memVal; 
+           return ERR_3;  
         }
 
         public function mClear()//function for cleaning memory
         {   
-            if($this->memVal)
-            {
-                 $this->memVal=null; print_r("result clear data from memory:" .gettype($this->memVal));  
-            }
-            
-             else   echo "there is not nomber in tme memory!";
+            if($this->memVal)          
+                return $this->memVal=null;
+                return "clear_ERROR"; 
         }
         
-
         public function mPlus()//function writing nomber in memory after addition current number to number from the memory
         {   
             if($this->memVal)
             {
                 $rezPlus=$this->memVal+ $this->a;//addition current number to number from the mem
                 $this->memVal=$rezPlus; // writing sum to mem
-                print_r("result sum from mem " .$this->memVal ."<br>");
+                 return $this->memVal ;
             }              
-             else   echo "there is not nomber in tme memory!";
+             else
+            {
+                return ERR_3; 
+            }   
         }
 
         public function mMinus()//function substraction nomber from number in memory
@@ -236,11 +196,12 @@ class Calculator
             {
                 $rezSubst=$this->memVal- $this->a;//substraction current number   from number the mem
                 $this->memVal=$rezSubst; // writing rez to mem
-                print_r("result substraction from mem " .$this->memVal ."<br>");
+                return $this->memVal;
             }              
-             else   echo "there is not nomber in tme memory!";
+            else
+            {
+                return ERR_3; 
+            }   
         }
-    }
-
-        
+}        
 ?>
