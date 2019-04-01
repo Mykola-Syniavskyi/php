@@ -1,27 +1,39 @@
 <?php
 include 'config.php';
+include 'functions.php';
 
 
+$noticeError= '';
+$noticeSucc= '';
+$noticeDel= '';
+$noticePerm="";
+//upload file
+if (isset($_POST['submite'])) 
+{	
+	uploadFile(DIR_PATH);
+}
+
+
+//delete file
+if (isset($_POST['delFile'])) 
+{
+	deleteFile($_POST['fileName'], DIR_PATH);
+}
+
+//show files table 
+$arrFiles = showTable(DIR_PATH);
+
+
+
+
+
+
+
+
+
+
+
+
+
+include 'templates/indexT.php'
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>task_php</title>
-</head>
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-       <br>
- select file to uploud:<br><br>
-
-        <input type="file" name="uploadedFile" id="uploadedFile"><br><br>
-        <input type="submit" value="Uploud File" name="submit">
-    </form>
-<?
-include 'templates/index.php';
-?>
-</body>
-</html>
-
