@@ -15,13 +15,13 @@ class Calculator
             }
 
         public function SetA($valueA)
-        { 
+        {             
                  if(is_numeric($valueA) && is_int($valueA)) //checking for integer and number
-                {
+                { 
                    return $this->a = $valueA ; 
                 }else
-                {
-                     print_r(ERR_NUM1_1 ."<br>");
+                {    
+                    return $this->a = ERR_NUM1_1;    
                 }
         }
 
@@ -32,7 +32,7 @@ class Calculator
                   return  $this->b= $valueB;   
                 }else
                 {
-                    print_r(ERR_NUM2_1 ."<br>");
+                    return $this->b = ERR_NUM2_1;
                 }
         }
             
@@ -60,43 +60,104 @@ class Calculator
         }
 
         public function Sum($a, $b)// function for Sum
-        {           
-                 if($a && $b)
-                 {
-                    $this->rez = $a + $b; 
-                    print_r("SUM is:".$this->rez. "<br>");
-                 } else echo "error funcSum";          
+        {        
+            if($a == ERR_NUM1_1)
+            {
+               return $a;  
+            }
+            elseif($b == ERR_NUM2_1)
+            {
+               return $b;  
+            }
+            else
+            {
+                return $this->rez = $a + $b; 
+            }
+                 
+                 
+                          
         }
 
         public function Substr($a, $b)// function for Substruction
         {
-            if($a && $b)
-                 { 
-                    $this->rez = $a - $b;
-                    print_r("Substruction: ".$this->rez. "<br>");
-                 }      
+            if($a == ERR_NUM1_1)
+                {
+                    return $a;  
+                }
+            elseif($b == ERR_NUM2_1)
+                {
+                    return $b;  
+                }
+            else
+                {
+                    return $this->rez = $a - $b;
+                }      
         }
         
 
 
         public function Multiply($a, $b) // function for multiplication
         {
-            if($a && $b)
-                 { 
-                    $this->rez = $a * $b;
-                    print_r("Murltiply is: " .$this->rez . "<br>");
-                 }      
+            echo "<br>000  ".$this->getError($a, $b)."<br>  ";
+             //{
+                 
+            // }
+            // else
+            // {
+            //     return $this->rez = $a * $b;
+            //}      
+                  
         }
 
         public function Divide($a, $b)// function for Devision
         {
-            if($a && $b && $b!=0 )
-                 { 
-                    $this->rez = $a / $b;
-                    print_r("Divide is: " . $this->rez . "<br>");
-                 }  else
-                 echo " Divide by zero  is forbidden, ". ERR_NUM2_2;
-                 
+            
+            if($b == 0){
+                return $b = ERR_NUM2_2;  
+            }
+            if($a && $b)
+                { 
+                if($a == ERR_NUM1_1)
+                {
+                    return $a;  
+                }
+                else if($b == ERR_NUM2_1)
+                {
+                    return $b;  
+                }
+                else
+                {
+                    return $this->rez = $a / $b;
+                }      
+            }      
+            
+        }
+
+        public function getError()
+        {
+            if($b == 0)
+            {
+                return $b = ERR_NUM2_2;  
+            }
+            if($a == 0)
+            {
+                return $a = ERR_NUM1_2;  
+            }
+            if($a && $b)
+            { 
+                if($a == ERR_NUM1_1)
+                {
+                    return $a;  
+                }
+                else if($b == ERR_NUM2_1)
+                {
+                    return $b;  
+                }
+                else
+                {
+                    return true;
+                }      
+            }      
         }
 
         public function DevideByOne($b)//function for Devision By One

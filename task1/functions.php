@@ -31,8 +31,8 @@ function uploadFile($pathToDir)
       catch (RuntimeException $e) 
       {
 
-       echo $noticeError=$e->getMessage();
-       return false;
+        $noticeError = $e->getMessage();
+        return $noticeError;
 
       }
   
