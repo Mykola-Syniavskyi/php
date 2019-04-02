@@ -2,58 +2,85 @@
 include 'config.php';
 class FileObj
 {
-    private $fileBox;
+    private $fileText;
 
     public function __construct()
     {
-        $this->fileBox = file(PATH_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $this->fileText = file(PATH_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
     }
 
-
-
-
-    function readFileRow()
+    public function setRow($numStr, $fileName )
     {
-       $fo= file( PATH_FILE);
-            for($rowId=1; $rowId<=count($fo); ) 
-            {
-                foreach($fo as $item){
-                    echo "<pre>".$rowId++.'.'  .$item; 
-                }
-            
-            }      
-      
-       
-    }
-        
-
-    //    for($i=0; $i<=count($fo); $i++)
-    //    {echo "<pre>";
-    //     print_r($fo[$i]) ;
-    //     echo "</pre>";
-    //     }
-    
-    
-
-
-
-
-    function readFileSymbol()
-     {
-        $fo= file(PATH_FILE); //print_r($fo);
-        foreach($fo as $item)
+        if($this->checkNumStr($numStr)==true && $this->checkFiles($fileName)==true)
         {
-            echo $str=$item;
+            echo $numStr."<br>";
+            echo $fileName."<br>";
+            $arr=file($fileName);
+            
+        }
+        else
+        {
+            Echo"!";
         }
 
+    }
+
+    public function setSymbol($numStr, $numSym, $fileName)
+    {
+        
+    }
 
 
-        //$symbol=str_split($fo);
-    //    for($i=0; $i<=count($fo); $i++)
-    //    {
-    //     echo $fo[$i];
-    //     }
+    //VALIDATOR OF THE STRNG NUMBERs
+    public function checkNumStr($numStr)
+    {
+        if(is_numeric($numStr) && is_int($numStr) && $numStr>0)
+        {echo'checkNumStr : t'."<br>";
+            return $numStr;
+        }
+        else
+        {
+            echo'checkNumStr :f'."<br>";
+            return false; 
+        }
+    }
 
-       }
+    //VALIDATOR OF THE SYMBOL NUMBERS
+    public function checkNumSym($numSym)
+    {
+        if(is_numeric($numSym) && is_int($numSym) && $numSym>0)
+        {echo'checkNumSym : t'."<br>";
+            return true;
+        }
+    else
+    {
+        echo'checkNumSym :f'."<br>";
+        return false; 
+    }
+    }
+
+    //VALIDATOR OF THE FILES
+    public function checkFiles($fileName)
+    {
+         if ( trim(file_get_contents($fileName)) !== false ) 
+        { echo'checkFiles :T'."<br>";
+                return true;            
+        }
+        else
+        {echo'checkFiles :F'."<br>";
+            return false;
+        }
+    }
+
+
+
+
+
+    
+
+
+
+
+    
 
 }
