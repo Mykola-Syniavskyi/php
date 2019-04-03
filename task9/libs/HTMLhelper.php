@@ -4,6 +4,8 @@ class HTMLhelper
 {
     private function __construct(){}
 
+
+
     //select-multi
      public static function selectMulty($name,$size,$selected,$arr,$style)
     {   if(is_numeric($size) && is_array($arr) && is_string($selected) && $style && is_string($name))
@@ -16,7 +18,11 @@ class HTMLhelper
            {
             $menu.="<option selected>$opt</option>\n";
            } 
-           $menu.="<option>$opt</option>\n";    
+           else
+           {
+                $menu.="<option>$opt</option>\n"; 
+           }
+              
         }
         $menu.="</option></select>\n";
         
@@ -28,7 +34,10 @@ class HTMLhelper
         }
              
     }
+    
 
+
+    //Create Table
     public static function createTable($myclass, $myid, $myborder, $mycellspacing, $arrTh, $arrTd )
     {
         if(is_string($myclass) && is_string( $myid) && is_numeric($myborder) && is_numeric($mycellspacing) && is_array($arrTh) && is_array($arrTd))
@@ -53,9 +62,11 @@ class HTMLhelper
         }
     }  
     
+
+
+     //Create list OL
     public static function ol($mytypeol,$myclassol,$arrOl)
     {
-        $res = false;
         if($mytypeol &&  is_string($myclassol)  &&  is_array($arrOl) )
         {
             $myOl="<ol type=\"$mytypeol\" class=\"$myclassol\">";
@@ -71,6 +82,9 @@ class HTMLhelper
         }   
     }
 
+
+
+    //Create list UL
     public static function ul($mytypeul,$myclassul,$arrul)
     {
         if(is_string($mytypeul) && is_string($myclassul) && is_array($arrul))
@@ -88,6 +102,9 @@ class HTMLhelper
         }
     }
 
+
+
+    //CREATE radibuttons
     public static function  createRadio($type,$check,$name,$value)
     {
         if(is_string($type) && is_string($check) && is_string($name) && is_array($value))
@@ -96,10 +113,10 @@ class HTMLhelper
                 
                 if($check==$key)
                 {
-                    $radio.="<input type=\"$type\" name=\"$name\" value=\"$key\" checked> $val\n";
+                    $radio.="<br><input type=\"$type\" name=\"$name\" value=\"$key\" checked> $val\n";
                 } 
                 else {
-                    $radio.="<input type=\"$type\" name=\"$name\" value=\"$key\"> $val\n";  }
+                    $radio.="<br><input type=\"$type\" name=\"$name\" value=\"$key\"> $val\n";  }
             endforeach;
             return $radio;
         }
@@ -107,6 +124,49 @@ class HTMLhelper
         {
             return RADIO_ERR;
         }
+    }
 
+
+
+    //Create list createCheckbox
+    public static function  createCheckbox($type,$check,$name,$value)
+    {
+        if(is_string($type) && is_string($check) && is_string($name) && is_array($value))
+        {   
+            foreach($value as $key=>$val): 
+                
+                if($check==$key)
+                {
+                    $checkbox.="<br><input type=\"$type\" name=\"$name\" value=\"$key\" checked> $val\n";
+                } 
+                else {
+                    $checkbox.="<br><input type=\"$type\" name=\"$name\" value=\"$key\"> $val\n";  }
+            endforeach;
+            return $checkbox;
+        }
+        else 
+        {
+            return CHECKBOX_ERR;
+        }
+    }
+
+
+
+    //CREATE LIST DL DT DD
+    public static function createDl($myclassDl, $arrDl )
+    {   
+        if(is_string($myclassDl) && is_array($arrDl) )
+        {   
+            $mydl="<dl class=\"$myclassDl\">";
+            foreach($arrDl as $key=>$val): 
+                $mydl.= "<dt>$key <dd>$val";               
+            endforeach;
+            $mydl.="</dl>";
+            return $mydl;
+        }
+        else
+        {
+            return DLDTDD_ERR;
+        }   
     }
 }

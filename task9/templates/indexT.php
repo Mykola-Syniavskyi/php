@@ -9,10 +9,10 @@
 <body>
 <?php
 //create select
-echo $select;
+echo $select."<br>"."<br>";
 
 //create table
-echo $table;
+echo $table."<br>";
 
 //create ol 
 echo $ol;
@@ -20,12 +20,20 @@ echo $ol;
 //create ul 
 echo $ul;
 
-//create ul 
-echo $radio;
+//create radiobutt 
+echo $radio."<br>";
 
+//create checkbox
+echo $chekbox;
+
+//create DL DT DD
+echo $dl;
 ?>
 
 
+
+</body>
+</html>
 
 
 

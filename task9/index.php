@@ -39,6 +39,26 @@ $name="name";
 $value=['wooden'=>'door','glass'=>'window','cement'=>'floor'];
 $radio=$classname::createRadio($type,$check,$name,$value);
 
+//create checkbox
+$type="checkbox";
+$check="wooden";
+$name="name";
+$value=['wooden'=>'door','glass'=>'window','cement'=>'floor'];
+$chekbox=$classname::createRadio($type,$check,$name,$value);
+
+
+//create ul
+
+$myclassDl="myul";
+$arrDl=['Name'=>'John','Age'=>'41','profession'=>'IT','Children'=> 'Luiza and Piter','Wife'=>  'Melinda'];
+//$arrDt=['Режиссёр','В главных ролях'];
+$dl=$classname::createDl($myclassDl, $arrDl);
+
+
+
+
+
+
 include 'templates/indexT.php';
 
 
