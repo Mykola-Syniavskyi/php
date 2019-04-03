@@ -28,7 +28,7 @@ class HTMLhelper
     public static function createTable($myclass, $myid, $myborder, $mycellspacing, $arrTh, $arrTd )
     {
         if(is_string($myclass) && is_string( $myid) && is_numeric($myborder) && is_numeric($mycellspacing) && is_array($arrTh) && is_array($arrTd))
-        {echo "ttt";
+        {
             $myTable="<table class=\"$myclass\" id=\"$myid\" border=\"$myborder\" cellspacing=\"$mycellspacing\">\n" ;
             $myTable.="<tr>";
             foreach($arrTh as $th)
@@ -45,7 +45,7 @@ class HTMLhelper
              return $myTable; 
         }
         else
-        {echo "FFF";
+        {
             return TABLE_ERR;
         }
     }   
