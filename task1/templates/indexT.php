@@ -23,7 +23,7 @@ include 'config.php';
 					}
 					
 //show information about delete actions
-
+					
 					if ($noticeDel) {  
 						?>
 							<div style="background:yellow; width:50%;">
@@ -103,7 +103,8 @@ include 'config.php';
 				</tbody>
 			</table>
 	
-			<?php } ?>
+					<?php }	?>
+
 		</div>
 </body>
 </html>

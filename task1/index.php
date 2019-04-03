@@ -7,33 +7,21 @@ $noticeError= '';
 $noticeSucc= '';
 $noticeDel= '';
 $noticePerm="";
+
 //upload file
 if (isset($_POST['submite'])) 
 {	
-	uploadFile(DIR_PATH);
+	$rezUpload = uploadFile(DIR_PATH);	
 }
-
 
 //delete file
 if (isset($_POST['delFile'])) 
 {
-	deleteFile($_POST['fileName'], DIR_PATH);
+	$rezDelete=deleteFile($_POST['fileName'], DIR_PATH);	
 }
 
 //show files table 
 $arrFiles = showTable(DIR_PATH);
-
-
-
-
-
-
-
-
-
-
-
-
 
 include 'templates/indexT.php'
 ?>
