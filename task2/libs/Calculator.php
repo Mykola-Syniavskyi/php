@@ -16,54 +16,45 @@ class Calculator
 
         public function SetA($valueA)
         {             
-                if($valueA) 
+            if(is_numeric($valueA) && is_int($valueA)) 
                 { 
-                   return $this->a = $valueA ; 
+                    $this->a = $valueA ; 
                 }else
                 {    
-                    return false;    
+                    $this->a = 0;    
                 }
         }
 
         public function SetB($valueB)
         {
-            if($valueB) 
+            if(is_numeric($valueB) && is_int($valueB))  
                 {
-                    return $this->b = $valueB ; 
+                     $this->b = $valueB ; 
                 }
                 else
                 {    
-                    return false;    
+                    $this->b =0;    
                 }
         }
             
         public function GetA()
         {
-                 if($this->$a != NULL)
-                 {
-                    return $this->a; 
-                 }else
-                 {
-                     return $this->ERR_2;
-                 }
+                return $this->a;
         }
 
         public function GetB()
         {
-                 if($this->$b != NULL)
-                 {
-                    return $this->b;
-                 }else
-                 {
-                     return $this->ERR_2;
-                 }
+                return $this->b;
         }
 
         public function Sum($a, $b)// function for Sum
         {      
             if(is_int($a) && is_int($b))
-            {
-               return $rez = $this->a + $this->b; 
+            {   
+                $this->SetA($a);
+                $this->SetB($b);
+                $rez = $this->GetA() + $this->GetB();
+                return $rez;
             }
             else
             {
