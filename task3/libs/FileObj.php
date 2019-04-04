@@ -53,14 +53,14 @@ class FileObj
 
 
 
-    public function replaceOneSymbol($numStr, $numSym, $fileName)
+    public function replaceOneSymbol($numStr, $numSym, $leter)
     {
-        if($this->readOneSymbol($numStr, $numSym, $fileName)==true && $this->readOneRow($numStr, $fileName )==true)
-        {   $oneSymb=$this->readOneSymbol($numStr, $numSym, $fileName);
-            $oneRow=$this->readOneRow($numStr, $fileName );
-            $symReplace= ereg_replace($oneSymb,"h", $oneRow );//print_r(file($fileName));
-            $saveReplaceSym=file_put_contents(PATH_SFILE, $symReplace);
-            return true;
+        
+        if(is_numeric($numStr) && is_numeric($numSym) && is_string($leter))
+        {
+            $this->fileText[$numStr][$numSym] = $leter;
+            $saveReplaceSym=file_put_contents(PATH_SFILE, $this->fileText);
+           
         }
         else 
         {
