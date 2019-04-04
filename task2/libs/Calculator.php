@@ -44,7 +44,7 @@ class Calculator
                     return $this->a; 
                  }else
                  {
-                     echo $this->ERR_2;
+                     return $this->ERR_2;
                  }
         }
 
@@ -55,7 +55,7 @@ class Calculator
                     return $this->b;
                  }else
                  {
-                     echo $this->ERR_2;
+                     return $this->ERR_2;
                  }
         }
 

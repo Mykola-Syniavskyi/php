@@ -47,11 +47,10 @@ $value=['wooden'=>'door','glass'=>'window','cement'=>'floor'];
 $chekbox=$classname::createRadio($type,$check,$name,$value);
 
 
-//create ul
+//create DL
 
-$myclassDl="myul";
+$myclassDl="myDl";
 $arrDl=['Name'=>'John','Age'=>'41','profession'=>'IT','Children'=> 'Luiza and Piter','Wife'=>  'Melinda'];
-//$arrDt=['Режиссёр','В главных ролях'];
 $dl=$classname::createDl($myclassDl, $arrDl);
 
 

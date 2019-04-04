@@ -28,8 +28,15 @@ echo $chekbox;
 
 //create DL DT DD
 echo $dl;
+
+
+
 ?>
 
+<form action="">
+<?  //for echo    ?>
+
+</form>
 
 
 </body>

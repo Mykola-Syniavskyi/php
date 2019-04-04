@@ -1,8 +1,21 @@
 <?php
-include 'libs/FileObj.php';
+
 include 'config.php';
-$fileAction= new FileObj();
-//$fileAction->checkFiles(PATH_FILE);
-//$fileAction->checkNumSym();
-//$fileAction->checkNumStr();
-$fileAction->setRow(1, PATH_FILE);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document-Print</title>
+</head>
+<body>
+    
+</body>
+</html>
+<?
+
+// echo $printRow."<br>";
+// echo $printSym."<br>";
+echo $replaceSym."<br>";

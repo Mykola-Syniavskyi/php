@@ -72,7 +72,8 @@ include 'config.php';
 					<tr>
 						<th>№</th>
 						<th>File name</th>
-						<th>Size</th>
+						<th
+						>Size</th>
 						<th>Delete</th>
 					</tr>
 				</thead>
@@ -103,7 +104,7 @@ include 'config.php';
 				</tbody>
 			</table>
 	
-					<?php }	?>
+					<?php }?>
 
 		</div>
 </body>
