@@ -20,6 +20,6 @@ echo "This is the pointed row : ". $printOneRow."<br>";//print selected Row
 echo "This is the pointed symbol : ".$printOneSym."<br>";//print selected Symbol
 echo "This is all rows in the file : ".$printAllRow."<br>";//Print All Rows in the file
 echo "This is content of the saved file : ".$printAllSavedRow."<br>";//Print All Rows in the saved file
-echo "This is all symbols in the file : ".$printAllSym."<br>";// Print All Symbols in the file
+echo "This is all symbols in the first file : ".$printAllSym."<br>";// Print All Symbols in the file
 echo $replaceSym."<br>"; // replace selected Symbol
 echo $replaceRow."<br>";//replace selected Row

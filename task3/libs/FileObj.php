@@ -79,10 +79,10 @@ class FileObj
      if($this->fileSavedText)
      {
         $arr=$this->fileSavedText;
-        foreach($arr as $row):
-            $rez= $row;
+        foreach($arr as $key=>$row):
+            $rez.= $key.")".$row;
         endforeach;
-            return trim($rez);      
+            return $rez;      
      }
      else
      {      
@@ -137,8 +137,9 @@ class FileObj
         if(is_numeric($numStr) && is_string($row))
         {
             $this->fileText[$numStr] = $row;
-            $saveReplaceSym=file_put_contents(PATH_SFILE, $this->fileText);
-           
+            $rez=implode("\n", $this->fileText);
+            $saveReplaceRow=file_put_contents(PATH_SFILE, $rez);
+                   
         }
         else 
         {
