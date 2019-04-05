@@ -12,47 +12,49 @@ class Calculator
                 $this->a= NULL;
                 $this->b= NULL;
                 $this->memVal=NULL;
+                $this->GetA(0);
+                $this->GetA(0);
             }
 
         public function SetA($valueA)
         {             
             if(is_numeric($valueA) && is_int($valueA)) 
-                { 
-                    $this->a = $valueA ; 
-                }else
-                {    
-                    $this->a = 0;    
-                }
+            { 
+                return $this->a = $valueA ;    
+            }
+            else
+            {    
+                return ERR_1;   
+            }
         }
 
         public function SetB($valueB)
         {
             if(is_numeric($valueB) && is_int($valueB))  
-                {
-                     $this->b = $valueB ; 
-                }
-                else
-                {    
-                    $this->b =0;    
-                }
+            {
+                return $this->b = $valueB ;
+            }
+            else
+            {    
+                return ERR_1;    
+            }
         }
             
         public function GetA()
         {
-                return $this->a;
+            return $this->a; 
         }
 
         public function GetB()
         {
-                return $this->b;
+            return $this->b;  
         }
 
         public function Sum($a, $b)// function for Sum
         {      
-            if(is_int($a) && is_int($b))
+            if($a && $b)
             {   
-                $this->SetA($a);
-                $this->SetB($b);
+                
                 $rez = $this->GetA() + $this->GetB();
                 return $rez;
             }
@@ -64,9 +66,9 @@ class Calculator
 
         public function Substr($a, $b)// function for Substruction
         {
-            if(is_int($a) && is_int($b))
+            if($a && $b)
             {
-                return $this->rez = $a - $b;
+                return $this->rez = $this->GetA() - $this->GetB();
             }
             else
             {
@@ -78,7 +80,7 @@ class Calculator
         {
             if(is_int($a) && is_int($b))
             {
-                return $this->rez = $a * $b;
+                return $this->rez = $this->GetA() * $this->GetB();
             }
             else
             {
@@ -93,7 +95,7 @@ class Calculator
             }
             if( is_int($a) &&  is_int($b))
             {   
-               return $this->rez=  $a / $b;      
+               return $this->rez= $this->GetA() / $this->GetB();   
             } 
             else     
             {
@@ -113,15 +115,15 @@ class Calculator
             } 
             else
             {
-                return $this->rez= 1 / $b;
+                return $this->rez= 1 / $this->GetB();  
             }                  
         }
 
         public function SqrRoot($a)//function for Radical
         { 
-            if(is_int($a))
+            if($a)
             {   
-                return sqrt($a);                
+                return sqrt($this->GetA());                
             }
             else
             {
@@ -131,9 +133,9 @@ class Calculator
 
         public function percent($a, $b) //function for get percent
         { 
-          if (is_int($a) && is_int($b))
+          if ($a && $b)
           { 
-            return $rez=  $b * $a / 100;            
+            return $rez=  $this->GetA() * $this->GetB()/ 100;            
           } 
           else
           {
@@ -143,9 +145,9 @@ class Calculator
 
         public function mSave($a)//function for saving nomber in memory
         {
-            if(is_int($a))
+            if($a)
             {
-                $this->memVal=$a; 
+                $this->memVal=$this->GetA(); 
             }
             else 
             {
@@ -171,7 +173,7 @@ class Calculator
         {   
             if($this->memVal)
             {
-                $rezPlus=$this->memVal+ $this->a;//addition current number to number from the mem
+                $rezPlus=$this->memVal+ $this->GetA(); //addition current number to number from the mem
                 $this->memVal=$rezPlus; // writing sum to mem
                  return $this->memVal ;
             }              
@@ -185,7 +187,7 @@ class Calculator
         {   
             if($this->memVal)
             {
-                $rezSubst=$this->memVal- $this->a;//substraction current number   from number the mem
+                $rezSubst=$this->memVal- $this->GetA();//substraction current number   from number the mem
                 $this->memVal=$rezSubst; // writing rez to mem
                 return $this->memVal;
             }              

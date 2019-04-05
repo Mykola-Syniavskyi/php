@@ -6,7 +6,7 @@ include'libs/Calculator.php';
 
 //SUM
 $Num1=$obj->SetA(5);
-$Num2=$obj->SetB(5);
+$Num2=$obj->SetB(3);
 $sum= "SUM is:". $obj->Sum($Num1, $Num2); echo"<pre>";
 
 
@@ -31,7 +31,7 @@ $Num2=$obj->SetB(5);
 $divByOne= "Divide by one is:". $obj->DevideByOne( $Num2);
 
 //Square Radical
-$Num1=$obj->SetA(6);
+$Num1=$obj->SetA(9);
 $radical= "Radical is:". $obj->SqrRoot($Num1);
 
 //Persent
@@ -39,7 +39,7 @@ $Num1=$obj->SetA(20);
 $Num2=$obj->SetB(1000);
 $persent= "Persent is:". $obj->percent($Num1, $Num2);
 
-//Operatios with memory
+// //Operatios with memory
 $Num1=$obj->SetA(10);
 $mSave= "Save to memory is:". $obj->mSave($Num1);// Save to memory
 $mRead= "Read from memory is:".$obj->mRead();// Read from memory
