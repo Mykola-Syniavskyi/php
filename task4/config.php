@@ -1,8 +1,17 @@
 <?php
-define('LOCAL_HOST', '127.0.0.1');
-define('USER_15', 'root');
-define('PASSWD', '');
-define('DB_NAME', 'test');
+define('HOST', '127.0.0.1');
+define('USER', 'user15');
+define('PASSWD', 'user15');
+define('DB_NAME', 'user15');
+define('TABLE_NAME', 'students');
+//define('PASSWD', '');
+
+
+
+
+
+
+
 
 
 
