@@ -16,15 +16,17 @@ include ('config.php');
 </html>
 <?
 
-// if($select)
-// {
-//     while ($row = mysql_fetch_assoc($select) ) { 
-                
-//        echo $result= $row["id"].$row["FirstName"].$row["LastName"]."<br>";
+if($select)
+{
+    while ($row = mysql_fetch_assoc($select) ) { 
+             
+       echo $result= $row["id"].$row["FirstName"].$row["LastName"]."<br>";
        
-//    }
-// }
+   }
+}
+
 echo $insert."<br>";
+
 
 ?>
 

@@ -22,7 +22,7 @@ class MYSQL extends SQL
         if($this->link) 
         {
             $sel_db= mysql_select_db(DB_NAME, $this->link);//var_dump($sel_db);
-            mysql_select_db(DB_NAME, $this->link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error());
+            mysql_select_db(DB_NAME, $this->link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error()); //print_r( $sel_db);
             return   $sel_db; 
         }
         else
@@ -42,17 +42,27 @@ class MYSQL extends SQL
             $rez= mysql_query($this->select());// print_r($rez);
             return $rez;
         }
-        else return "function selectAll() does not work";
+        else 
+        {
+            return "function selectAll() does not work".":".mysql_error();
+        }
     }
 
+
+
+
+
     public function insertQ()
-    {
-        if($this->insert() && $this->conectToBase()) 
-        {print_r($this->insert());
+    { print_r($this->insert());
+        if($this->link) 
+        {  
             $rez= mysql_query($this->insert());// print_r($rez);
-            return $rez;
+            
         }
-        else return "function insertQ() does not work";
+        else 
+        {
+            return "function insertQ() does not work".":".mysql_error();
+        }
     }
    
 

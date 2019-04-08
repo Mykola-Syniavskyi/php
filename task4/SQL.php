@@ -169,8 +169,9 @@ class SQL
 
     public function select()
     {  if($this->getTableName() && $this->getTableFild())
-        {            
-          return $this->query="SELECT" . " ".$this->arrToStr($this->getTableFild()). " ". "FROM". " " .$this->getTableName().";" ;          
+        {  $selectFilds= implode(",",$this->getTableFild()) ;
+            //print($this->query);         
+          return $this->query="SELECT" . " ".$selectFilds. " ". "FROM". " " .$this->getTableName().";" ;          
         }
         return "ERROR  select not returned";            
     }
@@ -183,11 +184,17 @@ class SQL
 
     public function insert()
     {  if($this->getTableName() &&  $this->getTableFild() && $this->getTableValues())
-        {print_r($this->insertQ);
-             $this->insertQ="INSERT INTO"." ".$this->getTableName()." "."(".$this->arrToStr($this->getTableFild()).")"."VALUES"."(".$this->strQuote($this->arrToStr($this->getTableValues())).");";
-
+        {//print_r($this->insertQ);
+            $insertVals = implode("','",$this->getTableValues());
+            $insertFilds = implode(",",$this->getTableFild());
+            $this->insertQ="INSERT INTO"." ".$this->getTableName()." "."(". $insertFilds.")"."VALUES"."('".$insertVals."');";
+            return $this->insertQ;
         }
-        return "ERROR  insert not returned";   
+        else
+        {
+            return "ERROR  insert not returned".":".mysql_error(); 
+        }
+          
     }
 
     //" " . "WHERE"." " .$this->getCondition(). " " . "Limit"." " .$this->getLimit().
@@ -212,26 +219,8 @@ class SQL
         $sql="DELETE  from "." ".$this->getTableName()." ". "WHERE"." ".$this->getCondition().";";
         return $this->sql;
     }
-   
+
     
-    private function arrToStr($arr)
-    {
-        if($arr)
-        {
-            $rez=trim(implode(",", $arr), ',');
-            return $rez;
-        }return false;
-    }
-
-
-    private function strQuote($quote)
-    {
-        if($quote)
-        {
-            $rez="'".$quote."'";
-            return $rez;
-        }return false;
-    }
 
 
     private function arrayPush($var, $val)
