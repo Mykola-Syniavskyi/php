@@ -5,94 +5,245 @@ class SQL
 
     protected $tableName;
     protected $tableFild;
+    protected $tableValues;
+    protected $updateValues;
     protected $condition;
     protected $limit;
+    protected $query;
+    protected $insertQ;
     
     
-    
-    public function conectToBase()
+    public function __construct()
     {
-        $link=mysql_connect(HOST, USER, PASSWD); 
-        if($link)
-        {
-            $sel_db= mysql_select_db(DB_NAME, $link);
-            mysql_select_db(DB_NAME, $link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error());
-            mysql_query("set names 'utf8'");
-            return $link; 
-        //    mysql_query("insert students (FirstName,LastName) VALUES ('Sergei','Kobelia')", $link);
-        //     echo mysql_errno($link) . ": " . mysql_error($link) . "\n";
-        }
-        else
-        {
-            return  false;
-        }
+        $this->tableName='';
+        $this->tableFild=[];
+        $this->tableValues=[];
+        $this->updateValues=[];
+        $this->condition='';
+        $this->query='';
+        $this->insertQ='';
+
+        $this->limit=1;  
     }
 
 
 
-    public function SetName()
-    // {
-    //     $this->tableName=$_POST['name'];
-    // }
-    //  public function SetFild_1()
-    //  {
-    //      $this->tableFild_1=$_POST['fild_1'];
-    //  }
-    //  public function SetFild_2()
-    //  {
-    //      $this->tableFild_2=$_POST['fild_2'];
-     }
-    // public function SetCond()
-    // {
-    //     $this->condition=$_POST['where'];
-    // }
-
-    public function insert()
-    {   $link=mysql_connect(LOCAL_HOST, USER_15, PASSWD); 
-        // print_r($link);
-         if($link)
-         {
-            $sel_db= mysql_select_db(DB_NAME, $link); 
-            //echo mysql_errno($link) . ": " . mysql_error($link). "\n";
-            //$rez=mysql_query("insert $this->tableName ($this->tableFild_1) VALUES ($this->tableFild_2)", $link);
-            echo mysql_errno($link) . ": " . mysql_error($link) . "\n";
-            return $rez; 
-         }   
-         
+    public function setTableName($tName)
+    {   
+        $tName= trim($tName);
+        if($tName)
+        {
+            $this->tableName=$tName;//print_r($this->tableName);
+            return true;
+        }
+        return false;
     }
+    
+    public function setTableFild( $tFild)             // SETER FUNCTIONS
+    {
+        $tFild= trim($tFild);
+        if($tFild)
+        {
+            $this->tableFild= $this->arrayPush($this->tableFild, $tFild);   
+            return $this->tableFild; 
+        }
+        return false;
+    }
+     
+
+
+    public function setTableValues( $tValues)             // SETER FUNCTIONS
+    {
+        $tValues= trim($tValues);
+        if($tValues)
+        {
+            $this->tableValues= $this->arrayPush($this->tableValues, $tValues);   //print_r($this->tableValues);
+            return true;
+        }
+        return false;
+    }
+    
+
+    public function setUpValues( $upValues)             // SETER FUNCTIONS
+    {
+        $upValues= trim($upValues);
+        if($upValues)
+        {
+            $this->updateValues= $this->arrayPush($this->updateValues, $upValues);   //print_r($this->tableValues);
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public function setCondition($cond)
+    {
+        $cond= trim($cond);
+        if($cond)
+        {
+            $this->condition=$cond;
+            return true;
+        }
+        return false;     
+    }
+    
+    public function setLimit($limit)
+    {
+        $limit=1;    
+        if($this->limit=1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+    public function getTableName()                   //GETER FUNCTIONS
+    {
+        if($this->tableName)
+        {
+            return $this->tableName;
+        }
+        return false;
+    }
+    
+    public function getTableFild()
+    {
+        if($this->tableFild) 
+        { 
+           return $this->tableFild; 
+        }
+        return false;
+    }
+
+    public function getTableValues()
+    {
+        if($this->tableValues)
+        { 
+           return $this->tableValues;
+        }
+        return false;
+    }
+
+
+
+    public function getUpdateValues()
+    {
+        if($this->updateValues)
+        { 
+           return $this->updateValues;
+        }
+        return false;
+    }
+    
+
+
+    
+    
+    public function getCondition()
+    {
+       
+        if($this->condition)
+        {
+            return $this->condition;
+        }
+        return false;     
+    }
+    
+    public function getLimit()
+    {
+        if($this->limit)
+        {
+            return $this->limit;
+        }
+        return false;
+    }
+
+
+
+                                         //SELECT     INSERT     DELETE     UPDATE
 
 
     public function select()
+    {  if($this->getTableName() && $this->getTableFild())
+        {            
+          return $this->query="SELECT" . " ".$this->arrToStr($this->getTableFild()). " ". "FROM". " " .$this->getTableName().";" ;          
+        }
+        return "ERROR  select not returned";            
+    }
 
-    {  
-        
-       if($this->conectToBase()) 
-       {
-            $sql="select  * from students"; 
-            $arr=mysql_query($sql); 
-            $row = mysql_fetch_assoc($arr) ; 
-            return $row;
-       }
-       else
-       {
-            echo "ggg";
-       }
-       
-        
+
+
+
+    
+
+
+    public function insert()
+    {  if($this->getTableName() &&  $this->getTableFild() && $this->getTableValues())
+        {print_r($this->insertQ);
+             $this->insertQ="INSERT INTO"." ".$this->getTableName()." "."(".$this->arrToStr($this->getTableFild()).")"."VALUES"."(".$this->strQuote($this->arrToStr($this->getTableValues())).");";
+
+        }
+        return "ERROR  insert not returned";   
     }
-    public function delete()
-    {
-        $sql="delete  from students where id=1;";
-        return $this->sql;
-    }
+
+    //" " . "WHERE"." " .$this->getCondition(). " " . "Limit"." " .$this->getLimit().
+    
+
+
     public function update()
     {
-        $sql="UPDATE students
-        SET secondName = 'Synii'
-        WHERE secondName = 'Syniavskyi';";
+        $sql="UPDATE"." ".$this->getTableName()." "."SET"." ".$this->getTableFild()==$this->getUpdateValues()." "."WHERE"." ".$this->getCondition().";";
         return $this->sql;
     }
+
+
+
+
+
+
+
+
+    public function delete()
+    {
+        $sql="DELETE  from "." ".$this->getTableName()." ". "WHERE"." ".$this->getCondition().";";
+        return $this->sql;
+    }
+   
     
+    private function arrToStr($arr)
+    {
+        if($arr)
+        {
+            $rez=trim(implode(",", $arr), ',');
+            return $rez;
+        }return false;
+    }
+
+
+    private function strQuote($quote)
+    {
+        if($quote)
+        {
+            $rez="'".$quote."'";
+            return $rez;
+        }return false;
+    }
+
+
+    private function arrayPush($var, $val)
+  {
+    $val = trim($val);
+    if ($val != '*')
+    {
+      array_push($var, $val);return $var;
+    }
+    return false;
+  }
+
 }
 
 ?>

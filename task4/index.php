@@ -1,19 +1,26 @@
 <?php
-include ('sql.php');
-include ('config.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-</body>
-</html>
-<?php
+include ('MYSQL.php');
 
-include ('template/index.php');
+
+//SELECT
+
+$combine= new MYSQL;
+$combine->setTableName('students');
+// $combine->setTableFild('FirstName');
+// $combine->conectToBase();
+// $select=$combine->selectAll();
+
+
+//INSERT 
+
+$combine->setTableFild('FirstName');
+$combine->setTableFild('LastName');
+$combine->setTableValues('Elena');
+$combine->setTableValues('Syniavskaia');
+$combine->conectToBase();
+$insert=$combine->insertQ();
+
+
+
+include ('template/indexT.php');
 ?>
