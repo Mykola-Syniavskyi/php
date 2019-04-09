@@ -6,32 +6,39 @@ class SQL
     protected $tableName;
     protected $tableFild;
     protected $tableValues;
-    protected $updateValues;
+    protected $updateValue;
+    protected $updateFild;
     protected $condition;
     protected $limit;
     protected $query;
     protected $insertQ;
-    
+    protected $updQ;
+    protected $deleteQ;
     
     public function __construct()
     {
         $this->tableName='';
         $this->tableFild=[];
         $this->tableValues=[];
-        $this->updateValues=[];
+        $this->updateValue='';
+        $this->updateFild='';
         $this->condition='';
         $this->query='';
         $this->insertQ='';
+        $this->updateQ='';
+        $this->deleteQ='';
+        $this->limit=''; 
 
-        $this->limit=1;  
     }
+
+
 
 
 
     public function setTableName($tName)
     {   
         $tName= trim($tName);
-        if($tName)
+        if ($tName)
         {
             $this->tableName=$tName;//print_r($this->tableName);
             return true;
@@ -39,10 +46,13 @@ class SQL
         return false;
     }
     
+
+
+
     public function setTableFild( $tFild)             // SETER FUNCTIONS
     {
         $tFild= trim($tFild);
-        if($tFild)
+        if ($tFild)
         {
             $this->tableFild= $this->arrayPush($this->tableFild, $tFild);   
             return $this->tableFild; 
@@ -55,7 +65,7 @@ class SQL
     public function setTableValues( $tValues)             // SETER FUNCTIONS
     {
         $tValues= trim($tValues);
-        if($tValues)
+        if ($tValues)
         {
             $this->tableValues= $this->arrayPush($this->tableValues, $tValues);   //print_r($this->tableValues);
             return true;
@@ -64,12 +74,29 @@ class SQL
     }
     
 
-    public function setUpValues( $upValues)             // SETER FUNCTIONS
+
+
+
+    public function setUpValue( $upValue)             // SETER FUNCTIONS
     {
-        $upValues= trim($upValues);
-        if($upValues)
+        $upValue= trim($upValue);
+        if ($upValue)
         {
-            $this->updateValues= $this->arrayPush($this->updateValues, $upValues);   //print_r($this->tableValues);
+            $this->updateValue= $upValue;   //print_r($this->tableValues);
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+    public function setUpFild( $upFild)             // SETER FUNCTIONS
+    {
+        $upFild= trim($upFild);
+        if ($upFild)
+        {
+            $this->updateFild= $upFild;   //print_r($this->tableValues);
             return true;
         }
         return false;
@@ -80,7 +107,7 @@ class SQL
     public function setCondition($cond)
     {
         $cond= trim($cond);
-        if($cond)
+        if ($cond)
         {
             $this->condition=$cond;
             return true;
@@ -88,11 +115,15 @@ class SQL
         return false;     
     }
     
+
+
+
     public function setLimit($limit)
     {
-        $limit=1;    
-        if($this->limit=1)
+        //$limit=1;    
+        if (is_int($limit))
         {
+            $this->limit=$limit;
             return true;
         }
         return false;
@@ -103,50 +134,61 @@ class SQL
 
     public function getTableName()                   //GETER FUNCTIONS
     {
-        if($this->tableName)
+        if ($this->tableName)
         {
             return $this->tableName;
         }
         return false;
     }
     
+
+
+
     public function getTableFild()
     {
-        if($this->tableFild) 
+        if ($this->tableFild) 
         { 
            return $this->tableFild; 
         }
         return false;
     }
 
-    public function getTableValues()
+
+    public function getTableValues( ) 
     {
-        if($this->tableValues)
+        if ($this->tableValues) 
         { 
-           return $this->tableValues;
+           return $this->tableValues; 
+        }
+        return false;
+    }
+
+    public function getUpValue()
+    {
+        if ($this->updateValue)
+        { 
+           return $this->updateValue;
         }
         return false;
     }
 
 
 
-    public function getUpdateValues()
+    public function getUpFild()
     {
-        if($this->updateValues)
+        if ($this->updateFild)
         { 
-           return $this->updateValues;
+           return $this->updateFild;
         }
         return false;
     }
-    
 
-
-    
+   
     
     public function getCondition()
     {
        
-        if($this->condition)
+        if ($this->condition)
         {
             return $this->condition;
         }
@@ -155,7 +197,7 @@ class SQL
     
     public function getLimit()
     {
-        if($this->limit)
+        if ($this->limit)
         {
             return $this->limit;
         }
@@ -168,10 +210,10 @@ class SQL
 
 
     public function select()
-    {  if($this->getTableName() && $this->getTableFild())
-        {  $selectFilds= implode(",",$this->getTableFild()) ;
-            //print($this->query);         
-          return $this->query="SELECT" . " ".$selectFilds. " ". "FROM". " " .$this->getTableName().";" ;          
+    {  if ($this->getTableName() && $this->getTableFild())
+        {  
+            $selectFilds= implode(",",$this->getTableFild()) ;     
+          return $this->query="SELECT" . " ".$selectFilds. " ". "FROM". " " .$this->getTableName()." "."LIMIT"." ". $this->getLimit().";" ;          
         }
         return "ERROR  select not returned";            
     }
@@ -179,12 +221,10 @@ class SQL
 
 
 
-    
-
 
     public function insert()
-    {  if($this->getTableName() &&  $this->getTableFild() && $this->getTableValues())
-        {//print_r($this->insertQ);
+    {  if ($this->getTableName() &&  $this->getTableFild() && $this->getTableValues())
+        {
             $insertVals = implode("','",$this->getTableValues());
             $insertFilds = implode(",",$this->getTableFild());
             $this->insertQ="INSERT INTO"." ".$this->getTableName()." "."(". $insertFilds.")"."VALUES"."('".$insertVals."');";
@@ -197,42 +237,47 @@ class SQL
           
     }
 
-    //" " . "WHERE"." " .$this->getCondition(). " " . "Limit"." " .$this->getLimit().
-    
 
 
     public function update()
     {
-        $sql="UPDATE"." ".$this->getTableName()." "."SET"." ".$this->getTableFild()==$this->getUpdateValues()." "."WHERE"." ".$this->getCondition().";";
-        return $this->sql;
+        if ($this->getTableName() && $this->getUpFild() && $this->getUpValue() && $this->getCondition())
+        {   
+             return $this->updQ= "UPDATE"." ".$this->getTableName()." "."SET"." ".$this->getUpFild()."="."'".$this->getUpValue()."'"." "."WHERE"." ".$this->getCondition().";" ;          
+        }   
+        else
+        { 
+            return "ERROR  update not returned".":".mysql_error(); 
+        } 
     }
-
-
-
-
-
 
 
 
     public function delete()
     {
-        $sql="DELETE  from "." ".$this->getTableName()." ". "WHERE"." ".$this->getCondition().";";
+        if ($this->getTableName() && $this->getCondition())
+        {
+            return $this->deleteQ="DELETE  from "." ".$this->getTableName()." ". "WHERE"." ".$this->getCondition().";";
         return $this->sql;
+        }
+        else
+        { 
+            return "ERROR  delete not returned".":".mysql_error(); 
+        } 
     }
 
-    
 
 
     private function arrayPush($var, $val)
-  {
+    {
     $val = trim($val);
     if ($val != '*')
     {
-      array_push($var, $val);return $var;
+      array_push($var, $val);
+      return $var;
     }
     return false;
   }
 
 }
 
-?>

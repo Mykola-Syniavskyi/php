@@ -19,10 +19,10 @@ class MYSQL extends SQL
     public function conectToBase()
     {
         
-        if($this->link) 
+        if ($this->link) 
         {
-            $sel_db= mysql_select_db(DB_NAME, $this->link);//var_dump($sel_db);
-            mysql_select_db(DB_NAME, $this->link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error()); //print_r( $sel_db);
+            $sel_db= mysql_select_db(DB_NAME, $this->link);
+            mysql_select_db(DB_NAME, $this->link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error());
             return   $sel_db; 
         }
         else
@@ -36,11 +36,10 @@ class MYSQL extends SQL
 
 
     public function selectAll()
-    {
-        if($this->select() && $this->conectToBase()) //print_r($this->select());
+    {   //print_r($this->select());
+        if ($this->select() && $this->conectToBase()) 
         {
-            $rez= mysql_query($this->select());// print_r($rez);
-            return $rez;
+            return $rez= mysql_query($this->select());
         }
         else 
         {
@@ -53,10 +52,10 @@ class MYSQL extends SQL
 
 
     public function insertQ()
-    { print_r($this->insert());
-        if($this->link) 
+    {  //print_r($this->insert());
+        if ($this->link) 
         {  
-            $rez= mysql_query($this->insert());// print_r($rez);
+            $rez= mysql_query($this->insert());
             
         }
         else 
@@ -64,10 +63,37 @@ class MYSQL extends SQL
             return "function insertQ() does not work".":".mysql_error();
         }
     }
+
+
+
+    public function updateQ()
+    { //print_r($this->update());
+        if ($this->link) 
+        {  
+            $rez= mysql_query($this->update()); 
+            
+        }
+        else 
+        { 
+            return "function updateQ() does not work".":".mysql_error();
+        }
+    }
    
 
+    public function deleteQ()
+    {// print_r($this->delete());
 
+        if ($this->link) 
+        {  
+            $rez= mysql_query($this->delete()); 
+            
+        }
+        else 
+        { 
+            return "function deleteQ() does not work".":".mysql_error();
+        }
+    }
+   
     
 
 }
-?>
