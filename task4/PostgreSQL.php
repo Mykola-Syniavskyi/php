@@ -1,99 +1,77 @@
 <?php
-include'SQL.php';
 class PostgreSQL extends SQL
 {
     protected $link;
 
     
-    
     public function __construct()
     {   
         parent::__construct();
-        $this->link=pg_connect(HOST, USER, PASSWD); 
+        $conn_string = "host= 127.0.0.1 port= 5432 dbname=user15 user=user15 password=user15";
+        $this->link=pg_connect($conn_string); 
     }
 
-
-
-
-
-    public function conectToBase()
-    {
-        
-        if ($this->link) 
-        {
-            $sel_db= mysql_select_db(DB_NAME, $this->link);
-            mysql_select_db(DB_NAME, $this->link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error());
-            return   $sel_db; 
-        }
-        else
-        {
-            return  false;
-        }
-    }
-
-
-
-
+//-----FUNC for SELECTION
 
     public function selectAll()
-    {   //print_r($this->select());
-        if ($this->select() && $this->conectToBase()) 
+    {   
+        if ($this->select() && $this->link) 
         {
-            return $rez= mysql_query($this->select());
+            return $rez= pg_query($this->select());
         }
         else 
         {
-            return "function selectAll() does not work".":".mysql_error();
+            return "function selectAll() does not work".":".pg_result_error_field();
         }
     }
 
 
 
-
+//-----FUNC for INSERTION
 
     public function insertQ()
-    {  //print_r($this->insert());
+    { 
         if ($this->link) 
         {  
-            $rez= mysql_query($this->insert());
+            $rez= pg_query($this->insert());
             
         }
         else 
         {
-            return "function insertQ() does not work".":".mysql_error();
+            return "function insertQ() does not work".":".pg_result_error_field();
         }
     }
 
 
+//-----FUNC for UPDATION
 
     public function updateQ()
-    { //print_r($this->update());
+    { 
         if ($this->link) 
         {  
-            $rez= mysql_query($this->update()); 
+            $rez= pg_query($this->update()); 
             
         }
         else 
         { 
-            return "function updateQ() does not work".":".mysql_error();
+            return "function updateQ() does not work".":".pg_result_error_field();
         }
     }
    
+
+    //-----FUNC for DELETION
 
     public function deleteQ()
-    {// print_r($this->delete());
-
+    {
         if ($this->link) 
         {  
-            $rez= mysql_query($this->delete()); 
+            $rez= pg_query($this->delete()); 
             
         }
         else 
         { 
-            return "function deleteQ() does not work".":".mysql_error();
+            return "function deleteQ() does not work".":".pg_result_error_field();
         }
-    }
-   
-    
+    }   
 
 }

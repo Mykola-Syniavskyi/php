@@ -31,25 +31,36 @@ class SQL
 
     }
 
+//---------FUNC for creating array with prohibited "*"
+    private function arrayPush($var, $val)
+    {
+    $val = trim($val);
+    if ($val != '*')
+    {
+        array_push($var, $val);
+        return $var;
+    }
+    return false;
+    }
 
 
-
+//--------SETER for TableName
 
     public function setTableName($tName)
     {   
         $tName= trim($tName);
         if ($tName)
         {
-            $this->tableName=$tName;//print_r($this->tableName);
+            $this->tableName=$tName;
             return true;
         }
         return false;
     }
     
 
+//--------SETER for TableFild
 
-
-    public function setTableFild( $tFild)             // SETER FUNCTIONS
+    public function setTableFild( $tFild)             
     {
         $tFild= trim($tFild);
         if ($tFild)
@@ -61,8 +72,9 @@ class SQL
     }
      
 
+    //--------SETER for TableValues
 
-    public function setTableValues( $tValues)             // SETER FUNCTIONS
+    public function setTableValues( $tValues)             
     {
         $tValues= trim($tValues);
         if ($tValues)
@@ -75,34 +87,35 @@ class SQL
     
 
 
+//--------SETER for UpValue
 
-
-    public function setUpValue( $upValue)             // SETER FUNCTIONS
+    public function setUpValue( $upValue)            
     {
         $upValue= trim($upValue);
         if ($upValue)
         {
-            $this->updateValue= $upValue;   //print_r($this->tableValues);
+            $this->updateValue= $upValue;   
             return true;
         }
         return false;
     }
 
 
+//--------SETER for UpFild
 
-
-    public function setUpFild( $upFild)             // SETER FUNCTIONS
+    public function setUpFild( $upFild)             
     {
         $upFild= trim($upFild);
         if ($upFild)
         {
-            $this->updateFild= $upFild;   //print_r($this->tableValues);
+            $this->updateFild= $upFild;   
             return true;
         }
         return false;
     }
 
 
+//--------SETER for Condition
 
     public function setCondition($cond)
     {
@@ -117,6 +130,7 @@ class SQL
     
 
 
+//--------SETER for Limit
 
     public function setLimit($limit)
     {
@@ -131,8 +145,9 @@ class SQL
 
 
 
+//--------GETER for TableName
 
-    public function getTableName()                   //GETER FUNCTIONS
+    public function getTableName()                 
     {
         if ($this->tableName)
         {
@@ -142,7 +157,7 @@ class SQL
     }
     
 
-
+//--------GETER for TableFild
 
     public function getTableFild()
     {
@@ -154,6 +169,8 @@ class SQL
     }
 
 
+//--------GETER for TableValues
+
     public function getTableValues( ) 
     {
         if ($this->tableValues) 
@@ -162,6 +179,10 @@ class SQL
         }
         return false;
     }
+
+
+
+//--------GETER for UpValue
 
     public function getUpValue()
     {
@@ -174,6 +195,10 @@ class SQL
 
 
 
+
+
+//--------GETER for UpFild
+
     public function getUpFild()
     {
         if ($this->updateFild)
@@ -183,7 +208,11 @@ class SQL
         return false;
     }
 
-   
+
+
+
+
+   //--------GETER for Condition
     
     public function getCondition()
     {
@@ -194,7 +223,11 @@ class SQL
         }
         return false;     
     }
-    
+
+
+
+    //--------GETER for Limit
+
     public function getLimit()
     {
         if ($this->limit)
@@ -206,9 +239,9 @@ class SQL
 
 
 
-                                         //SELECT     INSERT     DELETE     UPDATE
+ //-----------SELECT---- INSERT---------DELETE-------------UPDATE
 
-
+//-----------SELECT
     public function select()
     {  if ($this->getTableName() && $this->getTableFild())
         {  
@@ -220,7 +253,7 @@ class SQL
 
 
 
-
+//-----------INSERT
 
     public function insert()
     {  if ($this->getTableName() &&  $this->getTableFild() && $this->getTableValues())
@@ -239,6 +272,10 @@ class SQL
 
 
 
+
+
+//-----------UPDATE
+
     public function update()
     {
         if ($this->getTableName() && $this->getUpFild() && $this->getUpValue() && $this->getCondition())
@@ -253,6 +290,9 @@ class SQL
 
 
 
+
+//-----------DELETE
+
     public function delete()
     {
         if ($this->getTableName() && $this->getCondition())
@@ -266,18 +306,7 @@ class SQL
         } 
     }
 
-
-
-    private function arrayPush($var, $val)
-    {
-    $val = trim($val);
-    if ($val != '*')
-    {
-      array_push($var, $val);
-      return $var;
-    }
-    return false;
-  }
+    
 
 }
 
