@@ -1,42 +1,14 @@
 <?php
-function add(iWorkData $ses)
+function add(iWorkData $obj, $key, $value)
 {
-    if($ses)
-    {
-        $ses->add();
-        if($ses->add())
-        return true;
-    }
-    else
-    {
-        echo "$ses is not obj!";
-    }
-    
+    return $obg->saveData($key, $value);
 }
-function read(iWorkData $ses)
+function read(iWorkData $obg, $key)
 {
-    if($ses)
-    {
-        $ses->read();
-        if($ses->read())
-        return true;
-    }
-    else
-    {
-        echo "$ses is not obj!";
-    }
+    return $obg->getData($key);
 }
-function del(iWorkData $ses)
+function del(iWorkData $obg, $key)
 {
-    if($ses)
-    {
-        $ses->del();
-        if($ses->del())
-        return true;
-    }
-    else
-    {
-        echo "$ses is not obj!";
-    }
+    return $obg->deleteData($key);
 }
 ?>
