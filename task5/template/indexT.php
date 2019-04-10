@@ -11,12 +11,23 @@
 </html>
 <?php
 echo "<h2><u>class Session :</u></h2>";
-echo "<h4>Result of execution save Data to session".":&nbsp&nbsp<u>". $addSES."</u></h4>";
-echo "<h4>Result of getting  Data from session".":&nbsp&nbsp<u>".$getSES."</u></h4>";
-echo "<h4>Result of deleting Data from session".":&nbsp&nbsp<u>".$delSES."</u></h4>";
+echo "<h4>Result of execution save Data to session".":&nbsp&nbsp<u>". $addSes."</u></h4>";
+echo "<h4>Result of getting  Data from session".":&nbsp&nbsp<u>".$getSes."</u></h4>";
+echo "<h4>Result of deleting Data from session".":&nbsp&nbsp<u>".$delSes."</u></h4>";
 
 
 echo "<h2><u>class Cookie :</u></h2>";
 echo "<h4>Result of execution save Data to cookie".":&nbsp&nbsp<u>". $addCook."</u></h4>";
 echo "<h4>Result of getting  Data from cookie".":&nbsp&nbsp<u>".$getCook."</u></h4>";
 echo "<h4>Result of deleting cookie".":&nbsp&nbsp<u>".$delCook."</u></h4>";
+
+
+   
+
+echo "<h2><u>class Mysql :</u></h2>";
+echo "<h4>Result of execution save Data to cookie".":&nbsp&nbsp<u>". $addMysql."</u></h4>";
+while ($row = mysql_fetch_assoc($getMysql)) 
+{
+echo "<h4>Result of getting  Data from Mysql".":&nbsp&nbsp<u>".$rezSql=$row['cars']." "."produced by"." ".$row['country']."</u></h4>";
+}
+echo "<h4>Result of deleting from Mysql".":&nbsp&nbsp<u>".$delMysql."</u></h4>";

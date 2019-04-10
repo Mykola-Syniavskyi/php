@@ -3,12 +3,16 @@ function add(iWorkData $obj, $key, $value)
 {
     return $obj->saveData($key, $value);
 }
-function read(iWorkData $obg, $key)
+
+
+function read(iWorkData $obj, $key)
 {
-    return $obg->getData($key);
+    return $obj->getData($key);
 }
-function del(iWorkData $obg, $key)
+
+
+function del(iWorkData $obj, $key)
 {
-    return $obg->deleteData($key);
+    return $obj->deleteData($key);
 }
 ?>

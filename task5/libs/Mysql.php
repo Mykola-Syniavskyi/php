@@ -6,15 +6,17 @@ class Mysql implements iWorkData
 
     public  function __construct()
         {
-                           $this->link = mysql_connect('localhost', 'user15', 'user15'); 
+                           $this->link = mysql_connect(HOST, USER, PASSWD); 
                 if (!$this->link) {
                     die('Ошибка соединения: ' . mysql_error());
                 }
-                echo 'Успешно соединились';
-                $selDB=mysql_select_db('user15');//print_r($selDB);
-                mysql_close($this->link);
+                $selDB=mysql_select_db(DB_NAME);//print_r($selDB);
+                
         }
-
+        public  function __destruct()
+        {
+            mysql_close($this->link);
+        }
 
 
         
@@ -24,13 +26,15 @@ class Mysql implements iWorkData
     public function saveData($key, $value)
     {
         if (is_string($key) && is_string($value) || is_numeric($value))
-        {   $key= trim($key);
-            
-        return true;
-        }
-        else
-        {
-            return false;
+        {   
+            $key= trim($key);
+            $query="INSERT INTO task5 (cars, country)VALUES('$key', '$value')";// print_r($query);
+             $rez= mysql_query($query);
+             if (!$rez) 
+             {
+                 die('Неверный запрос: ' . mysql_error());
+             }
+             return true;
         }
         
     }
@@ -40,7 +44,12 @@ class Mysql implements iWorkData
         if (is_string($key))
         {
             $key= trim($key);
-            
+            $query="SELECT cars, country FROM task5 WHERE cars='$key'"; 
+            $rez= mysql_query($query);//print_r($rez);
+            if (!$rez) {
+                die('Неверный запрос: ' . mysql_error());
+            }
+            return $rez;
         }
         else
         {
@@ -53,15 +62,12 @@ class Mysql implements iWorkData
         if (is_string($key))
         {
             $key= trim($key);
-            
+            $query="DELETE FROM task5 WHERE cars='$key'"; 
+            $rez= mysql_query($query);//print_r($rez);
+            if (!$rez) {
+                die('Неверный запрос: ' . mysql_error());
+            }
             return "Data was deleted  ";
-        }
-        else
-        {
-            return false;
-        }
-
-     
-        
+        }   
     }
 }

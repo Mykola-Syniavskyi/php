@@ -6,25 +6,27 @@ include 'libs/Session.php';
 include 'libs/Cookie.php';
 include 'libs/Mysql.php';
 
-$obgSes= new Session(); //var_dump($obgSes);
-$addSES=add( $obgSes, 'keySes', 'ValueSes');
-// $addSES=$obgSes->saveData('keySes','ValueSes');
-// $getSES=$obgSes->getData('keySes');
-// $delSES=$obgSes->deleteData('keySes');
+$objSes= new Session(); 
+$addSes=add( $objSes, 'keySes', 'ValueSes');
+$getSes=read($objSes, 'keySes');
+$delSes=del($objSes, 'keySes');
 
 
-$obgCook= new Cookie();
-$addCook=$obgCook->saveData('keyCook','ValueCook');
-$getCook=$obgCook->getData('keyCook');
-$delCook=$obgCook->deleteData('keyCook');
+$objCook= new Cookie();
+$addCook=add($objCook,'keyCook','ValueCook');
+$getCook=read($objCook,'keyCook');
+$delCook=del($objCook,'keyCook');
+
 
 
 
  $objMysql= new Mysql();
-// //$objMysql->conToBase();
+ $addMysql=add( $objMysql, 'Audi', 'Germany');
+ $getMysql=read( $objMysql, 'Audi');
+ $delMysql=del( $objMysql, 'Audi');
+ 
 
-
-
+ 
 
 
 

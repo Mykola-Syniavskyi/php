@@ -23,7 +23,7 @@ class Session implements iWorkData
         {
             $key= trim($key);
             session_start();
-            return $_SESSION['$key'];
+            return $_SESSION[$key];
         }
         else
         {
@@ -37,7 +37,7 @@ class Session implements iWorkData
         {
             $key= trim($key);
             session_start();
-            unset($_SESSION['$key']);
+            unset($_SESSION[$key]);
             return "Data  was deleted from session";
         }
         else
