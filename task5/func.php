@@ -1,7 +1,7 @@
 <?php
 function add(iWorkData $obj, $key, $value)
 {
-    return $obg->saveData($key, $value);
+    return $obj->saveData($key, $value);
 }
 function read(iWorkData $obg, $key)
 {

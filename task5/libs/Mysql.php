@@ -6,17 +6,17 @@ class Mysql implements iWorkData
 
     public  function __construct()
         {
-            $this->$link = mysqli_connect(HOST, USER, PASSWD, DB_NAME);
-
-            if (!$this->$link) {
-                echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
-                echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
-                echo "Текст ошибки error: " . mysqli_connect_error() . PHP_EOL;
-                exit;
-            }
-
-            return $this->link;
+                           $this->link = mysql_connect('localhost', 'user15', 'user15'); 
+                if (!$this->link) {
+                    die('Ошибка соединения: ' . mysql_error());
+                }
+                echo 'Успешно соединились';
+                $selDB=mysql_select_db('user15');//print_r($selDB);
+                mysql_close($this->link);
         }
+
+
+
         
 
 

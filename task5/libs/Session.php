@@ -7,7 +7,7 @@ class Session implements iWorkData
         if (is_string($key) && is_string($value) || is_numeric($value))
         {   $key= trim($key);
             session_start();
-            $_SESSION['$key']=$value;
+            $_SESSION[$key]=$value;
         return true;
         }
         else

@@ -1,0 +1,263 @@
+*************MYSQL******************
+
+First Select without  indexes:
+
+
+mysql> select * from books where id=850000;
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id     | name                                                                                                                                                                                                                                                       | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 850000 | Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2 | Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (19.29 sec)
+
+
+mysql> explain select * from books where id=850000;
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows   | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+|  1 | SIMPLE      | books | NULL       | ALL  | NULL          | NULL | NULL    | NULL | 838753 |    10.00 | Using where |
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+1 row in set, 1 warning (0.00 sec)
+
+
+
+
+
+
+
+mysql> select * from books where name= 'Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2' ;
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id     | name                                                                                                                                                                                                                                                       | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 850000 | Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2 | Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (23.91 sec)
+ varchar
+
+mysql> explain select * from books where name= 'Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZ                                                                    mVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhM                                               ' ;
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows   | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+|  1 | SIMPLE      | books | NULL       | ALL  | NULL          | NULL | NULL    | NULL | 838753 |    10.00 | Using where |
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+1 row in set, 1 warning (0.00 sec)
+
+
+
+
+
+
+
+mysql> select * from books where description='Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2';
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id     | name                                                                                                                                                                                                                                                       | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 850000 | Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2 | Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (17.53 sec)
+
+
+ explain select * from books where description='Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2Y0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2OWVlYjY0NmRiODc4MmI3OGQwZGJlNjljNjQxMTEzNGYyMDcxZjE5Y2JiMzBiMDViYTdjNDUzMDk4YzhhMzc4OGEwM2VhMWZmMTI5Njc2N2RjMzg4YTBiYmVmNjM0ZDE2';
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows   | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+|  1 | SIMPLE      | books | NULL       | ALL  | NULL          | NULL | NULL    | NULL | 838753 |    10.00 | Using where |
++----+-------------+-------+------------+------+---------------+------+---------+------+--------+----------+-------------+
+1 row in set, 1 warning (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+***********PGSQL****************
+
+
+
+
+
+
+
+
+user15=> select * from books where id=850000;
+   id   |
+                                         name
+                                                                             |
+
+
+
+                                                                                description
+
+
+
+
+
+--------+-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------+--------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--
+ 850000 | IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVl
+NTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4
+YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm | IwMDQ3NjkxOTY
+2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTB
+jNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzE
+zYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3O
+WUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwM
+DQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJ
+hZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjR
+lMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM
+2FjYzRkOTBjNjRlMzM5NjJhZTlm
+(1 row)
+
+
+
+
+
+user15=> explain select * from books where id=850000;
+                         QUERY PLAN
+-------------------------------------------------------------
+ Seq Scan on books  (cost=0.00..139822.27 rows=1 width=1012)
+   Filter: (id = 850000)
+(2 rows)
+
+
+
+
+
+
+user15=>  select * from books where name='IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm';
+   id   |
+                   name
+                                 |
+
+
+                                                              description
+
+
+
+--------+---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+---------------------------------+--------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+ 850000 | IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOT
+BjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2
+MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm | IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1Z
+GVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDd
+hNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2I
+yYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzM
+Dk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0Y
+mU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY
+2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm
+(1 row)
+
+
+
+
+
+user15=> explain  select * from books where name='IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm';
+
+                        QUERY PLAN
+
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------
+ Seq Scan on books  (cost=0.00..139822.27 rows=1 width=1012)
+   Filter: ((name)::text = 'IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4
+YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYz
+g0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm'::text)
+(2 rows)
+
+
+
+
+
+
+user15=> select * from books where  description='IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm';
+   id   |
+                   name
+                                 |
+
+
+                                                              description
+
+
+
+--------+---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+---------------------------------+--------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+ 850000 | IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOT
+BjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2
+MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm | IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1Z
+GVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDd
+hNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2I
+yYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzM
+Dk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0Y
+mU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY
+2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm
+(1 row)
+
+
+
+
+
+
+
+user15=> explain select * from books where  description='IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm';
+
+
+
+                                              QUERY PLAN
+
+
+
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+ Seq Scan on books  (cost=0.00..139822.27 rows=1 width=1012)
+   Filter: (description = 'IwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4Y
+TY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg
+0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDd
+hNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzMDk4YzczN
+jFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmIwMDQ3NjkxOTY2ZWExMmY2M2I2NzEyNWU0YmU3OWUzM
+Dk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlmMWE5ZGIwMDQ3NjkxOTY2ZWExMmY2M2I2NzE
+yNWU0YmU3OWUzMDk4YzczNjFlN2IyYWUzZDdhNzEzYzg0MDM1ZGVlNTA4YTY2MTAyM2FjYzRkOTBjNjRlMzM5NjJhZTlm'::text)
+(2 rows)

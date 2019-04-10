@@ -7,9 +7,10 @@ include 'libs/Cookie.php';
 include 'libs/Mysql.php';
 
 $obgSes= new Session(); //var_dump($obgSes);
-$addSES=$obgSes->saveData('keySes','ValueSes');
-$getSES=$obgSes->getData('keySes');
-$delSES=$obgSes->deleteData('keySes');
+$addSES=add( $obgSes, 'keySes', 'ValueSes');
+// $addSES=$obgSes->saveData('keySes','ValueSes');
+// $getSES=$obgSes->getData('keySes');
+// $delSES=$obgSes->deleteData('keySes');
 
 
 $obgCook= new Cookie();
@@ -19,8 +20,8 @@ $delCook=$obgCook->deleteData('keyCook');
 
 
 
-$objMysql= new Mysql();
-//$objMysql->conToBase();
+ $objMysql= new Mysql();
+// //$objMysql->conToBase();
 
 
 
