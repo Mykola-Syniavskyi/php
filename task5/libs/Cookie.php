@@ -1,7 +1,10 @@
 <?php
 
 class Cookie implements iWorkData
-{   
+{  
+    
+    //-------FUNC FOR ADD DATA--------
+
     public function saveData($key, $value)
     {
         if (is_string($key) && is_string($value) || is_numeric($value))
@@ -10,12 +13,12 @@ class Cookie implements iWorkData
              setcookie('$key',$value, time()+3600);
             return true;
         }
-        else
-        {
-            return false;
-        }
-        
+         return false;      
     }
+
+
+
+    //-------FUNC FOR GET DATA--------
 
     public function getData($key)
     {
@@ -24,24 +27,20 @@ class Cookie implements iWorkData
             $key= trim('$key'); 
             return $cook=$_COOKIE[$key];
         }
-        else
-        {
-            return false;
-        }
+         return false;
     }
+
+
+    //-------FUNC FOR DELETE DATA--------
 
     public function deleteData($key)
     {
         if (is_string($key))
         {
             $key= trim($key);
-            $cookDel=setcookie($key,$value, time()-3600); //print_r($cookDel);
+            $cookDel=setcookie($key,$value, time()-3600); 
             return "Cookie was deleted  ";
         }
-        else
-        {
-            return false;
-        }
-        
+         return false;    
     }
 }

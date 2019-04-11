@@ -2,6 +2,10 @@
 
 class Session implements iWorkData
 {   
+
+ //-------FUNC FOR ADD DATA--------
+
+
     public function saveData($key, $value)
     {
         if (is_string($key) && is_string($value) || is_numeric($value))
@@ -10,12 +14,11 @@ class Session implements iWorkData
             $_SESSION[$key]=$value;
         return true;
         }
-        else
-        {
-            return false;
-        }
-        
+        return false;    
     }
+
+
+    //-------FUNC FOR GET DATA--------
 
     public function getData($key)
     {
@@ -25,11 +28,11 @@ class Session implements iWorkData
             session_start();
             return $_SESSION[$key];
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
+
+
+ //-------FUNC FOR DELETE DATA--------
 
     public function deleteData($key)
     {
@@ -40,10 +43,6 @@ class Session implements iWorkData
             unset($_SESSION[$key]);
             return "Data  was deleted from session";
         }
-        else
-        {
-            return false;
-        }
-        
+        return false;  
     }
 }

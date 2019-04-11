@@ -6,6 +6,8 @@ include 'libs/Session.php';
 include 'libs/Cookie.php';
 include 'libs/Mysql.php';
 include 'libs/Ini.php';
+include 'libs/Json.php';
+
 
 $objSes= new Session(); 
 $addSes=add( $objSes, 'keySes', 'ValueSes');
@@ -20,7 +22,6 @@ $delCook=del($objCook,'keyCook');
 
 
 
-
  $objMysql= new Mysql();
  $addMysql=add( $objMysql, 'Audi', 'Germany');
  $getMysql=read( $objMysql, 'Audi');
@@ -28,10 +29,18 @@ $delCook=del($objCook,'keyCook');
  
 
  $objIni= new Ini();
- $addIni=add( $objIni,  'Audi', 'Origin - Germany');
- $grtIni=read( $objIni,  'Audi');
+ $addIni=add($objIni, 'Origin', 'Amerika');
+ $getIni=read($objIni, 'Origin');
+ $delIni=del($objIni,  'Origin');
+
+
+ $objJs= new Json();
+ $addJs=add($objJs, 'Origin', 'Amerika');
+ $getJs=read($objJs, 'Origin');
+ $delJs=del($objJs,  'Origin');
 
  
+
   
  
 
