@@ -5,6 +5,7 @@ include 'func.php';
 include 'libs/Session.php';
 include 'libs/Cookie.php';
 include 'libs/Mysql.php';
+include 'libs/Ini.php';
 
 $objSes= new Session(); 
 $addSes=add( $objSes, 'keySes', 'ValueSes');
@@ -26,8 +27,13 @@ $delCook=del($objCook,'keyCook');
  $delMysql=del( $objMysql, 'Audi');
  
 
- 
+ $objIni= new Ini();
+ $addIni=add( $objIni,  'Audi', 'Origin - Germany');
+ $grtIni=read( $objIni,  'Audi');
 
+ 
+  
+ 
 
 
 

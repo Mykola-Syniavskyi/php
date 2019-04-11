@@ -5,9 +5,10 @@ class Cookie implements iWorkData
     public function saveData($key, $value)
     {
         if (is_string($key) && is_string($value) || is_numeric($value))
-        {   $key= trim($key);
-            setcookie($key,$value, time()+3600);
-        return true;
+        {   
+            $key= trim('$key');
+             setcookie('$key',$value, time()+3600);
+            return true;
         }
         else
         {
@@ -18,10 +19,10 @@ class Cookie implements iWorkData
 
     public function getData($key)
     {
-        if (is_string($key))
+        if (is_string('$key'))
         {
-            $key= trim($key);
-            return $_COOKIE[$key];
+            $key= trim('$key'); 
+            return $cook=$_COOKIE[$key];
         }
         else
         {
@@ -34,7 +35,7 @@ class Cookie implements iWorkData
         if (is_string($key))
         {
             $key= trim($key);
-            setcookie($key,$value, time()-3600);
+            $cookDel=setcookie($key,$value, time()-3600); //print_r($cookDel);
             return "Cookie was deleted  ";
         }
         else
