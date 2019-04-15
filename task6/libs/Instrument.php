@@ -11,22 +11,22 @@ class Instrument implements iInstrument
     }
 
 
-    public function setName ($N)
+    public function setName ($name)
     {   
-        if (is_string($N))
+        if (is_string($name))
         {
-             $this->nameInst=trim($N);
+             $this->nameInst=trim($name);
              return true;
         }
         return false;      
     }
 
 
-    public function setCategory ($C)
+    public function setCategory ($category)
     {
-        if (is_string($N))
+        if (is_string($category))
         {
-             $this->categInst=trim($C);
+             $this->categInst=trim($category);
              return true;
         }
         return false;  

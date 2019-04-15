@@ -7,8 +7,30 @@
     <title>Band</title>
 </head>
 <body>  
+ <table cellspacing="0" border="2">
+  
+ </table>
+
+
 </body>
 </html>
-<?php
-echo "Instrument :&nbsp".print_r($musician1)."<br>";
+
+
+
+
+
+
+<?
+echo "Band`s name`s : ".$bandName."<br>";
+echo "Band`s genre`s : ".$bandGenre."<br>";
+print_r($a);
+
+
+foreach($getMusician as $item){ echo $item."<br>"; }
+ 
+
+ 
+
+
+
 

@@ -1,26 +1,27 @@
 <?php
 class Musician implements iMusician
 {
-    protected $instrument;
-    protected $type;
-    protected $musicman;
+    private $instrument;
+    private $category;
+    private $type;
+    
 
    
     public function __construct()
     {
         $this->instrument= ' ';
-        $this->type= ' ';
-        $this->musicMan= ' ';
+        $this->instrument= ' ';
+        $this->category= ' ';
+        
     }
 
     
 
-    public function setMusicMan($t,$m)
+    public function setMusician($type)
     {
-        if(is_string($t) && is_string($m))
+        if(is_string($type) )
         {
-            $this->type=trim($t);
-            $this->musicMan=trim($m);
+            $this->type=trim($type);
             return true;
         }
         return false;
@@ -30,22 +31,31 @@ class Musician implements iMusician
 
     
     public function addInstrument(iInstrument $obj)
-    {
-        
-        $this->instrument=$obj;
+    {//print_r($obj);
+        if($obj)
+        {
+            $this->instrument=$obj->getName();
+            return true;
+        }
+        return false;
     }
 
 
 
      public function getInstrument()
      {
-        return $this->insrument;
+        return $this->instrument;
      }
 
 
 
      public function assingToBand(iBand $nameBand)
      {
+        if (is_object($nameBand))
+        {   
+
+            $nameBand->addMusician($this);
+        }
 
      }
 
