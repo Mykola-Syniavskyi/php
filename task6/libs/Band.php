@@ -5,15 +5,20 @@ class Band implements iBand
     protected $genre;
     protected $musician;
     protected $instrument;
+    protected $category;
+
 
     public function __construct()
     {
-        $this->bandName=" ";
-        $this->genre=" ";
+        $this->bandName="";
+        $this->genre="";
         $this->musician=[];
         $this->instrument=[];
+        $this->category=[];
     }
 
+
+//*************SET NAME FOR BAND
 
     public function setName($name)
     {
@@ -24,11 +29,11 @@ class Band implements iBand
         }
         return false;
     }
-    public function getName()
-    {
-        return $this->bandName;
-    }
 
+
+
+
+//*************SET GENRE FOR BAND
 
     public function setGenre($genre)
     {
@@ -40,24 +45,27 @@ class Band implements iBand
         return false;
     }
 
-    public function getGenre()
-    {
-        return $this->genre;
-    }
 
+
+
+//*************ADD MUSICIAN, INSTRUMENT, CATEGORY OF INSTRUMENT FOR BAND
 
 
     public function addMusician(iMusician $obj)
-    {   //print_r($obj);
+    {   
         if ($obj)
         {
-            array_push($this->musician,$obj->getMusicianType()); //print_r( $this->musician) ;//->getMusicianType();
+            array_push($this->musician,$obj->getMusicianType()); 
+            array_push($this->instrument,$obj->getInstrument()); 
+            array_push($this->category,$obj->getCategoryInst());             
             return true;
         }
         return false;
     }
 
 
+
+//****************GETERS
 
     public function getMusician()
     {
@@ -66,9 +74,31 @@ class Band implements iBand
 
 
 
-    public function Insrument($obj)
+
+     public function Insrument()
     {
-        return $this->instrument=$obj->getInstrument;
+        return $this->instrument;
     }
 
+
+
+
+
+    public function categoryInstr()
+    {
+        return $this->category;
+    }
+
+
+
+    public function getName()
+    {
+        return $this->bandName;
+    }
+
+
+    public function getGenre()
+    {
+        return $this->genre;
+    }
 }

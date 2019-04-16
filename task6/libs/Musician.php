@@ -1,21 +1,21 @@
 <?php
 class Musician implements iMusician
 {
-    private $instrument;
-    private $category;
-    private $type;
+    protected $instrument;
+    protected $category;
+    protected $type;
     
 
    
     public function __construct()
     {
-        $this->instrument= ' ';
-        $this->instrument= ' ';
-        $this->category= ' ';
-        
+        $this->instrument= "";      
+        $this->category= "";
+        $this->type= "";
     }
 
     
+//*********SET MUSICIANS 
 
     public function setMusician($type)
     {
@@ -29,12 +29,14 @@ class Musician implements iMusician
 
 
 
-    
+//*********ADD NAME OF THE INSTRUMENT AND CATEGORY 
+
     public function addInstrument(iInstrument $obj)
-    {//print_r($obj);
+    {
         if($obj)
         {
             $this->instrument=$obj->getName();
+            $this->category=$obj->getCategory();
             return true;
         }
         return false;
@@ -42,25 +44,33 @@ class Musician implements iMusician
 
 
 
+//********GETERS FOR INSTRUMENTS AND CATEGORY
+
      public function getInstrument()
      {
         return $this->instrument;
      }
 
 
+     public function getCategoryInst()
+     {
+        return $this->category;
+     }
+
+
+//***********ADD MUSICIANS TO BAND 
 
      public function assingToBand(iBand $nameBand)
      {
         if (is_object($nameBand))
         {   
-
             $nameBand->addMusician($this);
         }
-
      }
 
 
-     
+//************GETER FOR TYPE MUSiCIAN 
+
      public function getMusicianType()
      {
         return $this->type;

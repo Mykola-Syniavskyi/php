@@ -11,7 +11,7 @@ include 'libs/Musician.php';
 
 $instr1=new Instrument();
 $instr1->setName('Guitar');
-$instr1->setCategory('String');
+$instr1->setCategory('stringed');
 
 $instr2=new Instrument();
 $instr2->setName('Drum');
@@ -45,23 +45,12 @@ $musician3->addInstrument($instr3);
  $musician3->assingToBand($band1);
  
 
-
+//*****CALL to BAND
  $bandName=$band1->getName();
  $bandGenre=$band1->getGenre();
  $getMusician=$band1->getMusician();
-
-
-// $getMusician1=$band1->getMusician();
-// $Musician2=$band1->addMusician($musician2);
-// $getMusician2=$band1->getMusician();
-// $Musician3=$band1->addMusician($musician3);
-// $getMusician3=$band1->getMusician();
-// $arrayBand1=['name'=>$bandName, 'genre'=>$bandGenre, 'musician1'=>$getMusician1, 'musician2'=>$getMusician2, 'musician3'=>$getMusician3,];
-
-
-
-
-
+ $getInstr=$band1->Insrument();
+ $getCategoryInstr=$band1->categoryInstr();
 
 
 

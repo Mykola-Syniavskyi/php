@@ -11,6 +11,8 @@ class Instrument implements iInstrument
     }
 
 
+    //**********SET NAME INSTRUMENT
+
     public function setName ($name)
     {   
         if (is_string($name))
@@ -22,6 +24,9 @@ class Instrument implements iInstrument
     }
 
 
+
+    //**********SET TYPE INSTRUMENT
+
     public function setCategory ($category)
     {
         if (is_string($category))
@@ -32,6 +37,9 @@ class Instrument implements iInstrument
         return false;  
     }
 
+
+
+    //****** GETERS FOR NAME AND CATEGORY
 
     public function getName ()
     {
