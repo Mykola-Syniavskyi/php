@@ -22,7 +22,7 @@ class View
 	{
 		foreach($this->forRender as $key=>$val)
 		{
-			$this->file = str_replace($key, $val, $this->file);
+			$this->file = str_replace($key, $val, $this->file);//print_r($this->file);
 		}													
 		echo $this->file;
     }

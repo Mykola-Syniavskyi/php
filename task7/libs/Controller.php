@@ -4,6 +4,7 @@ class Controller
 {
 		private $model;
 		private $view;
+		
 
 		public function __construct()
 		{		
@@ -22,19 +23,27 @@ class Controller
 			$this->view->templateRender();			
 	    }	
 		
+
+
+
 		private function pageSendMail()
 		{
 			if($this->model->checkForm() === true)
 			{
 				$this->model->sendEmail();
 			}
-			$mArray = $this->model->getArray();		
+			$mArray = $this->model->getArray();	//print_r($mArray);	
 	        $this->view->addToReplace($mArray);	
 		}	
-			    
+			 
+		
+
+
 		private function pageDefault()
 		{   
 		   $mArray = $this->model->getArray();		
-	       $this->view->addToReplace($mArray);			   
-		}				
+		   $this->view->addToReplace($mArray);		
+		}	
+		
+		
 }
