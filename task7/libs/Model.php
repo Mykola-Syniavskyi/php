@@ -9,7 +9,9 @@ class Model
    	
 	public function getArray()
    {	    
-		return array('%TITLE%'=>'Contact Form', '%ERRORS%'=>'Empty field');	
+		return array('%TITLE%'=>'Contact Form', 
+		'%ERRORS%'=>'Empty field','%lll%'=>'ooooo'
+	);	
    }
 	
 	public function checkForm()

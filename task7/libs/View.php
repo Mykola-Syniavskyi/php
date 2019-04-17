@@ -5,10 +5,15 @@ class View
 	private $forRender;
 	private $file;
 
+
+	
 	public function __construct($template)
 	{       
 		  $this->file = file_get_contents($template);
 	}
+
+
+
 
 	public function addToReplace($mArray)
 	{
@@ -17,6 +22,9 @@ class View
 			$this->forRender[$key] = $val;
 	   }
 	}
+
+
+
 
 	public function templateRender()
 	{

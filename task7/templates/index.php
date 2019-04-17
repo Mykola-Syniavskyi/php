@@ -3,7 +3,7 @@
 	<title>%TITLE%</title>
 </head>
 <body>
-<div><h2>Contact Form</h2></div>
+<div><h2>Contact Form</h2></div>%lll%
 <div style="color: #FF0000; font-size: 15px;"><strong>%ERRORS%</strong></div>
 <form action="" method="post">
 <input type="text" name="name" required>your FistLastName<br>
