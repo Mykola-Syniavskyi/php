@@ -13,22 +13,15 @@ class Model
 		'%TITLE%'=>'Contact Form',
 		'%ERRORS%'=>'Empty field',
 		'%SACCESS%'=>'Your letter was sent, our manager will call you',
-
 		];
 		
 		
    }
    	
 	public function getArray()
-<<<<<<< HEAD
-   {	    
-		return array('%TITLE%'=>'Contact Form', 
-		'%ERRORS%'=>'Empty field','%lll%'=>'ooooo'
-	);	
-=======
+
    {	   
 		 return 	$this->placeholders;
->>>>>>> 4752b1c6e5fecc905097c371e505c44131d813e1
    }
 	
 	public function checkForm()
@@ -52,6 +45,8 @@ class Model
 		<meta charset="utf-8">
 		<head>
 		<body>
+		<p>From:'.$this->name.'</p>
+		<p>'.$this->email.'</p>
 		<p>'.$this->text.'</p>
 		<p>'.'IP:' .$_SERVER['REMOTE_ADDR'].'</p>
 		<p>'.'Date:' .$date. '</p>
@@ -61,7 +56,7 @@ class Model
 		$headers = 'Content-type: text/html; charset="utf-8"';
 		$headers .= "From: <$this->email>"; 
 		$headers .= "Reply-To: <$to>"; 
-		return mail(MAIL_TO, $subject, $message, $headers); 
+		return mail($to, $subject, $message, $headers); 
 	}	
 	
 	
