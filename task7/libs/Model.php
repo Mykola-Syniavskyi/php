@@ -11,8 +11,18 @@ class Model
 		$this->text=$_POST['text'];
 		$this->placeholders=[
 		'%TITLE%'=>'Contact Form',
+<<<<<<< HEAD
 		'%ERRORS%'=>'Empty field',
 		'%SACCESS%'=>'Your letter was sent, our manager will call you',
+=======
+		'%ERROR_TEXT%'=>'',
+		'%ERROR_NAME%'=>'',
+		'%ERROR_EMAIL%'=>'',
+		'%ERROR_SELECT%'=>'',
+		'%SACCESS%'=>'',
+		
+
+>>>>>>> 62cb794db1bd61391ba220c6d9a7a244d816f060
 		];
 		
 		
@@ -21,15 +31,10 @@ class Model
 	public function getArray()
 
    {	   
-		 return 	$this->placeholders;
+		 return $this->placeholders;
    }
 	
-	public function checkForm()
-	{
-		if (true == $this->ValidName() && true == $this->validEmail() && true == $this->ValidText())
-	 
-		return true;			
-	}
+	
     
 	public function sendEmail()
 	{
@@ -45,7 +50,11 @@ class Model
 		<meta charset="utf-8">
 		<head>
 		<body>
+<<<<<<< HEAD
 		<p>From:'.$this->name.'</p>
+=======
+		<p>From'.$this->name.'</p>
+>>>>>>> 62cb794db1bd61391ba220c6d9a7a244d816f060
 		<p>'.$this->email.'</p>
 		<p>'.$this->text.'</p>
 		<p>'.'IP:' .$_SERVER['REMOTE_ADDR'].'</p>
@@ -61,32 +70,59 @@ class Model
 	
 	
 
+
+	public function checkForm()
+	{
+		if (true == $this->ValidName() && true == $this->validEmail() && true == $this->ValidText())
+		{
+			return true;
+		}return false;
+					
+	}
+
+
+
+
 	public function validEmail()
     {//print_r($this->email);
         
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) 
-        {echo 'T';
-        return true;
-        }echo 'F';
-        return false;
+		
+		{	
+       		return true;
+		}
+		else
+		{
+			$this->placeholders['%ERROR_EMAIL%']='incorect email!';
+			return false;
+		}
+         
         
     }
 
     public function ValidName()
     {
-        if (htmlspecialchars(trim($this->name))) 
-        {echo 'T';
+        if (htmlspecialchars(trim(strip_tags(stripslashes($this->name))))) 
+        {
         return true;
-        }echo 'F';
-        return false;
+		}else
+		{	if(empty($this->name))
+			$this->placeholders['%ERROR_NAME%']='incorect NAME!';
+			return false;
+		}
+        
         
     }
     public function ValidText()
     {
-        if (strlen(htmlspecialchars(trim($this->text)))>3) 
-        {echo 'T';
+        if (strlen(htmlspecialchars(trim(strip_tags(stripslashes($this->text)))))>10) 
+        {
             return true;
-        }echo 'F'; return false;
+		}else
+		{
+			$this->placeholders['%ERROR_TEXT%']='please fill in more than 10 symbols!';
+			return false;
+		} 
         
     }
 }
