@@ -11,18 +11,20 @@ class Model
 		$this->text=$_POST['text'];
 		$this->placeholders=[
 		'%TITLE%'=>'Contact Form',
-<<<<<<< HEAD
 		'%ERRORS%'=>'Empty field',
 		'%SACCESS%'=>'Your letter was sent, our manager will call you',
-=======
 		'%ERROR_TEXT%'=>'',
 		'%ERROR_NAME%'=>'',
 		'%ERROR_EMAIL%'=>'',
 		'%ERROR_SELECT%'=>'',
-		'%SACCESS%'=>'',
+		'%TEXT%'=>$this->text,
+		'%NAME%'=>$this->name,
+		'%EMAIL%'=>$this->email,
+		'%OPTION_1%'=>$this->select,
+		'%OPTION_2%'=>$this->select,
+		'%OPTION_1%'=>$this->select
 		
-
->>>>>>> 62cb794db1bd61391ba220c6d9a7a244d816f060
+	
 		];
 		
 		
@@ -50,11 +52,7 @@ class Model
 		<meta charset="utf-8">
 		<head>
 		<body>
-<<<<<<< HEAD
-		<p>From:'.$this->name.'</p>
-=======
-		<p>From'.$this->name.'</p>
->>>>>>> 62cb794db1bd61391ba220c6d9a7a244d816f060
+		<p>From : '.$this->name.'</p>
 		<p>'.$this->email.'</p>
 		<p>'.$this->text.'</p>
 		<p>'.'IP:' .$_SERVER['REMOTE_ADDR'].'</p>
@@ -68,31 +66,56 @@ class Model
 		return mail($to, $subject, $message, $headers); 
 	}	
 	
-	
+	public function info()
+	{
+		if (true==sendEmail())
+		{
+			 $this->placeholders['%SACCESS%'];
+			 $this-> Clear();
+			 return true;
+		}return false;
+	}
 
 
 	public function checkForm()
 	{
 		if (true == $this->ValidName() && true == $this->validEmail() && true == $this->ValidText())
 		{
+			
 			return true;
-		}return false;
+		}
+		return false;
 					
 	}
 
 
 
 
+	public function ValidName()
+    {
+        if (htmlspecialchars(trim(strip_tags(stripslashes($this->name))))) 
+        {
+			$this->placeholders['%NAME%'];
+        	return true;
+		}else
+		{	if(empty($this->name))
+			$this->placeholders['%ERROR_NAME%']='incorect NAME!';
+			return false;
+		}
+	}
+
+
+
 	public function validEmail()
-    {//print_r($this->email);
-        
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) 
+    {        
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) || !empty($this->email)) 
 		
 		{	
+			$this->placeholders['%EMAIL%'];
        		return true;
 		}
 		else
-		{
+		{	 
 			$this->placeholders['%ERROR_EMAIL%']='incorect email!';
 			return false;
 		}
@@ -100,30 +123,53 @@ class Model
         
     }
 
-    public function ValidName()
+    
+		
+	
+
+
+	public function ValidSelect()
     {
-        if (htmlspecialchars(trim(strip_tags(stripslashes($this->name))))) 
+
+
+
+
+        if ($this->select) 
         {
-        return true;
-		}else
-		{	if(empty($this->name))
-			$this->placeholders['%ERROR_NAME%']='incorect NAME!';
+			$this->placeholders['%ERROR_SELECT%']='incorect subject!';
 			return false;
+			
+		}else
+		{	//if(empty($this->name))
+			$this->placeholders['%SELECT%'];
+        	return true;
 		}
         
-        
-    }
+	}
+	
+
+
+
     public function ValidText()
     {
         if (strlen(htmlspecialchars(trim(strip_tags(stripslashes($this->text)))))>10) 
         {
-            return true;
+			$this->placeholders['%TEXT%'];
+			return true;
 		}else
 		{
 			$this->placeholders['%ERROR_TEXT%']='please fill in more than 10 symbols!';
 			return false;
 		} 
         
-    }
+	}
+	public function Clear()
+	{
+		$this->name='';
+		$this->email='';
+		$this->select='';
+		$this->text='';
+
+	}
 }
 

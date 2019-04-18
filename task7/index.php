@@ -17,10 +17,8 @@ catch(Exception $e)
 {
   echo $e->getMessage();	           
 }
-$obj= new Model;
-$r=$obj->sendEmail();
 
-print_r($r);
+
 
 //include 'templates/indexT.php';
 
