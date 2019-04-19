@@ -9,32 +9,36 @@ class Model
 		$this->email=$_POST['email'];
 		$this->select=$_POST['select'];
 		$this->text=$_POST['text'];
-		$this->placeholders=[
-		'%TITLE%'=>'Contact Form',
-		'%ERRORS%'=>'Empty field',
-		'%SACCESS%'=>'Your letter was sent, our manager will call you',
-		'%ERROR_TEXT%'=>'',
-		'%ERROR_NAME%'=>'',
-		'%ERROR_EMAIL%'=>'',
-		'%ERROR_SELECT%'=>'',
-		'%TEXT%'=>$this->text,
-		'%NAME%'=>$this->name,
-		'%EMAIL%'=>$this->email,
-		'%OPTION_1%'=>$this->select,
-		'%OPTION_2%'=>$this->select,
-		'%OPTION_1%'=>$this->select
-		
-	
-		];
-		
-		
+		$this->placeholders=
+			[
+			'%TITLE%'=>'Contact Form',
+			'%ERRORS%'=>'Empty field',
+			'%SELECT_PHP%'=>'php',
+			'%SELECT_JS%'=>'js',
+			'%PROMPT_TEXT%'=>'please type in more than 10 symbols!',
+			'%SACCESS%'=>'',
+			'%ERROR_TEXT%'=>'',
+			'%ERROR_NAME%'=>'',
+			'%ERROR_EMAIL%'=>'',
+			'%ERROR_SELECT%'=>'',
+			'%TEXT%'=>$this->text,
+			'%NAME%'=>$this->name,
+			'%EMAIL%'=>$this->email,
+			'%SELECT%'=>$this->select,
+			'%SELECTED_PHP%'=>'',
+			'%SELECTED_JS%'=>''			
+			];		
    }
-   	
+	   
+   
+
+
+   
 	public function getArray()
 
-   {	   
-		 return $this->placeholders;
-   }
+	{	   
+		return $this->placeholders;
+	}
 	
 	
     
@@ -66,22 +70,32 @@ class Model
 		return mail($to, $subject, $message, $headers); 
 	}	
 	
-	public function info()
+
+
+
+/////////////SHOW SACCESS NOTICE ABOUT SENDING
+
+	public function showRez()
 	{
-		if (true==sendEmail())
+		if (true == $this->sendEmail())
 		{
-			 $this->placeholders['%SACCESS%'];
+			 $this->placeholders['%SACCESS%']='LETTER WAS SENT SACCESFULLY';
 			 $this-> Clear();
 			 return true;
 		}return false;
 	}
 
 
+
+
+
+
+
+
 	public function checkForm()
 	{
-		if (true == $this->ValidName() && true == $this->validEmail() && true == $this->ValidText())
-		{
-			
+		if (true == $this->ValidSelect() && true == $this->ValidName() && true == $this->validEmail() && true == $this->ValidText() )
+		{			
 			return true;
 		}
 		return false;
@@ -90,6 +104,9 @@ class Model
 
 
 
+
+
+////////////////CHECK NAME 
 
 	public function ValidName()
     {
@@ -106,48 +123,54 @@ class Model
 
 
 
+
+
+////////////////////CHECK EMAIL
+
 	public function validEmail()
     {        
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) || !empty($this->email)) 
+        if (false == filter_var($this->email, FILTER_VALIDATE_EMAIL) || empty($this->email)) 
 		
-		{	
-			$this->placeholders['%EMAIL%'];
-       		return true;
+		{	$this->placeholders['%ERROR_EMAIL%']='incorect email!';
+			return false;
+			
 		}
 		else
 		{	 
-			$this->placeholders['%ERROR_EMAIL%']='incorect email!';
-			return false;
-		}
-         
-        
+			$this->placeholders['%EMAIL%'];
+       		return true;
+		}       
     }
 
     
 		
 	
 
+/////////////////////CHECK SELECT
 
 	public function ValidSelect()
     {
-
-
-
-
-        if ($this->select) 
-        {
-			$this->placeholders['%ERROR_SELECT%']='incorect subject!';
-			return false;
-			
-		}else
-		{	//if(empty($this->name))
-			$this->placeholders['%SELECT%'];
-        	return true;
+		if ($this->placeholders['%SELECT%'] =='php')
+		{
+			$this->placeholders['%SELECTED_PHP%']='selected';
+			return true;
 		}
-        
+		elseif($this->placeholders['%SELECT%'] =='js')
+		{
+			$this->placeholders['%SELECTED_JS%']='selected';
+			return true;
+		}
+		else{
+			$this->placeholders['%ERROR_SELECT%']='select subject!';
+			return false;
+		}
 	}
+
+
 	
 
+
+//////////////////CHECK TEXTAREA
 
 
     public function ValidText()
@@ -163,13 +186,25 @@ class Model
 		} 
         
 	}
-	public function Clear()
-	{
-		$this->name='';
-		$this->email='';
-		$this->select='';
-		$this->text='';
 
+
+
+
+////////////////CLEARING DATA FROM FORM 
+
+
+	public function Clear()
+	{	if (true == $this->sendEmail())
+		{
+			$this->placeholders['%NAME%']='';
+			$this->placeholders['%EMAIL%']='';
+			$this->placeholders['%SELECT%'] ='';
+			$this->placeholders['%TEXT%']='';
+			$this->placeholders['%SELECTED_PHP%']='';
+			$this->placeholders['%SELECTED_JS%']='';
+			$_POST=[];
+		return true;
+		}return false;	
 	}
 }
 
