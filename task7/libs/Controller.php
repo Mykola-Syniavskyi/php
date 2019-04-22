@@ -30,7 +30,8 @@ class Controller
 		{
 			if($this->model->checkForm() === true)
 			{
-				$this->model->sendEmail();
+				
+				$this->model->sent=$this->model->sendEmail();
 				$this->model->showRez();
 			}
 			$mArray = $this->model->getArray();	//print_r($mArray);	

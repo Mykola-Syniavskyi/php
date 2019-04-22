@@ -2,6 +2,7 @@
 
 class Model
 { 
+	public $sent=false;
 
    public function __construct()
    {  
@@ -50,23 +51,11 @@ class Model
 		//тема сообщения
 		$subject = $this->select;
 		//как бы текст
-		$message = '<!DOCTYPE html>
-		<html>
-		<head>
-		<meta charset="utf-8">
-		<head>
-		<body>
-		<p>From : '.$this->name.'</p>
-		<p>'.$this->email.'</p>
-		<p>'.$this->text.'</p>
-		<p>'.'IP:' .$_SERVER['REMOTE_ADDR'].'</p>
-		<p>'.'Date:' .$date. '</p>
-		</body>
-		</html>';
-		//headers
-		$headers = 'Content-type: text/html; charset="utf-8"';
-		$headers .= "From: <$this->email>"; 
-		$headers .= "Reply-To: <$to>"; 
+		$message = $this->text."\n".
+		'IP:' .$_SERVER['REMOTE_ADDR'].
+		"\nDate:" .$date ;
+		$headers = "From: <$this->email> \r\n"; 
+		$headers .= "Reply-To: <$this->email> \r\n "; 
 		return mail($to, $subject, $message, $headers); 
 	}	
 	
@@ -77,7 +66,7 @@ class Model
 
 	public function showRez()
 	{
-		if (true == $this->sendEmail())
+		if (true == $this->sent )
 		{
 			 $this->placeholders['%SACCESS%']='LETTER WAS SENT SACCESFULLY';
 			 $this-> Clear();
@@ -194,7 +183,7 @@ class Model
 
 
 	public function Clear()
-	{	if (true == $this->sendEmail())
+	{	if (true ==  $this->sent)
 		{
 			$this->placeholders['%NAME%']='';
 			$this->placeholders['%EMAIL%']='';
