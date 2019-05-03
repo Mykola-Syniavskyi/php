@@ -6,7 +6,7 @@ class PostgreSQL extends SQL
     public function __construct()
     {   
         parent::__construct();
-        $dsn="pgsql:=".HOST.";port=5432;dbname=".DB_NAME.";charset=utf8";
+        $dsn="pgsql: host=".HOST.";dbname=".DB_NAME;
         $options=[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                   PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]; 
        
@@ -14,23 +14,21 @@ class PostgreSQL extends SQL
         try {
             $this->link=new PDO($dsn, USER, PASSWD,$options); 
         } catch (PDOException $e) {
-            echo 'Подключение не удалось: ' . $e->getMessage();
+            return $e->getMessage();
         } 
 
     }
-    public function connect()
-    {
-       //$this->link =  new PDO('pgsql:dbname=user15;host=localhost;user=user15;password=user15');
-        $rez=$this->link->query("select * from students"); print_r($rez);
-        return $rez;
-    }
+   
     
 
     public function toStringSelect()
      {  
-         print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
+         //print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
         $stmt=$this->link->prepare( $this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit);
-        $stmt->bindParam(':params',$this->params);// for where
+        if ($this->where)
+        {
+            $stmt->bindParam(':params',$this->params);// for where
+        }      
         $stmt->execute();
         $rez= $stmt;
         return $rez;
@@ -42,7 +40,7 @@ class PostgreSQL extends SQL
 
     public function toStringUpdate()
     { 
-        print_r($this->update.$this->where);
+        //print_r($this->update.$this->where);
         $stmt=$this->link->prepare( $this->update.$this->where);
         $stmt->bindParam(':params',$this->params);// for where
         foreach ($this->updateValues as $key => $val)
@@ -56,7 +54,7 @@ class PostgreSQL extends SQL
 
     public function toStringDelete()
     { 
-        print_r($this->delete.$this->where);
+        //print_r($this->delete.$this->where);
         $stmt=$this->link->prepare( $this->delete.$this->where);
         $stmt->bindParam(':params',$this->params);// for where
         $stmt->execute();
@@ -69,28 +67,25 @@ class PostgreSQL extends SQL
     public function insert($table, $columns)
     {         
         parent::insert($table, $columns);
-        $stmt=$this->link->prepare($this->insert);
+        $stmt=$this->link->prepare($this->insert);//print_r($stmt);
         foreach ($this->insertValue as $key=>$val)
         {
             $stmt->bindParam($key, $this->insertValue[$key]); 
         }
         //check for existing inputet columns name in base
-        $getCulumnName = $this->link->prepare("select * from $table limit 1");
+        $getCulumnName = $this->link->prepare("select * from $table limit 1"); 
         $getCulumnName->execute();
         $fields = array_keys($getCulumnName->fetch(PDO::FETCH_ASSOC));
         $inputKeys= array_keys($columns);
 
         foreach ($inputKeys as $key)
         {
-            if (in_array($key, $fields)) //check input filds for existing
-            {
+            if (in_array(strtolower($key), $fields)) //check input filds for existing
+            { 
                 $stmt->execute();
                 return $this;
             }return false;
         }
-        
-
-        
     }
 
 

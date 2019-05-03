@@ -15,7 +15,7 @@ class MYSQL extends SQL
         try {
             $this->link=new PDO($dsn, USER, PASSWD,$options); 
         } catch (PDOException $e) {
-            echo 'Подключение не удалось: ' . $e->getMessage();
+            return $e->getMessage();
         }
 
     }
@@ -23,7 +23,7 @@ class MYSQL extends SQL
 
     public function toStringSelect()
      {  
-         print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
+         //print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
         $stmt=$this->link->prepare( $this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit);
         $stmt->bindParam(':params',$this->params);// for where
         $stmt->execute();
@@ -37,7 +37,7 @@ class MYSQL extends SQL
 
     public function toStringUpdate()
     { 
-        print_r($this->update.$this->where);
+        //print_r($this->update.$this->where);
         $stmt=$this->link->prepare( $this->update.$this->where);
         $stmt->bindParam(':params',$this->params);// for where
         foreach ($this->updateValues as $key => $val)
@@ -51,7 +51,7 @@ class MYSQL extends SQL
 
     public function toStringDelete()
     { 
-        print_r($this->delete.$this->where);
+        //print_r($this->delete.$this->where);
         $stmt=$this->link->prepare( $this->delete.$this->where);
         $stmt->bindParam(':params',$this->params);// for where
         $stmt->execute();

@@ -47,8 +47,8 @@ if ($select)
 <!--show result PGSQL-->
 
 <div style="background-color: lightgray;" >
-<h3> ===========POSTGRESQL============</h3>
-<h5> RESULT AFTER OPERATIONS INSERT, UPDATE, DELETE :</h5>
+<h3 style="background:yellow; width:45%;"> ===========POSTGRESQL============</h3>
+<h5 style="background:yellow; width:45%;" > RESULT AFTER OPERATIONS INSERT, UPDATE, DELETE :</h5>
 <?
 if ($selectPg)
 {  ?> 
@@ -67,13 +67,14 @@ if ($selectPg)
        
         <tr>
             <td><?=$i++?></td>
-            <td><?=$row['FirstName']?></td>
-            <td><?=$row['LastName']?></td>
-            <td><?=$row['Age']?></td>
-            <td><?=$row['Sex']?></td>
+            <td><?=$row['firstname']?></td>
+            <td><?=$row['lastname']?></td>
+            <td><?=$row['age']?></td>
+            <td><?=$row['sex']?></td>
         </tr>
    
-    <?}}?>
+    <?}
+}?>
     </table>
 
 </div>

@@ -42,7 +42,7 @@ class SQL
         $this->from='';
         $this->columns=[];//columns for select
         $this->condition=[];// condition for where and having
-        $this->params=[];//params for where and having
+        $this->params='';//params for where and having
         $this->orderBy=[];//params for order
         $this->order='';//query
         $this->columnsGroupBy=[];//arr columns for group
@@ -115,7 +115,7 @@ class SQL
         if ($tables)
         {
             $this->tables=$tables;
-            $this->from=" FROM "."`".$this->tables."`";          
+            $this->from=" FROM $this->tables";          
         }
     }
 
@@ -133,6 +133,7 @@ class SQL
     }
 
 
+  
 
     public function having($havingCondition, $havingParams)
     {
@@ -213,8 +214,8 @@ class SQL
     {
         if ($columns)
         {
-            $this->columnsGroupBy= implode("`,`",$this->columnsGroupBy);
-            $this->group= " GROUP BY "."`".$this->columnsGroupBy."`";
+            $this->columnsGroupBy= implode(",",$this->columnsGroupBy);
+            $this->group= " GROUP BY $this->columnsGroupBy";
             return true;
         }return false;
     }
@@ -267,7 +268,7 @@ class SQL
         {
             $this->joinTable=trim(htmlspecialchars($table));
             $this->joinCondition=trim($conditions);
-            $this->rightJoin=" RIGHT OUTER JOIN "."`". $this->joinTable."`"." ON $this->joinCondition ";
+            $this->rightJoin=" RIGHT OUTER JOIN  $this->joinTable  ON $this->joinCondition ";
             return true;
         }return false;
     }
@@ -314,7 +315,7 @@ class SQL
             {
                 $values[] = ':' . $key;
             }
-            $this->insert=" INSERT INTO "."`". $this->tables."`" ." ($this->insertKey) VALUES(" . implode(', ', $values) . ")";
+            $this->insert=" INSERT INTO  $this->tables ($this->insertKey) VALUES(" . implode(', ', $values) . ")";
             return true;
         }
         
@@ -338,9 +339,9 @@ class SQL
             $values= array();
             foreach($this->updateValues as $key => $val) 
             {
-                $values[] = "`".$key."`".'= :' . $key;
+                $values[] = $key .'= :' .$key;
             }
-            $this->update="UPDATE `$this->tables` SET ".implode(', ' ,$values).""; 
+            $this->update="UPDATE $this->tables SET ".implode(', ' ,$values).""; 
         }  
     }
 
@@ -354,7 +355,7 @@ class SQL
         if ($table)
         {
             $this->tables=trim(htmlspecialchars($table));
-            $this->delete=" DELETE FROM `$this->tables`";
+            $this->delete=" DELETE FROM $this->tables ";
         }
     }
 
