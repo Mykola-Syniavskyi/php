@@ -20,10 +20,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $a=$this->calculator->setA(1);
-        $b=$this->calculator->setB(2);
-
-        $result = $this->calculator->Sum($a, $b);
+        $a=$this->calculator->SetA(1);
+        $b=$this->calculator->SetB(2);
+        $result = $this->calculator->Sum();
         $this->assertEquals(3, $result);
     }
 
@@ -32,11 +31,10 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testMinus()
     {
-        $a=$this->calculator->setA(1);
-        $b=$this->calculator->setB(2);
-
-        $result = $this->calculator->Substr($a, $b);
-        $this->assertEquals(-1, $result);
+        $a=$this->calculator->SetA(5);
+        $b=$this->calculator->SetB(0);
+        $result = $this->calculator->Substr();
+        $this->assertEquals(5, $result);
     }
 
 
@@ -44,10 +42,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testMultiply()
     {
-        $a=$this->calculator->setA(2);
-        $b=$this->calculator->setB(2);
-
-        $result = $this->calculator->Multiply($a, $b);
+        $a=$this->calculator->SetA(2);
+        $b=$this->calculator->SetB(2);
+        $result = $this->calculator->Multiply();
         $this->assertEquals(4, $result);
     }
  
@@ -56,10 +53,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testDivide()
     {
-        $a=$this->calculator->setA(2);
-        $b=$this->calculator->setB(2);
-
-        $result = $this->calculator->Divide($a, $b);
+        $a=$this->calculator->SetA(2);
+        $b=$this->calculator->SetB(2);
+        $result = $this->calculator->Divide();
         $this->assertEquals(1, $result);
     }
 
@@ -69,11 +65,10 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
 
     public function testDevideByOne()
-    {
-        $b=$this->calculator->setB(6);
-
-        $result = $this->calculator->DevideByOne($b);
-        $this->assertEquals(0.17, round( $result,2));
+    {   
+        $this->calculator->SetB(1);
+        $result = $this->calculator->DevideByOne();
+        $this->assertEquals(1/$this->calculator->GETB(),  $result);
     }
 
 
@@ -81,10 +76,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testSqrRoot()
     {
-        $a=$this->calculator->setA(2);
-       
-        $result = $this->calculator->SqrRoot($a);
-        $this->assertEquals(1.41, round( $result,2));
+        $a=$this->calculator->SetA(2);      
+        $result = $this->calculator->SqrRoot();
+        $this->assertEquals(sqrt($this->calculator->GetA()),  $result);
     }
 
 
@@ -93,10 +87,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testpercent()
     {
-        $a=$this->calculator->setA(100);
-        $b=$this->calculator->setB(5);
-       
-        $result = $this->calculator->percent($a,$b);
+        $a=$this->calculator->SetA(100);
+        $b=$this->calculator->SetB(5);
+        $result = $this->calculator->percent();
         $this->assertEquals(5,  $result);
     }
 
@@ -107,9 +100,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testmSave()
     {
-        $a=$this->calculator->setA(5);
-       
-        $result = $this->calculator->mSave($a);
+        $this->calculator->SetA(5);  
+        $result = $this->calculator->mSave();
         $this->assertEquals(5, $result);
     }
 
@@ -118,8 +110,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testmRead()
     {
-        $a=$this->calculator->setA(6);
-        $this->calculator->mSave($a);
+        $this->calculator->setA(6);
+        $this->calculator->mSave();
         $result = $this->calculator->mRead();
         $this->assertEquals(6, $result);
     }
@@ -130,8 +122,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testmClear()
     {
-        $a=$this->calculator->setA(6);
-        $this->calculator->mSave($a);
+         $this->calculator->setA(6);
+         $this->calculator->mSave();
         $result = $this->calculator->mClear();
         $this->assertEquals(null, $result);
     }
@@ -141,10 +133,11 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testmPlus()
     {
-        $a=$this->calculator->setA(6);
-        $this->calculator->mSave($a);
+        $this->calculator->setA(6);
+        $this->calculator->mSave();
+        $this->calculator->setA(7);
         $result = $this->calculator->mPlus();
-        $this->assertEquals(12, $result);
+        $this->assertEquals(13, $result);
     }
     
 
@@ -153,7 +146,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     public function testmMinus()
     {
         $a=$this->calculator->setA(6);
-        $this->calculator->mSave($a);
+        $this->calculator->mSave();
         $this->calculator->setA(5);
         $result = $this->calculator->mMinus();
         $this->assertEquals(1, $result);

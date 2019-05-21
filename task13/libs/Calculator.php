@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 
 class Calculator
 {
@@ -12,8 +12,7 @@ class Calculator
                 $this->a= NULL;
                 $this->b= NULL;
                 $this->memVal=NULL;
-                $this->GetA(0);
-                $this->GetA(0);
+                
             }
 
         public function SetA($valueA)
@@ -29,7 +28,7 @@ class Calculator
         }
 
         public function SetB($valueB)
-        {
+        {//var_dump($valueB);
             if(is_numeric($valueB) && is_int($valueB))  
             {
                 return $this->b = $valueB ;
@@ -50,9 +49,9 @@ class Calculator
             return $this->b;  
         }
 
-        public function Sum($a, $b)// function for Sum
+        public function Sum()// function for Sum
         {      
-            if($a && $b)
+            if(!is_null($this->a) && !is_null($this->b))
             {   
                 
                 $rez = $this->GetA() + $this->GetB();
@@ -64,11 +63,12 @@ class Calculator
             }                      
         }
 
-        public function Substr($a, $b)// function for Substruction
+        public function Substr()// function for Substruction
         {
-            if($a && $b)
-            {
-                return $this->rez = $this->GetA() - $this->GetB();
+            if(!is_null($this->a) && !is_null($this->b))
+            {	
+                 $rez = $this->GetA() - $this->GetB();
+                return $rez;
             }
             else
             {
@@ -76,11 +76,11 @@ class Calculator
             }      
         }
         
-        public function Multiply($a, $b) // function for multiplication
-        {
-            if(is_int($a) && is_int($b))
+        public function Multiply() // function for multiplication
+        { //print_r($this->a.$this->b);
+            if(!is_null($this->a) && !is_null($this->b))
             {
-                return $this->rez = $this->GetA() * $this->GetB();
+                return $rez = $this->GetA() * $this->GetB();
             }
             else
             {
@@ -88,14 +88,14 @@ class Calculator
             }      
         }
         
-        public function Divide($a, $b)// function for Devision
-        {   if($b==0)
+        public function Divide()// function for Devision
+        {   if($this->b===0)
             {
                 return ERR_2;
             }
-            if( is_int($a) &&  is_int($b))
+            if(!is_null($this->a) && !is_null($this->b))
             {   
-               return $this->rez= $this->GetA() / $this->GetB();   
+               return $rez= $this->GetA() / $this->GetB();   
             } 
             else     
             {
@@ -103,25 +103,25 @@ class Calculator
             }          
         }
 
-        public function DevideByOne($b)//function for Devision By One
+        public function DevideByOne()//function for Devision By One
         {
-            if($b==0)
-            {
+            if($this->b===0)
+            { //echo "aaa";
                 return ERR_2;
             }
-            elseif(  !is_int($b))
-            { 
+            elseif( is_null($this->b))
+            {// echo "AAA";
                 return  ERR_1;
             } 
             else
-            {
-                return $this->rez= 1 / $this->GetB();  
+            { //echo "CCC";
+                return $rez= 1 / $this->GetB();  
             }                  
         }
 
-        public function SqrRoot($a)//function for Radical
+        public function SqrRoot()//function for Radical
         { 
-            if($a)
+            if(!is_null($this->a))
             {   
                 return sqrt($this->GetA());                
             }
@@ -130,10 +130,11 @@ class Calculator
                 return  ERR_1;
             }
         }
+         
 
-        public function percent($a, $b) //function for get percent
+        public function percent() //function for get percent
         { 
-          if ($a && $b)
+          if (!is_null($this->a) && !is_null($this->b))
           { 
             return $rez=  $this->GetA() * $this->GetB()/ 100;            
           } 
@@ -143,12 +144,11 @@ class Calculator
           } 
         }
 
-        public function mSave($a)//function for saving nomber in memory
+        public function mSave()//function for saving nomber in memory
         {
-            if($a)
+            if(!is_null($this->a))
             {
-               $this->memVal=$this->GetA();
-               return $this->memVal; 
+               return $this->memVal=$this->GetA(); 
             }
             else 
             {
@@ -158,16 +158,16 @@ class Calculator
     
         public function mRead()//function for reading nomber from the memory
         {   
-           if($this->memVal) 
+           if(!is_null($this->memVal)) 
            return $this->memVal; 
-           return ERR_3;  
+           return ERR_1;  
         }
 
         public function mClear()//function for cleaning memory
         {   
             if($this->memVal)          
                 return $this->memVal=null;
-                return "clear_ERROR"; 
+                return ERR_1; 
         }
         
         public function mPlus()//function writing nomber in memory after addition current number to number from the memory
