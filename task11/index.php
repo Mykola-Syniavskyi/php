@@ -6,27 +6,27 @@ include ('libs/MY_TEST.php');
 
 
  MY_TEST::initSQLConnection();
- $delete= MY_TEST::delete(31); 
+ //$delete= MY_TEST::delete(31); 
 
 
-//   $title = 'car';
-//   $price = '100';
-//   $description = 'muscle car ';
+  $title = 'TV';
+  $price = '120';
+  $description = 'for intertaiment ';
 
-//   $newTest = MY_TEST::newEmptyInstance();
-//  $newTest->setTitle($title);
-//  $newTest->setDescription($description);
-//  $newTest->setPrice($price);
-//  $newTest->save();
+$newTest = MY_TEST::newEmptyInstance();
+ $newTest->setTitle($title);
+ $newTest->setDescription($description);
+ $newTest->setPrice($price);
+ $newTest->save();
  
 
 
 
 
-$newTest2= MY_TEST::find(56); 
-$newTest2->setTitle('Robots');
-$newTest2->setDescription('The best robot');
-$newTest2->save();
+// $newTest2= MY_TEST::find(56); 
+// $newTest2->setTitle('Robots');
+// $newTest2->setDescription('The best robot');
+// $newTest2->save();
 
 $findAll=  MY_TEST::findAll(); 
 

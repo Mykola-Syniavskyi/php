@@ -21,8 +21,8 @@ class MYSQL extends SQL
     {
         
         if ($this->link) 
-        {
-            $sel_db= mysql_select_db(DB_NAME, $this->link);
+        { 
+            $sel_db= mysql_select_db(DB_NAME, $this->link);//print_r($sel_db);
             mysql_select_db(DB_NAME, $this->link ) or die ($rez="problem with select DB!".DB_NAME. ":".mysql_error());
             return   $sel_db; 
         }

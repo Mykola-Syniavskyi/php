@@ -26,7 +26,7 @@ class  MY_TEST
         self::$_db = new MYSQL;
         self::$_db->conectToBase();
 
-		$resource = mysql_connect("localhost", "root", "");
+		$resource = mysql_connect("localhost", USER, PASSWD);
 		if ($resource === false) {
 			throw new Exception("Could not connect to MySQL server: " . mysql_error());
 		}
@@ -94,10 +94,10 @@ class  MY_TEST
 
     public static function find($id)
     {    
-        self::$_db->setTableName('MY_TEST'); 
+        self::$_db->setTableName('my_test'); 
         $table=self::$_db->getTableName(); //print_r($a);
         $find= "select * from $table WHERE id = $id";  //print_r($find);
-        $rez=mysql_query($find); 
+        $rez=mysql_query($find); //print_r($rez);
         while ($row = mysql_fetch_assoc($rez)) {
             $findAll= self:: newEmptyInstance((int)$row['id']);
             $findAll->setTitle($row['title']);
@@ -114,7 +114,7 @@ class  MY_TEST
 
     public static function findAll()
     {
-        self::$_db->setTableName('MY_TEST');
+        self::$_db->setTableName('my_test');
         self::$_db->setTableFild('id');
         self::$_db->setTableFild('title');
         self::$_db->setTableFild('description');
@@ -163,7 +163,7 @@ class  MY_TEST
 
     protected function update() 
     {
-        self::$_db->setTableName('MY_TEST');
+        self::$_db->setTableName('my_test');
 
         self::$_db->setUpValue($this->price);
         self::$_db->setUpFild('price');
@@ -190,7 +190,7 @@ class  MY_TEST
         self::$_db->setTableFild('title');
         self::$_db->setTableFild('price');
         self::$_db->setTableFild('description');
-        self::$_db->setTableName('MY_TEST');
+        self::$_db->setTableName('my_test');
         self::$_db->setTableValues($this->title); //print_r($this->title);
         self::$_db->setTableValues($this->price);
         self::$_db->setTableValues($this->description);
@@ -208,7 +208,7 @@ class  MY_TEST
         if ($lId < 0 || $lId > PHP_INT_MAX) {
             return false;
         }
-        self::$_db->setTableName('MY_TEST');
+        self::$_db->setTableName('my_test');
         self::$_db->setCondition("id = $lId");
         self::$_db->deleteQ();
         
