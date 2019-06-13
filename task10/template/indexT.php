@@ -12,12 +12,12 @@ include ('config.php');
 </head>
 <body>
 <!--show result MYSQL-->
-<div style="background-color: gray;" >
+<div style="background-color: lightgray;" >
 <h3 style="background:yellow; width:45%;"> =======================MYSQL========================</h3>
 <h5 style="background:yellow; width:45%;">RESULT AFTER OPERATIONS INSERT, UPDATE, DELETE, SELECT :</h5>
 <?
 
-if ($select) 
+if ($select && !$errors) 
 {  ?> 
     <table  border="2" width="45%" cellpadding="0">
     <caption><h3>Students</h3></caption>
@@ -40,9 +40,27 @@ if ($select)
             <td><?=$row['Age']?></td>
             <td><?=$row['Sex']?></td>
         </tr> 
-<?}}?>
+<?  }
+}else
+
+?>
     </table>
+    <div>
+    <h2 style="color:red;">
     
+    <?
+ 
+{
+        print_r( $errors[0]);
+}
+
+?>
+    </h2>
+    
+    
+    </div>
+
+
 </div>
 
 <!--show result PGSQL-->

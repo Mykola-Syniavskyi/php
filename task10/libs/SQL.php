@@ -384,25 +384,55 @@ class SQL
 
     public function setColumns($columns)
     {
-        
-            if ($columns)
-            {
-                $columns= trim(preg_replace('/\s+/', '', $columns));
-                if (!empty($columns))
+        if ($columns)
+        {
+            try
+           {
+               $columns= trim(preg_replace('/\s+/', '', $columns));
+                if (empty($columns))
                 {
-                    $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
-                    return $this;
+                    throw new Exception(COLUMN_ERROR);
                 }
-                else 
-                {
-                    return $this;
-                }
-                
-            }
-            else
-            {
+                $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
                 return $this;
-            }
+
+           }catch(Exception $e)
+           {
+                $this->errors= $this->arrayPush($this->errors, $e->getMessage());
+                return $this;
+           }
+        }
+        else 
+        {
+            $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR1);
+            return $this;
+        }
+           
+        
+        
+        
+        
+        
+        // if ($columns)
+            // {
+            //     $columns= trim(preg_replace('/\s+/', '', $columns));
+            //     if (!empty($columns))
+            //     {
+            //         $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
+            //         return $this;
+            //     }
+            //     else 
+            //     {//return false;
+            //         $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR);
+            //         return $this;
+            //     }
+                
+            // }
+            // else
+            // {
+            //      $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR);
+            //      return $this;
+            // }
             
             
 
@@ -423,10 +453,11 @@ class SQL
 
     public function getErrors()
     {
-       if( $this->errors)
-       {
-           return $this->errors;
-       }
+        if (!empty($this->errors))
+        {
+           return $this->errors  ;  
+        }
+        
         
     }
 
