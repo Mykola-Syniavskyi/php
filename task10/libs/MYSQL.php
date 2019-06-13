@@ -8,8 +8,8 @@ class MYSQL extends SQL
     {   
         parent::__construct();
         $dsn="mysql:=".HOST.";port=3306;dbname=".DB_NAME.";charset=utf8";
-        $options=[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]; 
+        $options=array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC); 
        
 
         try {
@@ -23,7 +23,7 @@ class MYSQL extends SQL
 
     public function toStringSelect()
      {  
-         //print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
+        print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
         $stmt=$this->link->prepare( $this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit);
         $stmt->bindParam(':params',$this->params);// for where
         $stmt->execute();

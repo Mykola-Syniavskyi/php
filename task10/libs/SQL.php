@@ -375,17 +375,34 @@ class SQL
     return false;
     }
 
+
+
+
     //**check imput filds and add it to array */
 
     public function setColumns($columns)
     {
         if ($columns)
         {
-            $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
-            return $this;
-        }return false;
+            if (!empty(trim(htmlspecialchars($columns))))
+            {
+                $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
+                return $this;
+            }
+            else
+            {
+                die(COLUMN_ERROR); 
+            }
+
+        }
+        else
+        {
+            die(COLUMN_ERROR_empty);
+        }
+    }   
+
+
         
-    }
 
     public function getColumns()
     {
