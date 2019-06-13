@@ -40,9 +40,9 @@ if ($select)
             <td><?=$row['Age']?></td>
             <td><?=$row['Sex']?></td>
         </tr> 
-<?}?>
+<?}}?>
     </table>
-    <?}?>
+    
 </div>
 
 <!--show result PGSQL-->
@@ -81,7 +81,6 @@ if ($selectPg)
 </div>
 </body>
 </html>
-<?
 
 
 

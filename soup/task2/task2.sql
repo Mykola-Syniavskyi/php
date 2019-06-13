@@ -13,7 +13,7 @@ CREATE TABLE `cars` (
 
 CREATE TABLE `model` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`model` char(50) NOT NULL AUTO_INCREMENT,
+	`model` char(50) NOT NULL ,
 	PRIMARY KEY (`id`)
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE `orders` (
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `model` ADD CONSTRAINT `model_fk0` FOREIGN KEY (`model`) REFERENCES `cars`(`id`);
+ALTER TABLE `model` ADD CONSTRAINT `model_fk0` FOREIGN KEY (`id`) REFERENCES `cars`(`id`);
 
 ALTER TABLE `brand` ADD CONSTRAINT `brand_fk0` FOREIGN KEY (`id`) REFERENCES `cars`(`id`);
 

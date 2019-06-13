@@ -31,6 +31,7 @@ class SQL
     protected $update;
     protected $updateValue;
     protected $delete;
+    protected $errors;
 
     public function __construct()
     {
@@ -63,6 +64,7 @@ class SQL
         $this->update='';
         $this->updateValue='';
         $this->delete='';
+        $this->errors=[];
        
     }
 
@@ -382,23 +384,29 @@ class SQL
 
     public function setColumns($columns)
     {
-        if ($columns)
-        {
-            if (!empty(trim(htmlspecialchars($columns))))
+        
+            if ($columns)
             {
-                $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
-                return $this;
+                $columns= trim(preg_replace('/\s+/', '', $columns));
+                if (!empty($columns))
+                {
+                    $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
+                    return $this;
+                }
+                else 
+                {
+                    return $this;
+                }
+                
             }
             else
             {
-                die(COLUMN_ERROR); 
+                return $this;
             }
+            
+            
 
-        }
-        else
-        {
-            die(COLUMN_ERROR_empty);
-        }
+        
     }   
 
 
@@ -411,6 +419,15 @@ class SQL
             return $this->columns;
         }
 
+    }
+
+    public function getErrors()
+    {
+       if( $this->errors)
+       {
+           return $this->errors;
+       }
+        
     }
 
 }

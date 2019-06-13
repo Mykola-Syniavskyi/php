@@ -8,4 +8,4 @@ define('PASSWD', 'user15');// for classes
 
 //errors
 define('COLUMN_ERROR', 'There are only spaces in params setColunm!');
-define('COLUMN_ERROR_empty', 'Insert parameters into setColumn!');
+
