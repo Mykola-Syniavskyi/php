@@ -31,7 +31,7 @@ $combine= new MYSQL;
 
 //******$COLUMNS FOR SELECT WITH JOIN****** */
 
-$columns=$combine->setColumns('')->setColumns('students.LastName')->setColumns('students.Age')->setColumns('sex.Sex')->getColumns();
+$columns=$combine->setColumns('students.FirstName')->setColumns('students.LastName')->setColumns('students.Age')->setColumns('sex.Sex')->getColumns();
 
 
 $select=$combine->select($columns)->from('students')->rightJoin('sex','students.id=sex.id')->toStringSelect();
