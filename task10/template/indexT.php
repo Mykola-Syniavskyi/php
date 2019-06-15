@@ -27,7 +27,6 @@ if ($select && !$errors)
             <th>Last Name</th>
             <th>Age</th>
             <th>Sex</th>
-
         </tr>
 
     <?$i=1;
