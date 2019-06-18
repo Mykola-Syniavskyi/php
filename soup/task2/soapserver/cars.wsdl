@@ -1,60 +1,90 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<definitions name="Cars"
-             targetNamespace="http://mysite.local/soup/task2/task2/soapserver/"
-             xmlns="http://schemas.xmlsoap.org/wsdl/"
-             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:tns="http://mysite.local/soup/task2/task2/soapserver/"
-             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding"
-             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<?xml version="1.0" encoding ="utf-8"?>
+<!-- 
+(c) World Corp
+2019-06-18
+let you post/retrieve online message by SOAP protocol
 
-    <wsdl:types>
-        <xsd:schema targetNamespace="http://mysite.local/soup/task2/task2/soapserver/">
-            <xsd:complexType name="resultArray">
-                <xsd:complexContent>
-                    <xsd:restriction base="SOAP-ENC:Array">
-                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]" />
-                    </xsd:restriction>
-                </xsd:complexContent>
-            </xsd:complexType>
-        </xsd:schema>
-    </wsdl:types>
-
-
-    <message name="getCarsResponse">
-        <part name="Result" type="tns:resultArray"/>
-    </message>
-
-    <message name="getDataRequest">
-        <part name="id" type="xsd:int"/>
-        <part name="name" type="xsd:string"/>
-        <part name="model" type="xsd:string"/>
-    </message>
-    <message name="getOneDataRequest">
-        <part name="id" type="xsd:int"/>
-    </message>
-    <message name="getDataResponse">
-        <part name="Result" type="tns:string"/>
-    </message>
-
-    <portType name="PortType">
-        <operation name="allAuto">
-            <output message="tns:getCarsResponse"/>
-        </operation>
-        <operation name="oneAuto">
-            <input message="tns:getOneDataRequest"/>
-            <output message="tns:getCarsResponse"/>
-        </operation>
-    </portType>
-
-    <binding name="Binding" type="tns:PortType">
-        <operation name="allAuto"/>
-        <operation name="oneAuto"/>
-    </binding>
-
-    <service name="CarsService">
-        <port name="CarsPort" binding="Binding">
-            <soap:address location="http://mysite.local/soup/task2/task2/soapserver/">
-        </port>
-    </service>
+Online WSDL 1.1 SOAP generator 0.2
+Julien Blitte
+ -->
+<definitions name="let you post/retrieve online message by SOAP protocol"
+	targetNamespace="us.world_corp.my_soap_forum.wsdl"
+	xmlns:tns="us.world_corp.my_soap_forum.wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="us.world_corp.my_soap_forum.xsd"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+<!-- definition of datatypes -->
+	<types>
+	<schema targetNamespace="us.world_corp.my_soap_forum.xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+		<element name="resultcode">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="id">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="params">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="void">
+		<complexType><sequence></sequence></complexType>
+		</element>
+	</schema>
+	</types>
+<!-- response messages -->
+	<message name='returns_resultcode'>
+	<part name='resultcode' type='xsd:resultcode'/>
+	</message>
+<!-- request messages -->
+	<message name='getAllCars'>
+	<part name='void' type='xsd:void'/>
+	</message>
+	<message name='getOneCar'>
+	<part name='id' type='xsd:id'/>
+	</message>
+	<message name='getCarsByParams'>
+	<part name='params' type='xsd:params'/>
+	</message>
+<!-- server's services -->
+	<portType name='my SOAP forum'>
+		<operation name='getAllCars'>
+		<input message='tns:getAllCars'/>
+		<output message='tns:returns_resultcode'/>
+		</operation>
+		<operation name='getOneCar'>
+		<input message='tns:getOneCar'/>
+		<output message='tns:returns_resultcode'/>
+		</operation>
+		<operation name='getCarsByParams'>
+		<input message='tns:getCarsByParams'/>
+		<output message='tns:returns_resultcode'/>
+		</operation>
+	</portType>
+<!-- server encoding -->
+	<binding name='my SOAP forum_webservices' type='tns:my SOAP forum'>
+	<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+		<operation name='getAllCars'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#getAllCars'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+		<operation name='getOneCar'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#getOneCar'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+		<operation name='getCarsByParams'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#getCarsByParams'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+	</binding>
+<!-- access to service provider -->
+	<service name='exemple'>
+	<port name='exemple_0' binding='my SOAP forum_webservices'>
+	<soap:address location='http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php'/>
+	</port>
+	</service>
 </definitions>
