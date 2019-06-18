@@ -1,5 +1,5 @@
 <?php
-include 'config.php'
+include 'config.php';
 class Cars 
 {
     private $autoCatalog;
@@ -14,7 +14,7 @@ class Cars
     }
 
 
-
+ 
     public function conectToBase()
     {
         
@@ -57,9 +57,7 @@ class Cars
     {
         $resultArray = array();
        
-        $stmt = $this->con->prepare("SELECT Cars.id, CarsModel.name, model , year , engin , color, max_speed, price
-        FROM Cars,CarsModel WHERE id_name = CarsModel.id  
-        AND Cars.id = ?");
+        $stmt = $this->con->prepare("SELECT Cars.id, CarsModel.name, model , year , engin , color, max_speed, price   FROM Cars,CarsModel WHERE id_name = CarsModel.id   AND Cars.id = ?");
         $stmt->execute([$id]); 
         $row = $stmt->fetch();
 
@@ -80,8 +78,6 @@ class Cars
     {
         $val = 'BMW';
         $searchParam = 'Name';
-
-        $arr = array();
 
         $arr = array();
 
