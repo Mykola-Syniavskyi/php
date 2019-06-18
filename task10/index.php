@@ -17,11 +17,11 @@ include ('libs/PostgreSQL.php');
 //group($group)                                      
 //order($order)
 //limit(1)
-//rightJoin('sex','students.id=sex.id')
-//leftJoin('sex','students.id=sex.id')
-//Join('sex','students.id=sex.id')
-//crossJoin('sex')
-//naturalJoin('sex')
+//rightJoin($JoinTable,$JoinCondition)
+//leftJoin($JoinTable,$JoinCondition)
+//Join($JoinTable,$JoinCondition)
+//crossJoin($JoinTable)
+//naturalJoin($JoinTable)
 // toStringSelect();
 
 
@@ -31,19 +31,19 @@ $combine= new MYSQL;
 
 //******$COLUMNS FOR SELECT WITH JOIN****** */
 
-$columns=$combine->setColumns('students.FirstName')->setColumns('students.LastName')->setColumns('students.Age')->setColumns('sex.Sex')->getColumns();
-
-
-$select=$combine->select($columns)->from('students')->rightJoin('sex','students.id=sex.id')->toStringSelect();
-$errors=$combine->getErrors();
+// $columns=$combine->setColumns('students.FirstName')->setColumns('students.LastName')->setColumns('students.Age')->setColumns('sex.Sex')->getColumns();
+// $JoinTable=$combine->setJoinTable('sex');
+// $JoinCondition=$combine->setJoinCondition('students.id=sex.id');
+// $select=$combine->select($columns)->from('students')->rightJoin($JoinTable,$JoinCondition)->toStringSelect();
+//$errors=$combine->getErrors();
 
 // // //*****$COLUMNS FOR SELECT WITH OUT JOIN */
 
-// $columns=$combine->setColumns('students.FirstName')->setColumns('students.LastName')->setColumns('students.Age')->getColumns();
-// $order=$combine->setOrder('id ASC')->getOrder();
-// $group=$combine->setGroupBy('FirstName')->setGroupBy('LastName')->setGroupBy('id')->getGroupBy();
-// $select=$combine->select($columns)->from('students')->where('id>','1')->group($group)->having('SUM(Age)<','30')->limit(10)->toStringSelect();
-
+$columns=$combine->setColumns('students.FirstName')->setColumns('students.LastName')->setColumns('students.Age')->getColumns();
+$order=$combine->setOrder('id ASC')->getOrder();
+$group=$combine->setGroupBy('FirstName')->setGroupBy('LastName')->setGroupBy('id')->getGroupBy();
+$select=$combine->select($columns)->from('students')->where('id>','1')->group($group)->having('SUM(Age)<','30')->limit( '10')->toStringSelect();
+$errors=$combine->getErrors();
 
  
 // //INSERT 

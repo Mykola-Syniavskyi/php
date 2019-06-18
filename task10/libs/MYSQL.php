@@ -22,13 +22,21 @@ class MYSQL extends SQL
 
 
     public function toStringSelect()
-     {  
-        // print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
+     {  if (1==($this->from && $this->rightJoin) || 1==($this->from && $this->join)|| 1==($this->from && $this->leftJoin) || 1==($this->from && $this->crossJoin) || 1==($this->from && $this->naturalJoin) || 1==($this->from && $this->where && $this->group && $this->having && $this->limit))
+        {
+             print_r($this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit );
         $stmt=$this->link->prepare( $this->select.$this->selectDistinct.$this->from.$this->join.$this->leftJoin.$this->rightJoin.$this->crossJoin.$this->naturalJoin.$this->where.$this->group.$this->having.$this->order.$this->limit);
-        $stmt->bindParam(':params',$this->params);// for where
+        $stmt->bindParam(':params',$this->params);//print_r($stmt); // for where 
         $stmt->execute();
-        $rez= $stmt;
+        $rez= $stmt;//var_dump($rez);
         return $rez;
+
+        }
+        else
+        {
+            return  $this->erros;
+        } 
+        
         
     }
 
@@ -110,11 +118,11 @@ class MYSQL extends SQL
 
 
 
-
     public function from($tables)
-    {      
-        parent:: from($tables);
-        return $this;      
+    {   
+                parent:: from($tables);
+                return $this;      
+  
     }
 
 

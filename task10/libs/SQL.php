@@ -32,6 +32,8 @@ class SQL
     protected $updateValue;
     protected $delete;
     protected $errors;
+    
+    
 
     public function __construct()
     {
@@ -65,10 +67,9 @@ class SQL
         $this->updateValue='';
         $this->delete='';
         $this->errors=[];
+        
        
     }
-
-
 
     
 
@@ -111,13 +112,30 @@ class SQL
 
 
 
-
     public function from($tables)
     {
         if ($tables)
         {
-            $this->tables=$tables;
-            $this->from=" FROM $this->tables";          
+            try
+            {
+                $tables= trim(preg_replace('/\s+/', '', $tables));
+                     if (empty($tables))
+                    {
+                        throw new Exception(COLUMN_ERROR);   
+                    }
+                    $this->tables = trim(htmlspecialchars($tables));
+                    $this->from = " FROM $this->tables"; 
+            }
+            catch(Exception $e)
+            {
+                $this->errors = $this->arrayPush($this->errors, $e->getMessage() );
+            }
+            
+        }
+        else
+        {
+             $this->errors = $this->arrayPush($this->errors, COLUMN_ERROR1);
+             
         }
     }
 
@@ -126,28 +144,59 @@ class SQL
     public function where($condition, $params)
     {
         if($condition &&  $params)
+        { 
+            try
+            {
+                $condition= trim(preg_replace('/\s+/', '', $condition));
+                $params= trim(preg_replace('/\s+/', '', $params));
+                     if (empty($condition) || empty($params))
+                    {
+                        throw new Exception(COLUMN_ERROR);   
+                    }
+                    $this->condition = $condition; 
+                    $this->params = $params;//print_r($this->params);
+                    $this->where = " WHERE  $this->condition  :params";
+                    //return $this;
+            }
+            catch(Exception $e)
+            {
+                $this->errors = $this->arrayPush($this->errors, $e->getMessage() );
+            }   
+        }
+        else
         {
-            $this->condition=trim($condition); 
-            $this->params=trim(htmlspecialchars($params)); 
-            $this->where=" WHERE  $this->condition  :params"; 
-            return true;    
-        }return false;   
+            $this->errors = $this->arrayPush($this->errors, COLUMN_ERROR1);
+        }    
     }
 
 
-  
 
     public function having($havingCondition, $havingParams)
     {
         if($havingCondition &&  $havingParams)
         {
-            $this->havingCondition=trim($havingCondition); 
-            $this->havingParams=trim(htmlspecialchars($havingParams)); 
-            $this->having=" HAVING $this->havingCondition   $this->havingParams"; 
-            return true;    
-        }return false;   
+            try
+            {
+                $havingCondition= trim(preg_replace('/\s+/', '', $havingCondition));
+                $havingParams= trim(preg_replace('/\s+/', '', $havingParams));
+                     if (empty($havingCondition) || empty($havingParams))
+                    {
+                        throw new Exception(COLUMN_ERROR);   
+                    }
+                    $this->havingCondition = $havingCondition; 
+                    $this->havingParams = $havingParams;
+                    $this->having = " HAVING $this->havingCondition   $this->havingParams"; 
+            }
+            catch(Exception $e)
+            {
+                $this->errors = $this->arrayPush($this->errors, $e->getMessage() );
+            }   
+        }
+        else
+        {
+            $this->errors = $this->arrayPush($this->errors, COLUMN_ERROR1);
+        }     
     }
-
 
 
 
@@ -157,8 +206,8 @@ class SQL
     {
         if ($columns)
         {
-            $orderBy=trim(htmlspecialchars($columns));
-            $this->orderBy=$this->arrayPush($this->orderBy,$orderBy);
+            $orderBy = trim(htmlspecialchars($columns));
+            $this->orderBy = $this->arrayPush($this->orderBy,$orderBy);
             return $this;
         }return false;
         
@@ -190,14 +239,32 @@ class SQL
 
     //add to array data for  public function group($columns)
 
-    public function setGroupBy($columns)
+    public function setGroupBy($columnsGroupBy)
     {
-        if ($columns)
+        if ($columnsGroupBy)
         {
-            $columnsGroupBy= trim(htmlspecialchars($columns));
-            $this->columnsGroupBy= $this->arrayPush($this->columnsGroupBy,$columnsGroupBy);
+            try
+           {
+               $columnsGroupBy= trim(preg_replace('/\s+/', '', $columnsGroupBy));//print_r($columns);
+                if (empty($columnsGroupBy))
+                {
+                    throw new Exception(COLUMN_ERROR);
+                }
+                $this->columnsGroupBy=$this->arrayPush($this->columnsGroupBy,htmlspecialchars($columnsGroupBy));
+                return $this;
+
+           }catch(Exception $e)
+           {
+                $this->errors= $this->arrayPush($this->errors, $e->getMessage());
+                return $this;
+           }
+        }
+        else 
+        {
+            $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR1);
             return $this;
-        }return false;
+        }
+
     }
 
 
@@ -225,13 +292,29 @@ class SQL
 
 
     public function limit($limit)
-    {
-        if (is_numeric($limit))
+    { 
+        if ($limit)
         {  
-            $this->limit= trim(htmlspecialchars($limit));
-            $this->limit= " LIMIT $this->limit";
-            return true; 
-        }return false;
+            try
+           {        
+               $limit= trim(preg_replace('/\s+/', '', $limit));
+                if (empty($limit))
+                {
+                    throw new Exception(COLUMN_ERROR);
+                }
+                $this->limit = $limit;
+                $this->limit = " LIMIT $this->limit";
+               
+
+           }catch(Exception $e)
+           {
+                $this->errors= $this->arrayPush($this->errors, $e->getMessage());
+           }
+        }
+        else 
+        {
+            $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR1);
+        }
     }
 
 
@@ -266,13 +349,14 @@ class SQL
 
     public function rightJoin($table, $conditions)
     {
-        if ($table && $conditions)
-        {
-            $this->joinTable=trim(htmlspecialchars($table));
+        if (is_string($table) && is_string($conditions))
+        { 
+            $this->joinTable=($table);
             $this->joinCondition=trim($conditions);
-            $this->rightJoin=" RIGHT OUTER JOIN  $this->joinTable  ON $this->joinCondition ";
+            $this->rightJoin=" RIGHT OUTER JOIN  $this->joinTable  ON $this->joinCondition "; //print_r( $this->joinCondition);
             return true;
-        }return false;
+        }
+        return false; 
     }
 
     
@@ -280,7 +364,7 @@ class SQL
 
     public function crossJoin($table)
     {
-        if ($table)
+        if (is_string($table))
         {
             $this->joinTable=trim(htmlspecialchars($table));
             $this->crossJoin=" CROSS JOIN "."`". $this->joinTable."`";
@@ -292,7 +376,7 @@ class SQL
 
     public function naturalJoin($table)
     {
-        if ($table)
+        if (is_string($table))
         {
             $this->joinTable=trim(htmlspecialchars($table));
             $this->naturalJoin=" NATURAL JOIN "."`". $this->joinTable."`";
@@ -323,9 +407,6 @@ class SQL
         
         return false;
     }
-
-
-
 
 
 
@@ -388,12 +469,12 @@ class SQL
         {
             try
            {
-               $columns= trim(preg_replace('/\s+/', '', $columns));
+               $columns= trim(preg_replace('/\s+/', '', $columns));//print_r($columns);
                 if (empty($columns))
                 {
                     throw new Exception(COLUMN_ERROR);
                 }
-                $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
+                $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));//var_dump($this->columns);
                 return $this;
 
            }catch(Exception $e)
@@ -407,40 +488,63 @@ class SQL
             $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR1);
             return $this;
         }
-           
-        
-        
-        
-        
-        
-        // if ($columns)
-            // {
-            //     $columns= trim(preg_replace('/\s+/', '', $columns));
-            //     if (!empty($columns))
-            //     {
-            //         $this->columns=$this->arrayPush($this->columns,trim(htmlspecialchars($columns)));
-            //         return $this;
-            //     }
-            //     else 
-            //     {//return false;
-            //         $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR);
-            //         return $this;
-            //     }
-                
-            // }
-            // else
-            // {
-            //      $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR);
-            //      return $this;
-            // }
-            
-            
-
         
     }   
 
 
+
+    public function setJoinTable($JoinTable)
+    {
+        if($JoinTable)
+        {
+            try
+            {
+                $JoinTable= trim(preg_replace('/\s+/', '', $JoinTable));
+                if (empty($JoinTable))
+                {
+                    throw new Exception(COLUMN_ERROR);
+                }
+               return $this->JoinTable=trim(htmlspecialchars($JoinTable));
+            }
+            catch(Exception $e)
+            {
+                $this->errors= $this->arrayPush($this->errors, $e->getMessage());
+            }
+        }
+        else
+        { 
+            $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR1);
+        }
+    }
         
+
+
+
+    public function setJoinCondition($joinCondition)
+    {
+        if($joinCondition)
+        {
+            try
+            {
+                $joinCondition= trim(preg_replace('/\s+/', '', $joinCondition));
+                if (empty($joinCondition))
+                {
+                    throw new Exception(COLUMN_ERROR);
+                }
+               return $this->joinCondition=trim(htmlspecialchars($joinCondition));
+            }
+            catch(Exception $e)
+            {
+                $this->errors= $this->arrayPush($this->errors, $e->getMessage());
+            }
+        }
+        else
+        { 
+            $this->errors= $this->arrayPush($this->errors, COLUMN_ERROR1);
+        }
+    }
+    
+
 
     public function getColumns()
     {
@@ -451,16 +555,15 @@ class SQL
 
     }
 
+
+
     public function getErrors()
     {
         if (!empty($this->errors))
         {
            return $this->errors  ;  
         }
-        
-        
     }
-
 }
 
 
