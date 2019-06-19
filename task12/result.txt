@@ -1,0 +1,1528 @@
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StackTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+.                                                                   1 / 1 (100%)
+
+Time: 237 ms, Memory: 10.00MB
+
+OK (1 test, 5 assertions)
+
+
+
+****************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StackTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+...                                                                 3 / 3 (100%)
+
+Time: 203 ms, Memory: 10.00MB
+
+OK (3 tests, 5 assertions)
+
+
+
+***************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StackTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+FS                                                                  2 / 2 (100%)
+
+Time: 200 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) DependencyFailureTest::testOne
+Failed asserting that false is true.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/StackTest.php:6
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Skipped: 1.
+
+
+
+****************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StackTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+...                                                                 3 / 3 (100%)
+
+Time: 236 ms, Memory: 10.00MB
+
+OK (3 tests, 3 assertions)
+
+******************************
+
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit DataTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+...F                                                                4 / 4 (100%)
+
+Time: 208 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) DataTest::testAdd with data set #3 (1, 1, 3)
+Failed asserting that 2 matches expected 3.
+
+W:\domains\mysite.local\task12\DataTest.php:9
+
+FAILURES!
+Tests: 4, Assertions: 4, Failures: 1.
+
+
+********************************
+
+
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit DependencyAndDataProviderComboTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+...F                                                                4 / 4 (100%)
+
+Time: 208 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) DependencyAndDataProviderComboTest::testConsumer with data set #1 ('provider2')
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+-    0 => 'provider1'
++    0 => 'provider2'
+     1 => 'first'
+     2 => 'second'
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12/DependencyAndDataProviderComboTest.php:30
+
+FAILURES!
+Tests: 4, Assertions: 4, Failures: 1.
+
+
+
+
+***********************************
+
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ExceptionTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 188 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ExceptionTest::testException
+Failed asserting that exception of type "InvalidArgumentException" is thrown.
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+
+
+*****************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ExceptionTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+FF                                                                  2 / 2 (100%)
+
+Time: 201 ms, Memory: 10.00MB
+
+There were 2 failures:
+
+1) ExceptionTest::testExceptionHasRightMessage
+Failed asserting that exception message 'Some Message' contains 'Right Message'.
+
+2) ExceptionTest::testExceptionHasRightCode
+Failed asserting that 10 is equal to expected exception code 20.
+
+FAILURES!
+Tests: 2, Assertions: 4, Failures: 2.
+
+
+**********************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ExceptionTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+FFF                                                                 3 / 3 (100%)
+
+Time: 197 ms, Memory: 10.00MB
+
+There were 3 failures:
+
+1) ExceptionTest::testException
+Failed asserting that exception of type "InvalidArgumentException" is thrown.
+
+2) ExceptionTest::testExceptionHasRightMessage
+Failed asserting that exception message 'Some Message' contains 'Right Message'.
+
+3) ExceptionTest::testExceptionHasRightCode
+Failed asserting that 10 is equal to expected exception code 20.
+
+FAILURES!
+Tests: 3, Assertions: 6, Failures: 3.
+
+
+*************************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ExceptionTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 209 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ExceptionTest::testException
+An expected exception has not been raised.
+
+W:\domains\mysite.local\task12\ExceptionTest.php:12
+
+FAILURES!
+Tests: 1, Assertions: 0, Failures: 1.
+
+
+
+
+
+
+
+*********************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ExpectedErrorTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+.                                                                   1 / 1 (100%)
+
+Time: 223 ms, Memory: 10.00MB
+
+OK (1 test, 1 assertion)
+
+
+*********************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ErrorSuppressionTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+.                                                                   1 / 1 (100%)
+
+Time: 231 ms, Memory: 10.00MB
+
+OK (1 test, 1 assertion)
+
+**********************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit OutputTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+.F                                                                  2 / 2 (100%)
+
+Time: 204 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) OutputTest::testExpectBarActualBaz
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'bar'
++'baz'
+
+FAILURES!
+Tests: 2, Assertions: 2, Failures: 1.
+
+
+*********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ArrayHasKeyTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 194 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ArrayHasKeyTest::testFailure
+Failed asserting that an array has the key 'foo'.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\ArrayHasKeyTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+************************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ClassHasAttributeTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 208 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ClassHasAttributeTest::testFailure
+Failed asserting that class "stdClass" has attribute "foo".
+
+W:\domains\mysite.local\task12\ClassHasAttributeTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+
+**********************************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ClassHasStaticAttributeTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 208 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ClassHasStaticAttributeTest::testFailure
+Failed asserting that class "stdClass" has static attribute "foo".
+
+W:\domains\mysite.local\task12\ClassHasStaticAttributeTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+***********************************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ContainsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 201 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ContainsTest::testFailure
+Failed asserting that an array contains 4.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\ContainsTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+**********************************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ContainsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 280 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ContainsTest::testFailure
+Failed asserting that 'foobar' contains "baz".
+
+http://tc.geeksforless.net/~user15/php/task12/task12\ContainsTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+**********************************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ContainsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F.                                                                  2 / 2 (100%)
+
+Time: 214 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ContainsTest::testFailure
+Failed asserting that 'FooBar' contains "foo".
+
+http://tc.geeksforless.net/~user15/php/task12/task12\ContainsTest.php:6
+
+FAILURES!
+Tests: 2, Assertions: 2, Failures: 1.
+
+
+********************************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ContainsOnlyTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 194 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ContainsOnlyTest::testFailure
+Failed asserting that Array &0 (
+    0 => '1'
+    1 => '2'
+    2 => 3
+) contains only values of type "string".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/ContainsOnlyTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+***********************************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ContainsOnlyInstancesOfTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+E                                                                   1 / 1 (100%)
+
+Time: 204 ms, Memory: 10.00MB
+
+There was 1 error:
+
+1) ContainsOnlyInstancesOfTest::testFailure
+Error: Class 'Foo' not found
+
+http://tc.geeksforless.net/~user15/php/task12/task12\ContainsOnlyInstancesOfTest.php:6
+
+ERRORS!
+Tests: 1, Assertions: 0, Errors: 1.
+
+
+********************************************
+
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit CountTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 198 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) CountTest::testFailure
+Failed asserting that actual size 1 matches expected size 0.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\CountTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*********************************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EmptyTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 194 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) EmptyTest::testFailure
+Failed asserting that an array is empty.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EmptyTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*****************************************
+
+
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EqualXMLStructureTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+FFFF                                                                4 / 4 (100%)
+
+Time: 328 ms, Memory: 10.00MB
+
+There were 4 failures:
+
+1) EqualXMLStructureTest::testFailureWithDifferentNodeNames
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'foo'
++'bar'
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EqualXMLStructureTest.php:9
+
+2) EqualXMLStructureTest::testFailureWithDifferentNodeAttributes
+Number of attributes on node "foo" does not match
+Failed asserting that 0 matches expected 1.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EqualXMLStructureTest.php:21
+
+3) EqualXMLStructureTest::testFailureWithDifferentChildrenCount
+Number of child nodes of "foo" differs
+Failed asserting that 1 matches expected 3.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EqualXMLStructureTest.php:34
+
+4) EqualXMLStructureTest::testFailureWithDifferentChildren
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'bar'
++'baz'
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EqualXMLStructureTest.php:47
+
+FAILURES!
+Tests: 4, Assertions: 8, Failures: 4.
+
+
+
+****************************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EqualsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+FFF                                                                 3 / 3 (100%)
+
+Time: 186 ms, Memory: 10.00MB
+
+There were 3 failures:
+
+1) EqualsTest::testFailure
+Failed asserting that 0 matches expected 1.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/EqualsTest.php:6
+
+2) EqualsTest::testFailure2
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'bar'
++'baz'
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EqualsTest.php:11
+
+3) EqualsTest::testFailure3
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+ 'foo
+-bar
++bah
+ baz
+ '
+
+http://tc.geeksforless.net/~user15/php/task12/task12/EqualsTest.php:16
+
+FAILURES!
+Tests: 3, Assertions: 3, Failures: 3.
+
+
+*
+*****************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EqualsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+.F                                                                  2 / 2 (100%)
+
+Time: 204 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) EqualsTest::testFailure
+Failed asserting that 1.1 matches expected 1.0.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/EqualsTest.php:11
+
+FAILURES!
+Tests: 2, Assertions: 2, Failures: 1.
+
+
+********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EqualsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 247 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) EqualsTest::testFailure
+Failed asserting that two DOM documents are equal.
+--- Expected
++++ Actual
+@@ @@
+ <?xml version="1.0"?>
+-<foo>
+-  <bar/>
+-</foo>
++<bar>
++  <foo/>
++</bar>
+
+http://tc.geeksforless.net/~user15/php/task12/task12/EqualsTest.php:12
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+**********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EqualsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 193 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) EqualsTest::testFailure
+Failed asserting that two objects are equal.
+--- Expected
++++ Actual
+@@ @@
+ stdClass Object (
+-    'foo' => 'foo'
+-    'bar' => 'bar'
++    'foo' => 'bar'
++    'baz' => 'bar'
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12/EqualsTest.php:14
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit EqualsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 196 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) EqualsTest::testFailure
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => 'a'
+-    1 => 'b'
+-    2 => 'c'
++    1 => 'c'
++    2 => 'd'
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12\EqualsTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+*******************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit FalseTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 199 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) FalseTest::testFailure
+Failed asserting that true is false.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/FalseTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*******************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit FileEqualsTest.php
+?>PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 205 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) FileEqualsTest::testFailure
+Failed asserting that file "/home/sb/expected" exists.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/FileEqualsTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit FileExistsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 202 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) FileExistsTest::testFailure
+Failed asserting that file "/path/to/file" exists.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/FileExistsTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*****************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit GreaterThanTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 210 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) GreaterThanTest::testFailure
+Failed asserting that 1 is greater than 2.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\GreaterThanTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+******************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit GreatThanOrEqualTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 200 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) GreatThanOrEqualTest::testFailure
+Failed asserting that 1 is equal to 2 or is greater than 2.
+
+http://tc.geeksforless.net/~user15/php/task12/task12\GreatThanOrEqualTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 2, Failures: 1.
+
+
+
+**********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit InstanceOfTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 248 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) InstanceOfTest::testFailure
+Failed asserting that Exception Object (...) is an instance of class "RuntimeException".
+
+http://tc.geeksforless.net/~user15/php/task12/task12\InstanceOfTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+
+*********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit InternalTypeTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 198 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) InternalTypeTest::testFailure
+Failed asserting that 42 is of type "string".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/InternalTypeTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+********************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit JsonFileEqualsJsonFileTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 204 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) JsonFileEqualsJsonFileTest::testFailure
+Failed asserting that file "path/to/fixture/file" exists.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/JsonFileEqualsJsonFileTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+***************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit JsonStringEqualsJsonFileTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 227 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) JsonStringEqualsJsonFileTest::testFailure
+Failed asserting that file "path/to/fixture/file" exists.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/JsonStringEqualsJsonFileTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+*****************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit JsonStringEqualsJsonStringTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 189 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) JsonStringEqualsJsonStringTest::testFailure
+Failed asserting that two objects are equal.
+--- Expected
++++ Actual
+@@ @@
+ stdClass Object (
+-    'Mascot' => 'Tux'
++    'Mascott' => 'ux'
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12/JsonStringEqualsJsonStringTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 3, Failures: 1.
+
+
+
+*****************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit LessThanTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 210 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) LessThanTest::testFailure
+Failed asserting that 2 is less than 1.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/LessThanTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+**********************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit LessThanOrEqualTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 197 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) LessThanOrEqualTest::testFailure
+Failed asserting that 2 is equal to 1 or is less than 1.
+
+W:\domains\mysite.local\task12\LessThanOrEqualTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 2, Failures: 1.
+
+
+
+
+***************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit NullTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 201 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) NullTest::testFailure
+Failed asserting that 'foo' is null.
+
+W:\domains\mysite.local\task12\NullTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*****************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ObjectHasAttributeTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 197 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ObjectHasAttributeTest::testFailure
+Failed asserting that object of class "stdClass" has attribute "foo".
+
+W:\domains\mysite.local\task12\ObjectHasAttributeTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit RegExpTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 211 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) RegExpTest::testFailure
+Failed asserting that 'bar' matches PCRE pattern "/foo/".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/RegExpTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+***********************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StringMatchesFormatTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 191 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) StringMatchesFormatTest::testFailure
+Failed asserting that format description matches text.
+--- Expected
++++ Actual
+@@ @@
+-%i
++foo
+
+http://tc.geeksforless.net/~user15/php/task12/task12/StringMatchesFormatTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+***********************************
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StringMatchesFormatFileTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 204 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) StringMatchesFormatFileTest::testFailure
+Failed asserting that file "/path/to/expected.txt" exists.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/StringMatchesFormatFileTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+
+***************************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit SameTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 209 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) SameTest::testFailure
+Failed asserting that 2204 is identical to '2204'.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SameTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+******************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit SameTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 198 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) SameTest::testFailure
+Failed asserting that two variables reference the same object.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SameTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+***********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit SelectCountTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+EEEE                                                                4 / 4 (100%)
+
+Time: 223 ms, Memory: 10.00MB
+
+There were 4 errors:
+
+1) SelectCountTest::testAbsenceFailure
+Error: Call to undefined method SelectCountTest::assertSelectCount()
+
+W:\domains\mysite.local\task12\SelectCountTest.php:12
+
+2) SelectCountTest::testPresenceFailure
+Error: Call to undefined method SelectCountTest::assertSelectCount()
+
+http://tc.geeksforless.net/~user15/php/task12/task12SelectCountTest.php:17
+
+3) SelectCountTest::testExactCountFailure
+Error: Call to undefined method SelectCountTest::assertSelectCount()
+
+http://tc.geeksforless.net/~user15/php/task12/task1/SelectCountTest.php:22
+
+4) SelectCountTest::testRangeFailure
+Error: Call to undefined method SelectCountTest::assertSelectCount()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectCountTest.php:27
+
+ERRORS!
+Tests: 4, Assertions: 0, Errors: 4.
+
+
+******************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit SelectEqualsTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+EEEE                                                                4 / 4 (100%)
+
+Time: 209 ms, Memory: 10.00MB
+
+There were 4 errors:
+
+1) SelectEqualsTest::testAbsenceFailure
+Error: Call to undefined method SelectEqualsTest::assertSelectEquals()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectEqualsTest.php:12
+
+2) SelectEqualsTest::testPresenceFailure
+Error: Call to undefined method SelectEqualsTest::assertSelectEquals()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectEqualsTest.php:17
+
+3) SelectEqualsTest::testExactCountFailure
+Error: Call to undefined method SelectEqualsTest::assertSelectEquals()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectEqualsTest.php:22
+
+4) SelectEqualsTest::testRangeFailure
+Error: Call to undefined method SelectEqualsTest::assertSelectEquals()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectEqualsTest.php:27
+
+ERRORS!
+Tests: 4, Assertions: 0, Errors: 4.
+
+
+***************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit SelectRegExpTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+EEEE                                                                4 / 4 (100%)
+
+Time: 210 ms, Memory: 10.00MB
+
+There were 4 errors:
+
+1) SelectRegExpTest::testAbsenceFailure
+Error: Call to undefined method SelectRegExpTest::assertSelectRegExp()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectRegExpTest.php:12
+
+2) SelectRegExpTest::testPresenceFailure
+Error: Call to undefined method SelectRegExpTest::assertSelectRegExp()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectRegExpTest.php:17
+
+3) SelectRegExpTest::testExactCountFailure
+Error: Call to undefined method SelectRegExpTest::assertSelectRegExp()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectRegExpTest.php:22
+
+4) SelectRegExpTest::testRangeFailure
+Error: Call to undefined method SelectRegExpTest::assertSelectRegExp()
+
+http://tc.geeksforless.net/~user15/php/task12/task12/SelectRegExpTest.php:27
+
+ERRORS!
+Tests: 4, Assertions: 0, Errors: 4.
+
+
+********************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StringEndsWithTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 197 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) StringEndsWithTest::testFailure
+Failed asserting that 'foo' ends with "suffix".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/StringEndsWithTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+**********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StringEqualsFileTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 207 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) StringEqualsFileTest::testFailure
+Failed asserting that file "/home/sb/expected" exists.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/StringEqualsFileTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit StringStartsWithTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 196 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) StringStartsWithTest::testFailure
+Failed asserting that 'foo' starts with "prefix".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/StringStartsWithTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+***********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit BiscuitTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+E                                                                   1 / 1 (100%)
+
+Time: 206 ms, Memory: 10.00MB
+
+There was 1 error:
+
+1) BiscuitTest::testEquals
+Error: Class 'Biscuit' not found
+
+http://tc.geeksforless.net/~user15/php/task12/task12/BiscuitTest.php:6
+
+ERRORS!
+Tests: 1, Assertions: 0, Errors: 1.
+
+
+
+
+*********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit TrueTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 196 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) TrueTest::testFailure
+Failed asserting that false is true.
+
+http://tc.geeksforless.net/~user15/php/task12/task12/TrueTest.php:6
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+**************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit XmlFileEqualsXmlFileTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+E                                                                   1 / 1 (100%)
+
+Time: 197 ms, Memory: 10.00MB
+
+There was 1 error:
+
+1) XmlFileEqualsXmlFileTest::testFailure
+PHPUnit_Framework_Exception: Could not read "/home/sb/expected.xml".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/XmlFileEqualsXmlFileTest.php:7
+
+ERRORS!
+Tests: 1, Assertions: 0, Errors: 1.
+
+
+
+******************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit XmlStringEqualsXmlFileTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+E                                                                   1 / 1 (100%)
+
+Time: 202 ms, Memory: 10.00MB
+
+There was 1 error:
+
+1) XmlStringEqualsXmlFileTest::testFailure
+PHPUnit_Framework_Exception: Could not read "/home/sb/expected.xml".
+
+http://tc.geeksforless.net/~user15/php/task12/task12/XmlStringEqualsXmlFileTest.php:7
+
+ERRORS!
+Tests: 1, Assertions: 0, Errors: 1.
+
+
+*************************************
+
+
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit XmlStringEqualsXmlStringTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 200 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) XmlStringEqualsXmlStringTest::testFailure
+Failed asserting that two DOM documents are equal.
+--- Expected
++++ Actual
+@@ @@
+ <?xml version="1.0"?>
+ <foo>
+-  <bar/>
++  <baz/>
+ </foo>
+
+http://tc.geeksforless.net/~user15/php/task12/task12/XmlStringEqualsXmlStringTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+
+**************************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ArrayDiffTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 200 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ArrayDiffTest::testEquality
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+     0 => 1
+     1 => 2
+-    2 => 3
++    2 => 33
+     3 => 4
+     4 => 5
+     5 => 6
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12/ArrayDiffTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+********************************
+
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit LongArrayDiffTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 216 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) LongArrayDiffTest::testEquality
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+     13 => 2
+-    14 => 3
++    14 => 33
+     15 => 4
+     16 => 5
+     17 => 6
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12/LongArrayDiffTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*************************
+
+http://tc.geeksforless.net/~user15/php/task12/task12>phpunit ArrayWeakComparisonTest.php
+PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+
+F                                                                   1 / 1 (100%)
+
+Time: 214 ms, Memory: 10.00MB
+
+There was 1 failure:
+
+1) ArrayWeakComparisonTest::testEquality
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+-    0 => 1
++    0 => '1'
+     1 => 2
+-    2 => 3
++    2 => 33
+     3 => 4
+     4 => 5
+     5 => 6
+ )
+
+http://tc.geeksforless.net/~user15/php/task12/task12/ArrayWeakComparisonTest.php:7
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.
+
+
+*************************
+
+THE END!
+
+
+
+
+
+
+
