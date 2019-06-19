@@ -2,7 +2,13 @@
 include 'config.php';
 class Cars 
 {
-    private $autoCatalog;
+    private $model;
+    private $brand;
+    private $engine_capacity;
+    private $year;
+    private $color;
+    private $price;
+    private $max_speed;
     
 
 
@@ -22,18 +28,17 @@ class Cars
     function getOneCar($id)
     {
         $resultArray = array();
-       
-        $stmt = $this->con->prepare("select  cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id   where cars.id =1");
+        $dbh = new PDO(DSN, USER, PASSWD);
+        $stmt = $dbh->prepare("select  cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id   where cars.id =?");
         $stmt->execute([$id]); 
         $row = $stmt->fetch();
 
             $tmp_arr = array(
-            'id'=>$row['id'],    
-            'modelName'=>$row['name'].":".$row['model'],
+            'model'=>$row['model'],    
+            'engine_capacity'=>$row['engine_capacity'],
             'year'=>$row['year'],
-            'engine'=>$row['engin'],
             'color'=>$row['color'],
-            'maxspeed'=>$row['max_speed'],
+            'max_speed'=>$row['max_speed'],
             'price'=>$row['price']);
             array_push($resultArray, $tmp_arr); 
         
@@ -43,36 +48,144 @@ class Cars
 
     function getCarsByParams($params)
     {
-        // $val = 'BMW';
-        // $searchParam = 'Name';
+        foreach ($params as $key=>$val)
+        {
+            if ($key == 'model')
+            {
+                $this->model= $val; 
+            }
+            
 
-        // $arr = array();
+            if ($key == 'year')
+            {
+                $this->year= $val; 
+            }
+            
 
-        // foreach($this->con->query('SELECT Cars.id, CarsModel.name, model 
-        // from Cars,CarsModel 
-        // where id_name = CarsModel.id') as $row) {
-        //     $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'],'name'=>$row['name']);
-        //     array_push($arr, $tmp_arr); 
-        // }
-       
-        // return $arr;
+            if ($key == 'engine_capacity')
+            {
+                $this->engine_capacity= $val;
+            }
+            
 
-        // foreach ($this->autoCatalog as $item){
-        //     if($item[$searchParam] == $val){
-        //         $tmp_arr = array(
-        //             'modelName'=>$item['Name'].":".$item['Model'],
-        //             'year'=>$item['Year'],
-        //             'engine'=>$item['Engine'],
-        //             'color'=>$item['Color'],
-        //             'maxspeed'=>$item['MaxSpeed'],
-        //             'price'=>$item['Price']
-        //         );
-        //         array_push($arr, $tmp_arr);    
-        //     }
-        // }
-        // return $arr;
+            if ($key == 'brand')
+            {
+                $this->brand= $val; 
+            }
+            
+            if ($key == 'color')
+            {
+                $this->color= $val; 
+            }
+           
 
-        return "all cars by Params";
+            if ($key == 'max_speed')
+            {
+                $this->max_speed= $val; 
+            }
+
+            if ($key == 'price')
+            {
+                $this->price= $val; 
+            }
+        }
+        //print_r($params);
+        $dbh = new PDO(DSN, USER, PASSWD); 
+        $arr = array();
+
+        if ($params)
+        {   
+            $quer= " SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id   WHERE cars.year= $this->year " . $this->addEngine_capacity() . $this->addMax_speed() . $this->addModel() . $this->addBrand() . $this->addPrice() . $this->addColor();
+           //print_r(" SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id   WHERE cars.year= $this->year " . $this->addEngine_capacity() .  $this->addMax_speed() . $this->addModel() . $this->addBrand() . $this->addPrice() . $this->addColor());
+            foreach($dbh->query($quer) as $row) 
+           { 
+                $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'], 'engine_capacity'=>$row['engine_capacity'],'year'=>$row['year'] , 'color'=>$row['color'], 'max_speed'=>$row['max_speed'], 'brand'=>$row['brand'], 'price'=>$row['price']  );
+                array_push($arr, $tmp_arr); 
+           }
+        
+            return $arr ;
+        }  
     }
+
+
+
+
+    public function addEngine_capacity()
+    {
+        if ($this->engine_capacity)
+        {
+            return " and engine_capacity= $this->engine_capacity ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addMax_speed()
+    {
+        if ($this->max_speed)
+        {
+            return " and max_speed= $this->max_speed ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addModel()
+    {
+        if ($this->model)
+        {
+            return " and model= '$this->model' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addBrand()
+    {
+        if ($this->brand)
+        {
+            return " and brand= '$this->brand' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addPrice()
+    {
+        if ($this->price)
+        {
+            return " and price= '$this->price' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addColor()
+    {
+        if ($this->color)
+        {
+            return " and color= '$this->color' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
 
 }
