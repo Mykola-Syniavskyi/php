@@ -39,7 +39,7 @@ $combine= new MYSQL;
 
 // // //*****$COLUMNS FOR SELECT WITH OUT JOIN */
 
-$columns=$combine->setColumns('students.FirstName')->setColumns('students.LastName')->setColumns('students.Age')->getColumns();
+$columns=$combine->setColumns('  ')->setColumns('  ')->setColumns('  ')->getColumns();
 $order=$combine->setOrder('id ASC')->getOrder();
 $group=$combine->setGroupBy('FirstName')->setGroupBy('LastName')->setGroupBy('id')->getGroupBy();
 $select=$combine->select($columns)->from('students')->where('id>','1')->group($group)->having('SUM(Age)<','30')->limit( '10')->toStringSelect();
