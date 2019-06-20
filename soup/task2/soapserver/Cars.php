@@ -98,16 +98,17 @@ class Cars
         //print_r($params);
         $dbh = new PDO(DSN, USER, PASSWD); 
         $arr = array();
+        $count= count($params); //print_r($count);
+        if ($count >0)
 
-        if ($params)
-        {   
+        {  
             $quer= " SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id   WHERE cars.year= $this->year " . $this->addEngine_capacity() . $this->addMax_speed() . $this->addModel() . $this->addBrand() . $this->addPrice() . $this->addColor();
            //print_r(" SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id   WHERE cars.year= $this->year " . $this->addEngine_capacity() .  $this->addMax_speed() . $this->addModel() . $this->addBrand() . $this->addPrice() . $this->addColor());
             foreach($dbh->query($quer) as $row) 
            { 
                 $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'], 'engine_capacity'=>$row['engine_capacity'],'year'=>$row['year'] , 'color'=>$row['color'], 'max_speed'=>$row['max_speed'], 'brand'=>$row['brand'], 'price'=>$row['price']  );
                 array_push($arr, $tmp_arr); 
-           }
+           } 
            return $arr ;
         
             

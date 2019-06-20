@@ -17,7 +17,7 @@ include ('config.php');
 <h5 style="background:yellow; width:45%;">RESULT AFTER OPERATIONS INSERT, UPDATE, DELETE, SELECT :</h5>
 <?
 
-if ($select && !$errors) 
+if ($select && sizeof($errors)) 
 {  ?> 
     <table  border="2" width="45%" cellpadding="0">
     <caption><h3>Students</h3></caption>

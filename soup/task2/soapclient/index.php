@@ -5,7 +5,7 @@ $obj = new SoupClient();
 $carList=$obj->getCars();
 
 //print_r($_POST);
-$obj->searchCar($_POST);
+$rezSearch = $obj->searchCar($_POST);
 
 
 
