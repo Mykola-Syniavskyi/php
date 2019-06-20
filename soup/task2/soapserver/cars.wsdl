@@ -84,8 +84,8 @@ Julien Blitte
 <!-- access to service provider -->
 	<service name='exemple'>
 	<port name='exemple_0' binding='my SOAP forum_webservices'>
-	<!-- <soap:address location='http://mysite.local/soap/task2/soapserver/SoapServer.php'/> -->
-	<soap:address location='http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php'/>
+	<soap:address location='http://mysite.local/soap/task2/soapserver/SoapServer.php'/>
+	<!-- <soap:address location='http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php'/> -->
 	</port>
 	</service>
 </definitions>

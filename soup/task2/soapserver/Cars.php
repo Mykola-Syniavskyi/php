@@ -9,7 +9,9 @@ class Cars
     private $color;
     private $price;
     private $max_speed;
-    
+  
+
+
 
 
     function getAllCars()
@@ -50,17 +52,24 @@ class Cars
     {
         foreach ($params as $key=>$val)
         {
+            if ($key == 'brand')
+            {
+                $this->brand= $val; 
+            }
+
+            if ($key == 'year')
+            {
+                $this->year= $val; 
+            }
+
+
             if ($key == 'model')
             {
                 $this->model= $val; 
             }
             
 
-            if ($key == 'year')
-            {
-                $this->year= $val; 
-            }
-            
+        
 
             if ($key == 'engine_capacity')
             {
@@ -68,10 +77,7 @@ class Cars
             }
             
 
-            if ($key == 'brand')
-            {
-                $this->brand= $val; 
-            }
+            
             
             if ($key == 'color')
             {
@@ -102,12 +108,16 @@ class Cars
                 $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'], 'engine_capacity'=>$row['engine_capacity'],'year'=>$row['year'] , 'color'=>$row['color'], 'max_speed'=>$row['max_speed'], 'brand'=>$row['brand'], 'price'=>$row['price']  );
                 array_push($arr, $tmp_arr); 
            }
+           return $arr ;
         
-            return $arr ;
+            
         }  
     }
 
 
+
+
+   
 
 
     public function addEngine_capacity()
