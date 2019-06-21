@@ -91,7 +91,7 @@
                     <option value="180000">180000</option>
                     <option value="200000">200000</option>
                     <option value="250000">250000</option>
-                    <option value="250000">270000</option>
+                    <option value="270000">270000</option>
                 </select>
                 </div>
                 <div class="col-auto my-1">
@@ -105,17 +105,20 @@
             <table cellspacing="2" border="1" cellpadding="5" border-color="white">
                 <tr><th>brand</th><th>year</th><th>model</th><th>max_speed</th><th>engine_capacity</th><th>color</th><th>price</th></tr>
                 <tr><td>skoda</td><td>2010</td><td>fabia</td><td>180</td><td>2</td><td>black</td><td>180000</td></tr>
+                <tr><td>skoda</td><td>2015</td><td>octavia</td><td>225</td><td>3</td><td>red</td><td>270000</td></tr>
                 <tr><td>audi</td><td>2012</td><td>tt</td><td>200</td><td>2</td><td>white</td><td>200000</td></tr>
                 <tr><td>toyota</td><td>2015</td><td>corolla</td><td>220</td><td>2</td><td>red</td><td>250000</td></tr>
             </table>
         </div>
         <div class="rezSearch">
             <? if ($rezSearch){?>
-               <h3>Result of searching</h3>
+             <h3>Result of searching</h3>
+           <?  foreach ( $rezSearch as $key ) { ?>
+              
         <ul>
-        <li class="alert alert-primary" role="alert"><?=$rezSearch[0]['id']?>&nbsp<?=$rezSearch[0]['brand']?>&nbsp<?=$rezSearch[0]['model']?> &nbsp &nbsp &nbsp &nbsp  <a href="more.php?more&id=<?=$rezSearch[0]['id']?>" class="more"> |more info|</a></li>
+        <li class="alert alert-primary" role="alert"><?=$key['id']?>&nbsp<?=$key['brand']?>&nbsp<?=$key['model']?> &nbsp &nbsp &nbsp &nbsp  <a href="more.php?more&id=<?=$key['id']?>" class="more"> |more info|</a></li>
         </ul>
-        <?}?>
+        <?}}?>
         </div>
 
     </div>

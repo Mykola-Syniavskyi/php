@@ -18,15 +18,15 @@ class SoupClient
     function getClient()
     {
         $url = URL;
-        $options['uri'] = "http://tc.geeksforless.net/~user15/php/soup/task2/";
-        // $options['uri'] = "http://mysite.local/soap/task2/";
-        $options['location'] = "http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php";
-        // $options['location'] = "http://mysite.local/soap/task2/soapserver/SoapServer.php";
+        // $options['uri'] = "http://tc.geeksforless.net/~user15/php/soup/task2/";
+        $options['uri'] = "http://mysite.local/soap/task2/";
+        // $options['location'] = "http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php";
+        $options['location'] = "http://mysite.local/soap/task2/soapserver/SoapServer.php";
         $options['cache_wsdl'] =  WSDL_CACHE_NONE;
         $options['trace'] = true;
         $options['soap_version'] = SOAP_1_1;
-        // $client = new SoapClient("http://mysite.local/soap/task2/soapserver/SoapServer.php?wsdl",$options);
-        $client = new SoapClient("http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php?wsdl",$options);
+        $client = new SoapClient("http://mysite.local/soap/task2/soapserver/SoapServer.php?wsdl",$options);
+        // $client = new SoapClient("http://tc.geeksforless.net/~user15/php/soup/task2/soapserver/SoapServer.php?wsdl",$options);
         $this->client = $client;
         return $client;
     }
@@ -60,6 +60,24 @@ class SoupClient
             print_r($params);
             $rez = $this->client->getCarsByParams($params); print_r($rez);
             return $rez;
+        }
+
+    }
+
+    function buyCar($params, $id)
+    {
+        if ($params && is_object($this->getClient()))
+        {
+            $tmpArr = array();
+            //$id = array('car_id'=>$id);
+            array_push($tmpArr,$params );
+            
+            array_push($tmpArr[0],$id );
+            print_r($tmpArr[0]);
+            //print_r($id);
+
+            //$rez = $this->client->addOrder($params); print_r($rez);
+            //return $rez;
         }
 
     }

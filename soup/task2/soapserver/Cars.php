@@ -9,6 +9,10 @@ class Cars
     private $color;
     private $price;
     private $max_speed;
+    private $firstname;
+    private $lastname;
+    private $payments;
+    private $car_id;
   
 
 
@@ -195,6 +199,49 @@ class Cars
         else 
         {
             return ' ';
+        }
+    }
+
+
+    public function addOrder($params)
+    {
+        $count = count($params);
+        if ($count > 0 && is_array($params))
+        {  
+            $dbh = new PDO(DSN, USER, PASSWD);
+            foreach ($params as $key => $val)
+            {
+                if ($key == 'firstname')
+                {
+                    $this->firstname=$val;
+                }
+
+                if ($key == 'lastname')
+                {
+                    $this->lastname=$val;
+                }
+
+                if ($key == 'car_id')
+                {
+                    $this->car_id=$val;
+                }
+
+                if ($key == 'payments')
+                {
+                    $this->payments=$val;
+                }
+                  
+            }
+            $sql = " INSERT INTO orders (car_id,payments,lastname,firstname)values('$this->car_id','$this->payments','$this->lastname','$this->firstname')";
+        // print_r($sql);
+        $statement = $dbh->prepare($sql);
+        $statement->execute();
+        $rez = $statement; 
+        return $rez;   
+        }
+        else 
+        {
+            return 'yps';
         }
     }
 

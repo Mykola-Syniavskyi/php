@@ -57,26 +57,15 @@
         }
         ?>
         <div class="buy">
-        <form>
-            <div class="form-row">
-                <div class="col-3">
-                <input type="text" class="form-control" placeholder="First name">
-                </div><br>
-                <div class="col-3">
-                <input type="text" class="form-control" placeholder="Last name">
-                </div>              
-            </div><br>
-            <select class="custom-select mr-sm-3 select_pay" id="inlineFormCustomSelect">
-                <option selected>Choose pay variant</option>
-                <option value="1">credit cart</option>
-                <option value="2">cash</option>
-            </select>
-        </form>
-        <button type="submit" class="btn btn-primary btn_buy">Buy this car</button>
+      
+            <button type="button" class="btn btn-primary btn_buy" name="buy"><a href="buy.php?&id=<?=$id?>">buy this car</a></button>
+    
+        
         </div>
 
         <div class="return"><button type='button' class="btn btn-primary"><a href="index.php"><- Back to main</a></button></div>
     </div>
-    
-      
+    <?
+ 
+  
     
