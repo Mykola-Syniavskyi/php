@@ -60,7 +60,7 @@
     {
        $params= $_POST;
        $id = $_GET;
-       print_r($id);
+       //print_r($id);
         $buy=$obj->buyCar($params, $id);
     }
     

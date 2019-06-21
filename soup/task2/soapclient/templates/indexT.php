@@ -15,7 +15,8 @@
         .shopList{width:50%; float:right;}
         .col-auto{width: 60%;}
         .prompt{float: right; margin-top:20%;}
-        .rezSearch{float: left; width:30%;}
+        .rezSearch{float: left; width:35%;}
+        .Result{color:white;}
         #find{text-align:left;}
         
     </style>
@@ -23,10 +24,6 @@
     <title>Cars shop</title>
 </head>
 <body>
-    <? if ($placeholders){
-
-       ?> <div style="color: #FF0000; font-size: 15px;"><strong>%ERROR_YEAR%</strong></div>
-    <?}?>
     <div class="main">
         <h3 class="alert alert-success" role="alert">Cars shop</h3>
         <div class="shopList">
@@ -36,18 +33,20 @@
                 foreach ($carList as $key=> $val){
              ?>
         <ul>
-        <li class="alert alert-primary" role="alert"><?=$val['id']?>&nbsp <?=$val['brand']?> &nbsp <?=$val['model']?> &nbsp &nbsp &nbsp &nbsp  <a href="more.php?more&id=<?= $val['id'] ?>" class="more"> |more info|</a></li> 
+            <li class="alert alert-primary" role="alert"><?=$val['id']?>&nbsp <?=$val['brand']?> &nbsp <?=$val['model']?> &nbsp &nbsp &nbsp &nbsp  <a href="more.php?more&id=<?= $val['id'] ?>" class="more"> |more info|</a></li> 
         
         </ul>
             <?}
             }?>
         </div>
-        <div class="find">
+        <div class="find"><?
+            if (is_string($rezSearch)) {?>
+            <p class="alert alert-danger" role="alert"><?=$rezSearch?></p>
+            <?} ?>
         <h4 id="find">Find car by params</h4>
         <form method="POST">
             <div class="form-row align-items-center">
-                <div class="col-auto my-4">
-                
+                <div class="col-auto my-4">        
                 <select class="custom-select mr-sm-2" name="brand">
                     <option disabled selected>Choose brand</option>
                     <option value="skoda">Skoda</option>
@@ -111,14 +110,18 @@
             </table>
         </div>
         <div class="rezSearch">
-            <? if ($rezSearch){?>
-             <h3>Result of searching</h3>
-           <?  foreach ( $rezSearch as $key ) { ?>
-              
+            <? if (is_array($rezSearch) && sizeof($rezSearch) > 0){?>
+             <h3 class="Result">Result of searching</h3>
+           <?  foreach ( $rezSearch as $key ) {  ?>      
         <ul>
         <li class="alert alert-primary" role="alert"><?=$key['id']?>&nbsp<?=$key['brand']?>&nbsp<?=$key['model']?> &nbsp &nbsp &nbsp &nbsp  <a href="more.php?more&id=<?=$key['id']?>" class="more"> |more info|</a></li>
         </ul>
-        <?}}?>
+        <?}
+        }
+        else 
+        { 
+            return $rezSearch;
+        }?>
         </div>
 
     </div>

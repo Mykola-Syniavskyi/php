@@ -53,7 +53,7 @@ class Cars
     }
 
     function getCarsByParams($params)
-    {
+    { print_r($params);
         foreach ($params as $key=>$val)
         {
             if ($key == 'brand')
@@ -66,23 +66,16 @@ class Cars
                 $this->year= $val; 
             }
 
-
             if ($key == 'model')
             {
                 $this->model= $val; 
             }
-            
-
-        
-
+   
             if ($key == 'engine_capacity')
             {
                 $this->engine_capacity= $val;
             }
-            
-
-            
-            
+             
             if ($key == 'color')
             {
                 $this->color= $val; 
@@ -113,9 +106,7 @@ class Cars
                 $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'], 'engine_capacity'=>$row['engine_capacity'],'year'=>$row['year'] , 'color'=>$row['color'], 'max_speed'=>$row['max_speed'], 'brand'=>$row['brand'], 'price'=>$row['price']  );
                 array_push($arr, $tmp_arr); 
            } 
-           return $arr ;
-        
-            
+           return $arr ;    
         }  
     }
 
@@ -221,7 +212,7 @@ class Cars
                     $this->lastname=$val;
                 }
 
-                if ($key == 'car_id')
+                if ($key == 'id')
                 {
                     $this->car_id=$val;
                 }

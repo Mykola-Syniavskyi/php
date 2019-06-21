@@ -38,7 +38,7 @@
         }
         else
         {
-            echo "nooooooo";
+            return false;
         }
         if ($getInfo)
         foreach ($getInfo as $key=>$val)
