@@ -11,15 +11,14 @@ class restServer
 
 
     public function parsUrl()
-    
-    {
+    { //print_r($_SERVER['REQUEST_URI']);
        if  ($_SERVER['REQUEST_URI'])
        {
            $arrMethod= array();
            $arrParams= array();
            $this->url= $_SERVER['REQUEST_URI'];  
-            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 42));//for classes
-            $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
+            $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
+            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
             $this->method = $_SERVER['REQUEST_METHOD'];
             foreach ($arrRez as $key=>$val)
             {
@@ -36,17 +35,17 @@ class restServer
                 }
 
             
-                //  print_r($this->params[0]);
+                //   print_r($this->params[0]);
              }
-            //  print_r( $this->nameMethod);
-            $this->getSortVuew();
+            //    print_r( $this->nameMethod);
+             $this->getSortVuew();
        }
     }
 
 
     
     public function getMethod()
-    {   //print_r($this->method);
+      {  // print_r($this->method);
                 switch($this->method)
         {   
             case 'GET':

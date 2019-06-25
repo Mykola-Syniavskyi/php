@@ -49,7 +49,8 @@ class carShop extends restServer
 
     public function getSortVuew()
     {
-        $id = substr($this->url, strrpos($this->url, '/') + 1); //print_r($id);
+        $id = substr($this->url, strrpos($this->url, '/') + 1);
+        //$id = explode('?', $id)[0];
         $this->sortVuew = $id; //print_r($this->sortVuew);
         // return $this->sortVuew;
 
@@ -122,6 +123,11 @@ class carShop extends restServer
     }
 
     
+
+    public function help()
+    {
+        // print_r( get_class_methods($this));
+    }
 }
 
 
@@ -130,6 +136,8 @@ class carShop extends restServer
 
 $obj = new carShop();
 $obj->parsUrl();
+//$obj->help();
+
 // $obj->setMethod('Test', "Vasia");
 $obj->getMethod();
 echo $obj->getErrors();
