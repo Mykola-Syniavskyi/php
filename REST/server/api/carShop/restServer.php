@@ -6,6 +6,8 @@ class restServer
     protected $method ;
     protected $params;
     protected $nameMethod;
+    protected $errors;
+    
 
 
     public function parsUrl()
@@ -16,7 +18,8 @@ class restServer
            $arrMethod= array();
            $arrParams= array();
            $this->url= $_SERVER['REQUEST_URI'];  
-            $arrRez = explode('/',$this->nameMethod= substr($this->url, 42));
+            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 42));//for classes
+            $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
             $this->method = $_SERVER['REQUEST_METHOD'];
             foreach ($arrRez as $key=>$val)
             {
@@ -33,13 +36,15 @@ class restServer
                 }
 
             
-                //print_r($this->params[0]);
-            }//print_r( $this->nameMethod);
-
+                //  print_r($this->params[0]);
+             }
+            //  print_r( $this->nameMethod);
+            $this->getSortVuew();
        }
     }
 
 
+    
     public function getMethod()
     {   //print_r($this->method);
                 switch($this->method)
@@ -73,100 +78,27 @@ class restServer
     function setMethod($method, $param=false)
     { 
          
-        if (method_exists($this, $method) )
+        if (method_exists($this, $method))
         { 
             call_user_func(array($this, $method) ,$param );
         }
-    }
-
-
-    function getAllCars()
-    { //print_r('fff');
-        $resultArray = array();
-        $dbh = new PDO(DSN, USER, PASSWD);// print_r($dbh);
-        foreach($dbh->query("select cars.id, brand.brand, model.model  from cars join brand on cars.id=brand.id join   model on cars.id=model.id") as $row) 
+        else
         {
-            $tmp_array = array('id'=>$row['id'],'brand'=>$row['brand'],'model'=>$row['model']);
-            array_push($resultArray, $tmp_array); 
+            header("HTTP/1.1 400 Bad Request Api");
+            $this->errors = '404 Sorry, we cant find this action!';
         }
-       //print_r($resultArray);
-       $this->vuewRez($resultArray);
-        return $resultArray;
-    }
-
-    function getOneCar($id)
-    {
-        $resultArray = array();
-        $dbh = new PDO(DSN, USER, PASSWD);
-        $stmt = $dbh->prepare("select  cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id   where cars.id =?");
-        $stmt->execute([$id]); 
-        $row = $stmt->fetch();
-
-            $tmp_arr = array(
-            'model'=>$row['model'],    
-            'engine_capacity'=>$row['engine_capacity'],
-            'year'=>$row['year'],
-            'color'=>$row['color'],
-            'max_speed'=>$row['max_speed'],
-            'price'=>$row['price']);
-            array_push($resultArray, $tmp_arr); 
-        
-            
-        return $resultArray;
-        
-       
     }
 
 
-    protected function vuewRez($rez)
+    public function getErrors()
     {
-        if ($rez)
+        if (!empty($this->errors))
         {
-            header('Content-Type: application/json');
-            echo json_encode($rez);
-        }else{
-            header('Content-type: text/html');
-            echo $result = '404 No such action!';
+            return $this->errors;
         }
-        
-                
     }
 
-
-
-    // private function showRes($result, $viewType = 'json')
-    // {
-    //     header('Access-Control-Allow-Origin: *');
-    //     header('Content-Type: text/html; charset=utf-8'); 
-    //     header('Cache-Control: no-cache');
-
-    //     if (!$result)
-    //     {
-    //         header("HTTP/1.1 400 Bad Request Api");
-    //         $result = '404 No such action!';
-    //     }
-        
- 
-    //     //ставим заголовок
-    //     switch ($viewType) {
-    //         case 'txt':
-    //             header('Content-type: text/plain');
-    //             print_r($result);
-    //             break;
-    //         case 'html':
-    //             header('Content-type: text/html');
-    //             echo ($result);
-    //             break;
-    //         case 'xml':
-    //             header('Content-type: application/xml');
-    //             echo $this->toXml($result);
-    //             break;
-    //         default:
-    //             header('Content-Type: application/json');
-    //             echo json_encode($result);
-    //             break;
-    //     }
-    // }
+    
     
 
 }
