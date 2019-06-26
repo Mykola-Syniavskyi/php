@@ -128,6 +128,22 @@ class carShop extends restServer
     {
         // print_r( get_class_methods($this));
     }
+
+    public function postReg($formData)
+    {
+       if (!empty(is_array($formData)))
+       {
+            return $this->vuewRez($formData);
+       } 
+       else
+       {
+            return $this->vuewRez('aaaaaaaaaaaa');
+       }
+       
+
+       
+       
+    }
 }
 
 
@@ -136,7 +152,8 @@ class carShop extends restServer
 
 $obj = new carShop();
 $obj->parsUrl();
-//$obj->help();
+$obj->help();
+// $obj->postReg($formData);
 
 // $obj->setMethod('Test', "Vasia");
 $obj->getMethod();

@@ -12,10 +12,16 @@
         body{
             background-image: url('api/pic/2.jpg');
             background-size: cover;
+            background-repeat: no-repeat;
         }
        h3{
            text-align: center;
            color: rgb(26, 145, 145)!important;
+       }
+
+       h4{
+           text-align: center;
+           color: rgb(28, 143, 143)!important;
        }
         .car{
             width:30%;
@@ -25,14 +31,14 @@
         .car1{
             width:30%;
             float: left;
-
         }
+        
 
     </style>
 
     <h3 class="alert alert-secondary" role="alert">Luxury cars</h3>
     
-    <div  id="cars" class="car" ></div>
+    <div  id="cars" class="car" ><h4>Cars list</h4></div>
     <div  id="oneCar" class="car1" ></div>
 
 
@@ -52,6 +58,7 @@
                 <li class = "cars-list  alert alert-primary "role="alert"></li>
                 <button type="button" class = " button btn alert alert-secondary "role="alert"></button>
             </ul>
+            
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script>
@@ -61,6 +68,25 @@
             var template_car = $('#template_car').text();
             var template_car1 = $('#template_car1').text();
 
+            function buildCars(cars) {
+                $(cars).each(function(index, val) {
+                    var $car = $(template_car);
+                    $car.find('.cars-list').text(val.id + '.' +' '+ val.brand +' '+ val.model);
+                    $car.find('.button').text('watch ->'+val.model).data('id', val.id);
+                    $car.appendTo($cars);
+                });
+            
+            
+                $('body').on('click', "button", function() {
+                var $this = $(this), 
+                    id = $this.data('id');
+                    //alert(id);
+                    GetDetails(id); // название функции не айс
+                })
+            }
+
+
+            
             
             function buildOneCar(oneCar)
             {
@@ -78,30 +104,11 @@
             }
 
 
-            function buildCars(cars) {
-                $(cars).each(function(index, val) {
-                    var $car = $(template_car);
-                    $car.find('.cars-list').text(val.id+'.' +' '+ val.brand +' '+ val.model);
-                    $car.find('.button').text('watch ->'+val.model).data('id', val.id);
-                    $car.appendTo($cars);
-                });
-            
-            
-                $('body').on('click', "button", function() {
-                var $this = $(this), 
-                    id = $this.data('id');
-                    //alert(id);
-                    GetDetails(id); // название функции не айс
-                })
-
-               
-
-           
-            }
 
             function GetDetails(id){
-                $.ajax({url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
-                // url: 'http://tc.geeksforless.net/~user15/php/REST/client/api/allCars/',
+                $.ajax({
+                // url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
+                url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/oneCar/'+id+'/',
                 method: 'GET',
                 data: {
                     results: 50,
@@ -127,8 +134,8 @@
             }
             
             $.ajax({
-                url: 'http://mysite.local/REST/server/api/carShop/allCars/',
-				                // url: 'http://tc.geeksforless.net/~user15/php/REST/client/api/allCars/',
+                // url: 'http://mysite.local/REST/server/api/carShop/allCars/',
+				                url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/allCars/',
 
                 method: 'GET',
                 data: {
@@ -150,10 +157,57 @@
                 }
             })
 
-
+            
             
             
         }(jQuery))
     </script>
+ 
+        <form method="POST" id="ajax_form" action="" >
+            <input type="text" name="name" placeholder="name" /><br>
+            <input type="text" name="last_name" placeholder="last name" /><br>
+            <input type="email" name="email" placeholder="email" /><br>
+            <input type="passwd" name="passwd" placeholder="passwd" /><br>
+            <input type="passwd" name="confirm_passwd" placeholder="confirm passwd" /><br>
+            <input type="submit" id="btn_send" value="send" />
+        </form>
+    
+        <br>
+
+        <script>
+        $( document ).ready(function() {
+            $("#btn_send").click(
+                function(){
+                    sendAjaxForm('result_form', 'ajax_form', 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/reg');
+                    return false; 
+                }
+            );
+        });
+ 
+
+        </script>
+    
+        <div id="result_form"></div> 
+
+        <script>
+            function sendAjaxForm(result_form, ajax_form, url) {
+                //console.log(url+"/");
+                $.ajax({
+                    url:     url+"/"+ajax_form, //url страницы (action_ajax_form.php)
+                    type:     "POST", //метод отправки
+                    dataType: "html", //формат данных
+                    data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
+                    success: function(response) { //Данные отправлены успешно
+                        //console.log(response);
+                        result = $.parseJSON(response);console.log(result);
+                        // result = response;
+                        $('#result_form').html('name: '+result.name+'<br>lastname: '+result.last_name);
+                    },
+                    error: function(response) { // Данные не отправлены
+                        $('#result_form').html('Ошибка. Данные не отправлены.');
+                    }
+                });
+            }
+        </script>
 </body>
 </html>
