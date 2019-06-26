@@ -4,90 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Cars-shop</title>
 </head>
 <body>
     <style>
-        .cars-list .user {
-            width: 300px;
+        body{
+            background-image: url('api/pic/2.jpg');
+            background-size: cover;
+        }
+       h3{
+           text-align: center;
+           color: rgb(26, 145, 145)!important;
+       }
+        .car{
+            width:30%;
+            float: right;
+
+        }
+        .car1{
+            width:30%;
             float: left;
-            border: 1px solid lightgray;
-            border-radius: 5px;
-            padding: 5px;
-            margin: 5px;
+
         }
-        .cars-list .car > h2 {
-            margin-top: 0;
-            text-transform: capitalize;
-            text-align: center;
-        }
-        .cars-list .car > img {
-            display: block;
-            margin: 0 auto;
-        }
-        .cars-list::after {
-            clear: both;
-        }
-        .cars-list::after,
-        .cars-list::before{
-            content: " ";
-            display: table;
-        }
+
     </style>
+
+    <h3 class="alert alert-secondary" role="alert">Luxury cars</h3>
     
-    <div class="cars-list" id="cars"></div>
+    <div  id="cars" class="car" ></div>
+    <div  id="oneCar" class="car1" ></div>
+
+
+
+    <script type="text/template" id="template_car1">
+        <ul  >
+            <li class = "car-list  alert alert-primary "role="alert"></li>
+            <button type="button" class = " button1 btn alert alert-secondary "role="alert" data-id="1"></button>
+        </ul>
+    </script>
+
+
+
 
     <script type="text/template" id="template_car">
-        <div class="car">
-            <h2 class="brand"></h2>
-            <h2 class="model"></h2>
-        </div>
+            <ul  >
+                <li class = "cars-list  alert alert-primary "role="alert"></li>
+                <button type="button" class = " button btn alert alert-secondary "role="alert"></button>
+            </ul>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script>
         (function($){
             var $cars = $('#cars');
+            var $oneCar= $('#oneCar')
             var template_car = $('#template_car').text();
+            var template_car1 = $('#template_car1').text();
+
+            
+            function buildOneCar(oneCar)
+            {
+                $(oneCar).each(function(index, val) { console.log(val);
+                    var $car1 = $(template_car1);
+                    $car1.find('.car-list').text(val.engine_capacity);
+                    $car1.find('.car-list').text(val.color);
+                    $car1.find('.car-list').text(val.model);
+                    $car1.find('.car-list').text(val.max_speed);
+                    $car1.find('.car-list').text(val.price);
+                    $car1.find('.car-list').text(val.year);
+                    $car1.find('.button1').text('buy ->'+val.model);
+                    $car1.appendTo($oneCar);
+                })
+            }
+
+
             function buildCars(cars) {
                 $(cars).each(function(index, val) {
                     var $car = $(template_car);
-                     $car.find('.brand').text(val.brand);
-                     //$user.find('.model').attr('src', val.picture.large);
+                    $car.find('.cars-list').text(val.id+'.' +' '+ val.brand +' '+ val.model);
+                    $car.find('.button').text('watch ->'+val.model).data('id', val.id);
                     $car.appendTo($cars);
                 });
+            
+            
+                $('body').on('click', "button", function() {
+                var $this = $(this), 
+                    id = $this.data('id');
+                    //alert(id);
+                    GetDetails(id); // название функции не айс
+                })
+
+               
+
+           
             }
-            $.ajax({
-                url: 'https://~user15/php/REST/server/api/',
+
+            function GetDetails(id){
+                $.ajax({url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
+                // url: 'http://tc.geeksforless.net/~user15/php/REST/client/api/allCars/',
                 method: 'GET',
                 data: {
                     results: 50,
                     seed: 'test'
                 },
                 success: function(data) {
-                    console.log('Status OK');
-                    buildCars(data.results);
+     
+                    //console.log(data);
+                    buildOneCar(data);
+                    //sendId();
                 },
                 error: function(e) {
+    
+                    console.log('ajax error', e);
+                },
+                complete: function() {
+                    console.log('allways runned')
+                }
+                
+                })
+
+
+            }
+            
+            $.ajax({
+                url: 'http://mysite.local/REST/server/api/carShop/allCars/',
+				                // url: 'http://tc.geeksforless.net/~user15/php/REST/client/api/allCars/',
+
+                method: 'GET',
+                data: {
+                    results: 50,
+                    seed: 'test'
+                },
+                success: function(data) {
+     
+                    console.log(data);
+                    buildCars(data);
+                    //sendId();
+                },
+                error: function(e) {
+    
                     console.log('ajax error', e);
                 },
                 complete: function() {
                     console.log('allways runned')
                 }
             })
-            /* var jqxhr = $.getJSON('https://randomuser.me/api/?results=50', function(data) {
-                buildUsers(data.results);
-            }).done(function() {
-                console.log( "second success" );
-            })
-            .fail(function() {
-                console.log( "error" );
-            })
-            .always(function() {
-                console.log( "complete" );
-            });
-            jqxhr.complete(function() {
-                console.log( "second complete" );
-            }); */
+
+
+            
+            
         }(jQuery))
     </script>
 </body>
