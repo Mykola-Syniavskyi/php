@@ -5,6 +5,7 @@ class carShop extends restServer
     protected $sortVuew;
     protected $arrayAllCars;
     protected $arrayOneCar;
+    protected $email;
 
 
     function getAllCars()
@@ -131,18 +132,102 @@ class carShop extends restServer
 
     public function postReg($formData)
     {
-       if (!empty(is_array($formData)))
+        $tmpArr= array();
+       if (sizeof($formData))
        {
-            return $this->vuewRez($formData);
-       } 
-       else
-       {
-            return $this->vuewRez('aaaaaaaaaaaa');
-       }
-       
+           foreach ($formData as $key => $val)
+           {
+               if ($key =='name')
+               {
+                $this->name  = array($key => $val);
+               }
+               if ($key =='last_name')
+               {
+                $this->lastname  = array($key => $val);
+               }
+               if ($key =='email')
+               {
+                $this->email  = array($key => $val);
+             
+               }
+               if ($key =='passwd')
+               {
+                $this->passwd  = array($key => $val);
+               
+               }
+               if ($key =='confirm_passwd')
+               {
+                $this->confirmpasswd  = array($key => $val);         
+               }
+               
+               
+           }
+           $name = $this->name['name'];
+           $lastname = $this->lastname['last_name'];
+           $email =$this->email['email'];
+           
+           //check email
+           if (filter_var($email, FILTER_VALIDATE_EMAIL))
+           {
+                $email = trim(htmlspecialchars($email));
+           }
+           else
+           {
+            return $this->vuewRez(array('error'=>'your Email isnt VALID !'));
+           }
+           
+           $passwd = $this->passwd['passwd'];
+           
+           //check parol for length
+           if (strlen($passwd) >=4)
+           {
+                $passwd = md5(htmlspecialchars(trim($passwd)));
+           }
+           else
+           {
+                return $this->vuewRez(array('error'=>'enter password more then 3 symbols !'));
+           }
 
-       
-       
+           $confirmpasswd = md5(trim(htmlspecialchars($this->confirmpasswd['confirm_passwd'])));
+           
+           if (strlen($name) >=3 && strlen($lastname) >=3)
+           {
+            $name = trim(htmlspecialchars($name));
+            $lastname = trim(htmlspecialchars($lastname));
+           
+           }
+           else 
+           {
+            return $this->vuewRez(array('error'=> 'please enter min 4  symbols in the parol fild and min 3 symbols in the other filds !'));
+           }
+ 
+           
+           if (trim($passwd) === trim($confirmpasswd))
+           {
+
+            $dbh = new PDO(DSN, USER, PASSWD);
+            $quer= "INSERT INTO users (name, lastname, email,  password)values( '$name', '$lastname', '$email', '$passwd' )"; //print_r( $quer);
+            $stmt = $dbh->prepare($quer);//die('hello');
+            $rez=$stmt->execute(); //var_dump($rez);
+            if (true === $rez)
+            {
+                return $this->vuewRez(array('success'=> 'congrats, you are registered!'));
+            }
+            else 
+            {
+                return $this->vuewRez(array('error'=> 'sorry, you entered exists email !'));
+            }
+            $tmpArr = array($this->name, $this->lastname, $this->email, $this->passwd, $this->confirmpasswd);
+            return $this->vuewRez($tmpArr);
+           }
+           else
+           {
+            return $this->vuewRez(array('error'=>'parols are not equal'));
+           }
+           
+                
+       } 
+        
     }
 }
 

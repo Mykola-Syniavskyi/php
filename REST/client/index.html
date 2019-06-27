@@ -32,6 +32,9 @@
             width:30%;
             float: left;
         }
+        .error{
+            width:30%;
+        }
         
 
     </style>
@@ -107,8 +110,8 @@
 
             function GetDetails(id){
                 $.ajax({
-                // url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
-                url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/oneCar/'+id+'/',
+                url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
+                // url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/oneCar/'+id+'/',
                 method: 'GET',
                 data: {
                     results: 50,
@@ -134,8 +137,8 @@
             }
             
             $.ajax({
-                // url: 'http://mysite.local/REST/server/api/carShop/allCars/',
-				                url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/allCars/',
+                url: 'http://mysite.local/REST/server/api/carShop/allCars/',
+				                // url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/allCars/',
 
                 method: 'GET',
                 data: {
@@ -167,8 +170,8 @@
             <input type="text" name="name" placeholder="name" /><br>
             <input type="text" name="last_name" placeholder="last name" /><br>
             <input type="email" name="email" placeholder="email" /><br>
-            <input type="passwd" name="passwd" placeholder="passwd" /><br>
-            <input type="passwd" name="confirm_passwd" placeholder="confirm passwd" /><br>
+            <input type="password" name="passwd" placeholder="passwd" /><br>
+            <input type="password" name="confirm_passwd" placeholder="confirm passwd" /><br>
             <input type="submit" id="btn_send" value="send" />
         </form>
     
@@ -178,7 +181,10 @@
         $( document ).ready(function() {
             $("#btn_send").click(
                 function(){
-                    sendAjaxForm('result_form', 'ajax_form', 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/reg');
+                    sendAjaxForm('result_form', 'ajax_form', 
+                    'http://mysite.local/REST/server/api/carShop/reg'
+                    // 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/reg'
+                    );
                     return false; 
                 }
             );
@@ -186,27 +192,38 @@
  
 
         </script>
+
+
+<div id="errors"></div>
+<script type="text/template" id="template_error"> 
+    <div id="result_form"  class="alert alert-danger error" role="alert"></div> 
+</script>
     
-        <div id="result_form"></div> 
+        
 
         <script>
             function sendAjaxForm(result_form, ajax_form, url) {
-                //console.log(url+"/");
+                
                 $.ajax({
-                    url:     url+"/"+ajax_form, //url страницы (action_ajax_form.php)
+                    url:     url, //url страницы (action_ajax_form.php)
                     type:     "POST", //метод отправки
                     dataType: "html", //формат данных
                     data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
                     success: function(response) { //Данные отправлены успешно
-                        //console.log(response);
-                        result = $.parseJSON(response);console.log(result);
+                        
+                        result = $.parseJSON(response);//console.log(result);
                         // result = response;
-                        $('#result_form').html('name: '+result.name+'<br>lastname: '+result.last_name);
+                        console.log(result);
+                        $('#result_form').html('ERROR: '+result.error+'<br>lastname: '+result.success);
                     },
                     error: function(response) { // Данные не отправлены
                         $('#result_form').html('Ошибка. Данные не отправлены.');
                     }
                 });
+                var $error = $('#template_error');
+                var $errors = $('#errors');
+                $error.find('.error').text(result.error);
+                $error.appendTo($errors);
             }
         </script>
 </body>
