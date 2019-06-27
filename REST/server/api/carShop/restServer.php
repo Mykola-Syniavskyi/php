@@ -17,8 +17,8 @@ class restServer
            $arrMethod= array();
            $arrParams= array();
            $this->url= $_SERVER['REQUEST_URI'];  
-            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
-            $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
+            $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
+            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
             $this->method = $_SERVER['REQUEST_METHOD'];
             foreach ($arrRez as $key=>$val)
             {
@@ -63,7 +63,9 @@ class restServer
                 $this->setMethod('post'.ucfirst($this->nameMethod), $this->params);
                 break;
             case 'PUT':
-                $this->setMethod('put'.ucfirst($this->nameMethod), $this->params[0]);
+                parse_str(file_get_contents('php://input'), $params);
+                $this->params  = $params; //print_r($fParams);
+                $this->setMethod('put'.ucfirst($this->nameMethod), $this->params);
                 break;
             default:
                 return false;

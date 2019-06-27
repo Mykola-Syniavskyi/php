@@ -1,12 +1,16 @@
 RewriteEngine On
 
 #for classes
-#RewriteBase /~user15/php/REST/server/api/carShop/
+RewriteBase /~user15/php/REST/server/api/carShop/
 
 
 #for home
-RewriteBase /REST/server/api/carShop/
+#RewriteBase /REST/server/api/carShop/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ index.php
+
+<Limit GET POST PUT DELETE>
+    Allow from all
+</Limit>

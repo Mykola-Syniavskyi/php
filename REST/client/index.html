@@ -6,49 +6,80 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Cars-shop</title>
-</head>
-<body>
     <style>
-        body{
-            background-image: url('api/pic/2.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-       h3{
-           text-align: center;
-           color: rgb(26, 145, 145)!important;
-       }
+            body{
+                background-image: url('pic/1.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                }
+            h3{
+                text-align: center;
+                color: rgb(26, 145, 145)!important;
+            }
+    
+            h4{
+                text-align: center;
+                color: rgb(28, 143, 143)!important;
+            }
+            .car{
+                    width:30%;
+                    float: right;
+    
+                }
+            .car1{
+                    width:30%;
+                    float: left;
+                }
+            .error{
+                    width:30%;
+                }
+            .form{
+                    width: 20%;
+                }
+         
+        </style>
+</head>
 
-       h4{
-           text-align: center;
-           color: rgb(28, 143, 143)!important;
-       }
-        .car{
-            width:30%;
-            float: right;
-
-        }
-        .car1{
-            width:30%;
-            float: left;
-        }
-        .error{
-            width:30%;
-        }
-        
-
-    </style>
-
+<body>
     <h3 class="alert alert-secondary" role="alert">Luxury cars</h3>
     
     <div  id="cars" class="car" ><h4>Cars list</h4></div>
+    <div id="result_form"   role="alert"></div> 
     <div  id="oneCar" class="car1" ></div>
+    <div class="form">
+        <form method="POST" id="ajax_form" action="" >
+            <input type="text" name="name" placeholder="name" /><br>
+            <input type="text" name="last_name" placeholder="last name" /><br>
+            <input type="email" name="email" placeholder="email" /><br>
+            <input type="password" name="passwd" placeholder="passwd" /><br>
+            <input type="password" name="confirm_passwd" placeholder="confirm passwd" /><br>
+            <input type="submit" id="btn_send" class="btn btn-primary" value="send" />
+        </form><br>
+  
+        <form method="PUT" action="" id="log_form">
+            <div class="form-group">
+            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+            <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <input  type="submit" id="btn_log" class="btn btn-primary"value="send"/>
+        </form>
+
+    </div>
+
 
 
 
     <script type="text/template" id="template_car1">
         <ul  >
-            <li class = "car-list  alert alert-primary "role="alert"></li>
+            <li class = "car-list1  alert alert-primary "role="alert"></li>
+            <li class = "car-list2  alert alert-primary "role="alert"></li>
+            <li class = "car-list3  alert alert-primary "role="alert"></li>
+            <li class = "car-list4  alert alert-primary "role="alert"></li>
+            <li class = "car-list5  alert alert-primary "role="alert"></li>
+            <li class = "car-list6  alert alert-primary "role="alert"></li>
             <button type="button" class = " button1 btn alert alert-secondary "role="alert" data-id="1"></button>
         </ul>
     </script>
@@ -95,12 +126,12 @@
             {
                 $(oneCar).each(function(index, val) { console.log(val);
                     var $car1 = $(template_car1);
-                    $car1.find('.car-list').text(val.engine_capacity);
-                    $car1.find('.car-list').text(val.color);
-                    $car1.find('.car-list').text(val.model);
-                    $car1.find('.car-list').text(val.max_speed);
-                    $car1.find('.car-list').text(val.price);
-                    $car1.find('.car-list').text(val.year);
+                    $car1.find('.car-list1').text("engine_capacity: "+val.engine_capacity+" L");
+                    $car1.find('.car-list2').text("color: " + val.color);
+                    $car1.find('.car-list3').text("model: " + val.model);
+                    $car1.find('.car-list4').text("max_speed: " + val.max_speed + "km/h");
+                    $car1.find('.car-list5').text("price: " + val.price + "uan");
+                    $car1.find('.car-list6').text("year : " + val.year);
                     $car1.find('.button1').text('buy ->'+val.model);
                     $car1.appendTo($oneCar);
                 })
@@ -110,8 +141,8 @@
 
             function GetDetails(id){
                 $.ajax({
-                url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
-                // url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/oneCar/'+id+'/',
+                // url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
+                url: '/~user15/php/REST/client/api/carShop/oneCar/'+id+'/',
                 method: 'GET',
                 data: {
                     results: 50,
@@ -137,8 +168,8 @@
             }
             
             $.ajax({
-                url: 'http://mysite.local/REST/server/api/carShop/allCars/',
-				                // url: 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/allCars/',
+                // url: 'http://mysite.local/REST/server/api/carShop/allCars/',
+				                url: '/~user15/php/REST/client/api/carShop/allCars/',
 
                 method: 'GET',
                 data: {
@@ -160,30 +191,60 @@
                 }
             })
 
+
+
+            function sendPutAjax(result_form,log_form,url){
+                
+                $.ajax({
+                    url:     url, //url страницы 
+                    type:     "PUT", //метод отправки
+                    dataType: "html", //формат данных
+                    data: $("#"+log_form).serialize(),  // Сеарилизуем объект
+                    success: function(response) { //Данные отправлены успешно
+                    //console.log(response);
+                        result = $.parseJSON(response);
+                        console.log(result);
+                        //result = response;
+                        // $('#result_form').html('login: '+result.loginstatus);
+                            // if (result.loginstatus == 'OK'){
+                            //     document.cookie = "uid="+result.email;
+                            //     document.cookie = "key="+result.key;
+                            //     document.cookie = "name="+result.name;
+                            // }else{
+                            //     document.cookie = "uid="+result.email;document.cookie = "key=0";
+                            //     document.cookie = "name="+'guest';
+                            // }
+
+                    },
+                    error: function(response) { // Данные не отправлены
+                        $('#result_form').html('Ошибка. Данные не отправлены.');
+                    }
+                });
+       
+   }
+
+
             
+//button for log form
+            $("#btn_log").click(
+            function(){
+                sendPutAjax('result_form', 'log_form', '/~user15/php/REST/client/api/carShop/log/');
+            return false; 
+            }
+            );
             
             
         }(jQuery))
     </script>
  
-        <form method="POST" id="ajax_form" action="" >
-            <input type="text" name="name" placeholder="name" /><br>
-            <input type="text" name="last_name" placeholder="last name" /><br>
-            <input type="email" name="email" placeholder="email" /><br>
-            <input type="password" name="passwd" placeholder="passwd" /><br>
-            <input type="password" name="confirm_passwd" placeholder="confirm passwd" /><br>
-            <input type="submit" id="btn_send" value="send" />
-        </form>
-    
-        <br>
-
+       
         <script>
         $( document ).ready(function() {
             $("#btn_send").click(
                 function(){
                     sendAjaxForm('result_form', 'ajax_form', 
-                    'http://mysite.local/REST/server/api/carShop/reg'
-                    // 'http://tc.geeksforless.net/~user15/php/REST/server/api/carShop/reg'
+                    // 'http://mysite.local/REST/server/api/carShop/reg'
+                    '/~user15/php/REST/client/api/carShop/reg'
                     );
                     return false; 
                 }
@@ -193,13 +254,6 @@
 
         </script>
 
-
-<div id="errors"></div>
-<script type="text/template" id="template_error"> 
-    <div id="result_form"  class="alert alert-danger error" role="alert"></div> 
-</script>
-    
-        
 
         <script>
             function sendAjaxForm(result_form, ajax_form, url) {
@@ -214,17 +268,22 @@
                         result = $.parseJSON(response);//console.log(result);
                         // result = response;
                         console.log(result);
-                        $('#result_form').html('ERROR: '+result.error+'<br>lastname: '+result.success);
+                        if (result.success){
+                            $('#result_form').addClass(".alert alert-success").html(result.success);
+                        }else{
+                            $('#result_form').addClass(".alert alert-danger error").html(result.error);
+                        }
+                        
+                       
+                        
                     },
                     error: function(response) { // Данные не отправлены
                         $('#result_form').html('Ошибка. Данные не отправлены.');
                     }
                 });
-                var $error = $('#template_error');
-                var $errors = $('#errors');
-                $error.find('.error').text(result.error);
-                $error.appendTo($errors);
+                
             }
         </script>
+        
 </body>
 </html>

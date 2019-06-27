@@ -77,7 +77,9 @@ class carShop extends restServer
             case '.txt':
            //echo "HELLO PHP";
                 header('Content-type: text/plain');
+                echo "<pre>";
                 print_r($result);
+                echo "</pre>";
                 break;
             case '.html':
                 header('Content-type: text/html'); //print_r($result);//die();
@@ -161,7 +163,7 @@ class carShop extends restServer
                }
                
                
-           }
+            }
            $name = $this->name['name'];
            $lastname = $this->lastname['last_name'];
            $email =$this->email['email'];
@@ -173,7 +175,7 @@ class carShop extends restServer
            }
            else
            {
-            return $this->vuewRez(array('error'=>'your Email isnt VALID !'));
+                return $this->vuewRez(array('error'=>'your Email isnt VALID !'));
            }
            
            $passwd = $this->passwd['passwd'];
@@ -192,43 +194,46 @@ class carShop extends restServer
            
            if (strlen($name) >=3 && strlen($lastname) >=3)
            {
-            $name = trim(htmlspecialchars($name));
-            $lastname = trim(htmlspecialchars($lastname));
-           
+                $name = trim(htmlspecialchars($name));
+                $lastname = trim(htmlspecialchars($lastname));
            }
            else 
            {
-            return $this->vuewRez(array('error'=> 'please enter min 4  symbols in the parol fild and min 3 symbols in the other filds !'));
+                return $this->vuewRez(array('error'=> 'please enter min 4  symbols in the parol fild and min 3 symbols in the other filds !'));
            }
- 
-           
+
            if (trim($passwd) === trim($confirmpasswd))
            {
 
-            $dbh = new PDO(DSN, USER, PASSWD);
-            $quer= "INSERT INTO users (name, lastname, email,  password)values( '$name', '$lastname', '$email', '$passwd' )"; //print_r( $quer);
-            $stmt = $dbh->prepare($quer);//die('hello');
-            $rez=$stmt->execute(); //var_dump($rez);
-            if (true === $rez)
-            {
-                return $this->vuewRez(array('success'=> 'congrats, you are registered!'));
-            }
-            else 
-            {
-                return $this->vuewRez(array('error'=> 'sorry, you entered exists email !'));
-            }
-            $tmpArr = array($this->name, $this->lastname, $this->email, $this->passwd, $this->confirmpasswd);
-            return $this->vuewRez($tmpArr);
-           }
-           else
-           {
-            return $this->vuewRez(array('error'=>'parols are not equal'));
-           }
+                $dbh = new PDO(DSN, USER, PASSWD);
+                $quer= "INSERT INTO users (name, lastname, email,  password)values( '$name', '$lastname', '$email', '$passwd' )"; //print_r( $quer);
+                $stmt = $dbh->prepare($quer);//die('hello');
+                $rez=$stmt->execute(); //var_dump($rez);
+                if (true === $rez)
+                {
+                    return $this->vuewRez(array('success'=> 'congrats, you are registered!'));
+                }
+                else 
+                {
+                    return $this->vuewRez(array('error'=> 'sorry, you entered exists email !'));
+                }
+                $tmpArr = array($this->name, $this->lastname, $this->email, $this->passwd, $this->confirmpasswd);
+                return $this->vuewRez($tmpArr);
+                }
+                else
+                {
+                    return $this->vuewRez(array('error'=>'parols are not equal'));
+                }
            
                 
-       } 
+        } 
         
     }
+    public function putLog($params)
+    {   
+       return $this->vuewRez($params);
+    }
+    
 }
 
 
