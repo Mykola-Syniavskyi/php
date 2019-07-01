@@ -121,8 +121,8 @@
     function GetDetails(id){
      
         $.ajax({
-        url: '/REST/server/api/carShop/oneCar/'+id+'/',
-        // url: '/~user15/php/REST/client/api/carShop/oneCar/'+id+'/',
+        // url: '/REST/server/api/carShop/oneCar/'+id+'/',
+        url: '/~user15/php/REST/client/api/carShop/oneCar/'+id+'/',
         method: 'GET',
         data: {
             results: 50,
@@ -148,8 +148,8 @@
     }
     
     $.ajax({
-        url: '/REST/client/api/carShop/allCars/',
-                        // url: '/~user15/php/REST/client/api/carShop/allCars/',
+        // url: '/REST/client/api/carShop/allCars/',
+                        url: '/~user15/php/REST/client/api/carShop/allCars/',
         method: 'GET',
         data: {
             results: 50,
@@ -204,7 +204,8 @@
 //button for log form
     $("#btn_log").click(
     function(){
-        sendPutAjax('result_form', 'log_form', '/REST/client/api/carShop/log/');///~user15/php/REST/client/api/carShop/log/
+        sendPutAjax('result_form', 'log_form', '~user15/php/REST/client/api/carShop/log/');
+        // '/REST/client/api/carShop/log/');
     return false; 
     }
     );
@@ -216,18 +217,12 @@
 
 
 
-
-
-
-
-
-
 $( document ).ready(function() {
     $("#btn_send").click(
         function(){
             sendAjaxForm('result_form', 'ajax_form', 
-            'http://mysite.local/REST/client/api/carShop/reg'
-            // '/~user15/php/REST/client/api/carShop/reg'
+            // 'http://mysite.local/REST/client/api/carShop/reg'
+            '/~user15/php/REST/client/api/carShop/reg'
             );
             return false; 
         }
@@ -280,8 +275,8 @@ $( document ).ready(function() {
 
             function(){ 
                 sendAjaxBuyForm('result_form', 'buy_form', 
-                'http://mysite.local/REST/client/api/carShop/buy'
-                // '/~user15/php/REST/client/api/carShop/buy'
+                // 'http://mysite.local/REST/client/api/carShop/buy'
+                '/~user15/php/REST/client/api/carShop/buy'
                 );
                 var $buyCar = $("#buy_js");
                 var buy_form = $("#buy_form");
@@ -311,6 +306,7 @@ $( document ).ready(function() {
                     // result = response;
                     console.log(result);
                     if (result.success){
+
                         $('#result_form').addClass(".alert alert-success regAlert").html(result.success);
     
                     }else{
@@ -323,4 +319,54 @@ $( document ).ready(function() {
                 }
             });
             
+        }
+
+       
+        $( document ).ready(function() {
+            $("#btn_find_byparams").click(
+                
+                 function(){ //alert(5);
+
+                    findByParams('result_form', 'find_params_js', '/~user15/php/REST/client/api/carShop/findCarByParams');// 'http://mysite.local/REST/client/api/carShop/findCarByParams'
+                
+                //     var $buyCar = $("#buy_js");
+                //     var buy_form = $("#buy_form");
+                //     buy_form.html('');
+                //     $buyCar.css('display','none');
+                     return false; 
+                }
+            );
+        });
+
+        function findByParams(result_form, find_params_js, url){
+            $.ajax({
+                url:     url, //url страницы (action_ajax_form.php)
+                type:     "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $("#find_params_js").serialize(),// Сеарилизуем объект и добавляю айди кар
+                        
+                
+                success: function(response) { //Данные отправлены успешно
+                    
+                    result = $.parseJSON(response);//console.log(result);
+                    //$('#ajax_form')[0].reset();//clear form
+                    // result = response;
+                    console.log(result);
+                    if (result.success){
+                        $('#result_form').addClass(".alert alert-success regAlert").html(result.success);
+    
+                    }else{
+                        $('#result_form').addClass(".alert alert-danger error regAlert").html(result.error);
+                    }
+                    if (result.length > 0){
+                        buildOneCar(result);
+                    }else{
+                        return false;
+                    }
+    
+                },
+                error: function(response) { // Данные не отправлены
+                    $('#result_form').html('Ошибка. Данные не отправлены.');
+                }
+            });
         }

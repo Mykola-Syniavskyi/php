@@ -17,7 +17,7 @@
 
     <!-- BUTONS SHOW FORM -->
     <div class="btn_form">
-        <h4 style="text-align: left;">Buying cars only after REGISRATION !</h4>
+        <h4 style="text-align: left; color: rgb(197, 51, 51)!important;">Buying cars only after REGISRATION !</h4>
         <button type="button" id="js_reg_show" class="alert alert-dark" role="alert">click for registration</button> 
         <button type="button" id="js_log_show" class="alert alert-dark" role="alert">click here if you regisered</button>
     </div><br>
@@ -78,7 +78,7 @@
 <!-- FORM FIND BY PARAMS -->
     <div class="params">
             <h4 >Find car by params</h4>
-            <form method="POST">
+            <form method="POST" id="find_params_js">
                 <div class="form-row align-items-center">
                     <div class="col-auto my-4">        
                     <select class="custom-select mr-sm-2" name="brand">
@@ -128,7 +128,7 @@
                     </select>
                     </div>
                     <div class="col-auto my-1">
-                    <button type="submit" class="btn btn-primary">Run -></button>
+                    <button type="submit" class="btn btn-primary" id="btn_find_byparams">Run -></button>
                     </div>
                 </div>
             </form>

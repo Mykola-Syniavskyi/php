@@ -14,6 +14,14 @@ class carShop extends restServer
     protected $payLastName;
     protected $paymentsType;
     protected $payID;
+    protected $brand;
+    protected $color;
+    protected $engine_capacity;
+    protected $max_speed;
+    protected $model;
+    protected $price;
+    protected $year;
+    
     
 
 
@@ -305,11 +313,7 @@ class carShop extends restServer
             {
                 return $this->vuewRez(array('error'=> 'sorry, you did not buy this  car!'));
             }
-
-            
-            
-            
-            
+ 
             //return $this->vuewRez($formData);
         }
         else
@@ -318,6 +322,160 @@ class carShop extends restServer
                 }
         
     }
+    
+
+
+    public function postfindCarByParams($params)
+    {//print_r($params);
+        if (isset($params) && !empty($params))
+        {
+            foreach ($params as $key => $value)
+            {
+                if ($key == 'brand')
+                {
+                    $this->brand = trim(htmlspecialchars($value));
+                }
+                if ($key == 'color')
+                {
+                    $this->color = trim(htmlspecialchars($value));
+                }
+                if ($key == 'engine_capacity')
+                {
+                    $this->engine_capacity = trim(htmlspecialchars($value));
+                }
+                if ($key == 'max_speed')
+                {
+                    $this->max_speed = trim(htmlspecialchars($value));
+                }
+                if ($key == 'model')
+                {
+                    $this->model = trim(htmlspecialchars($value));
+                }
+                if ($key == 'price')
+                {
+                    $this->price = trim(htmlspecialchars($value));
+                }
+                if ($key == 'year')
+                {
+                    $this->year = trim(htmlspecialchars($value));
+                }
+            }
+
+            //check for entered date
+            if (!empty($this->year))
+            {
+                $this->year = trim(htmlspecialchars($this->year));
+            }
+            else
+            {
+                return $this->vuewRez(array('error'=>'select year require !'));
+            }
+            
+            //  return $this->vuewRez(array('year'=>$this->year));
+            // return $this->vuewRez($params);
+            $arr = array();
+            $dbh = new PDO(DSN, USER, PASSWD);
+            $quer= " SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id   WHERE cars.year= $this->year " . $this->addEngine_capacity() . $this->addMax_speed() . $this->addModel() . $this->addBrand() . $this->addPrice() . $this->addColor();
+           //print_r(" SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id   WHERE cars.year= $this->year " . $this->addEngine_capacity() .  $this->addMax_speed() . $this->addModel() . $this->addBrand() . $this->addPrice() . $this->addColor());
+            foreach($dbh->query($quer) as $row) 
+           { 
+                $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'], 'engine_capacity'=>$row['engine_capacity'],'year'=>$row['year'] , 'color'=>$row['color'], 'max_speed'=>$row['max_speed'], 'brand'=>$row['brand'], 'price'=>$row['price']  );
+                array_push($arr, $tmp_arr); 
+           } 
+           return $this->vuewRez($arr);  
+        }
+        else
+        {
+            return  $this->vuewRez(array('error'=>'please select even thought one parametr !'));   
+        }
+
+
+        
+    }
+    
+
+
+
+
+
+
+    public function addEngine_capacity()
+    {
+        if ($this->engine_capacity)
+        {
+            return " and engine_capacity= $this->engine_capacity ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addMax_speed()
+    {
+        if ($this->max_speed)
+        {
+            return " and max_speed= $this->max_speed ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addModel()
+    {
+        if ($this->model)
+        {
+            return " and model= '$this->model' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addBrand()
+    {
+        if ($this->brand)
+        {
+            return " and brand= '$this->brand' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addPrice()
+    {
+        if ($this->price)
+        {
+            return " and price= '$this->price' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
+
+    public function addColor()
+    {
+        if ($this->color)
+        {
+            return " and color= '$this->color' ";
+        }
+        else 
+        {
+            return ' ';
+        }
+    }
+
     
 }
 $obj = new carShop();
