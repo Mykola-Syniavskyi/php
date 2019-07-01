@@ -6,6 +6,16 @@ class carShop extends restServer
     protected $arrayAllCars;
     protected $arrayOneCar;
     protected $email;
+    protected $name;
+    protected $lastname;
+    protected $passwd;
+    protected $confirmpasswd;
+    protected $payName;
+    protected $payLastName;
+    protected $paymentsType;
+    protected $payID;
+    
+
 
 
     function getAllCars()
@@ -21,17 +31,15 @@ class carShop extends restServer
        $this->vuewRez($this->arrayAllCars, $this->sortVuew);
         return $resultArray;
     }
-
-
     function getOneCar($id)
     {
         $resultArray = array();
         $dbh = new PDO(DSN, USER, PASSWD);
-        $stmt = $dbh->prepare("select  cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id   where cars.id =?");
+        $stmt = $dbh->prepare("select cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id   where cars.id =?");
         $stmt->execute([$id]); 
         $row = $stmt->fetch();
-
             $tmp_arr = array(
+            'id' => $row['id'],
             'model'=>$row['model'],    
             'engine_capacity'=>$row['engine_capacity'],
             'year'=>$row['year'],
@@ -45,26 +53,18 @@ class carShop extends restServer
         
        
     }
-
-
-
     public function getSortVuew()
     {
         $id = substr($this->url, strrpos($this->url, '/') + 1);
         //$id = explode('?', $id)[0];
         $this->sortVuew = $id; //print_r($this->sortVuew);
         // return $this->sortVuew;
-
     }
-
-
-
     private function vuewRez($result, $sortVuew = 'json')
     {
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: text/html; charset=utf-8'); 
         header('Cache-Control: no-cache');
-
         if (!$result)
         {
             header("HTTP/1.1 400 Bad Request Api");
@@ -113,7 +113,6 @@ class carShop extends restServer
                 break;
         }
     }
-
     public function toXml($result)
     {   
         $xml = new SimpleXMLElement('<root/>');
@@ -124,13 +123,12 @@ class carShop extends restServer
       
         print $xml->asXML();
     }
-
     
-
     public function help()
     {
         // print_r( get_class_methods($this));
     }
+
 
     public function postReg($formData)
     {
@@ -189,7 +187,6 @@ class carShop extends restServer
            {
                 return $this->vuewRez(array('error'=>'enter password more then 3 symbols !'));
            }
-
            $confirmpasswd = md5(trim(htmlspecialchars($this->confirmpasswd['confirm_passwd'])));
            
            if (strlen($name) >=3 && strlen($lastname) >=3)
@@ -201,10 +198,8 @@ class carShop extends restServer
            {
                 return $this->vuewRez(array('error'=> 'please enter min 4  symbols in the parol fild and min 3 symbols in the other filds !'));
            }
-
            if (trim($passwd) === trim($confirmpasswd))
            {
-
                 $dbh = new PDO(DSN, USER, PASSWD);
                 $quer= "INSERT INTO users (name, lastname, email,  password)values( '$name', '$lastname', '$email', '$passwd' )"; //print_r( $quer);
                 $stmt = $dbh->prepare($quer);//die('hello');
@@ -229,22 +224,106 @@ class carShop extends restServer
         } 
         
     }
+
+
+
     public function putLog($params)
     {   
        return $this->vuewRez($params);
     }
+
+
+
+    public function postBuy($formData)
+    {
+        if (sizeof($formData))
+
+        { //return $this->vuewRez($formData);
+            foreach ($formData as $key => $value)
+            {
+               if ($key == 'firstname')
+               {
+                    $this->payName = $value;
+               }
+               if ($key == 'lastname')
+               {
+                $this->payLastName = $value;
+               }
+               if ($key == 'payments')
+               {
+                $this->paymentsType = $value;
+               }
+               if ($key == 'id')
+               {
+                $this->payID = $value;
+               }
+            }
+
+            if (!empty($this->payName))
+            {
+                $this->payName = trim(htmlspecialchars($this->payName));
+            }
+            else 
+            {
+                return $this->vuewRez(array('error'=> 'sorry, enter your name'));
+            }
+
+            if (!empty($this->payLastName))
+            {
+                $this->payLastName = trim(htmlspecialchars($this->payLastName));
+            }
+            else 
+            {
+                return $this->vuewRez(array('error'=> 'sorry, enter your last name'));
+            }
+ 
+            if (!empty($this->paymentsType))
+            {
+                $this->paymentsType = trim(htmlspecialchars($this->paymentsType));
+            }
+            else 
+            {
+                return $this->vuewRez(array('error'=> 'sorry, check type paying'));
+            }
+
+
+            //return $this->vuewRez(array('firstname' =>"$this->payName"));
+            $dbh = new PDO(DSN, USER, PASSWD);
+            $quer = "INSERT INTO orders (car_id, payments, lastname, firstname)values(:id,:payments,:lastname,:firstname)";
+            $sth = $dbh->prepare($quer);
+            //return $this->vuewRez([$typePay, $lastname, $firstname]);
+            $sth->bindParam(':id',$this->payID,PDO::PARAM_INT);
+            $sth->bindParam(':payments',$this->paymentsType,PDO::PARAM_STR);
+            $sth->bindParam(':lastname',$this->payLastName,PDO::PARAM_STR);
+            $sth->bindParam(':firstname',$this->payName,PDO::PARAM_STR);
+            $rez = $sth->execute(); 
+            if (true === $rez)
+            {
+                return $this->vuewRez(array('success'=> 'congrats, you bought this car! Our meneger will call you!'));
+            }
+            else
+            {
+                return $this->vuewRez(array('error'=> 'sorry, you did not buy this  car!'));
+            }
+
+            
+            
+            
+            
+            //return $this->vuewRez($formData);
+        }
+        else
+                {
+                    return $this->vuewRez(array('error'=>'no data'));
+                }
+        
+    }
     
 }
-
-
-
-
-
 $obj = new carShop();
 $obj->parsUrl();
 $obj->help();
 // $obj->postReg($formData);
-
 // $obj->setMethod('Test', "Vasia");
 $obj->getMethod();
 echo $obj->getErrors();

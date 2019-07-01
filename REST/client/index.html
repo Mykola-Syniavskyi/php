@@ -5,57 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>Cars-shop</title>
-    <style>
-            body{
-                background-image: url('pic/1.jpg');
-                background-size: cover;
-                background-repeat: no-repeat;
-                }
-            h3{
-                text-align: center;
-                color: rgb(26, 145, 145)!important;
-            }
-    
-            h4{
-                text-align: center;
-                color: rgb(28, 143, 143)!important;
-            }
-            .car{
-                    width:30%;
-                    float: right;
-    
-                }
-            .car1{
-                    width:30%;
-                    float: left;
-                }
-            .error{
-                    width:30%;
-                }
-            .form{
-                    width: 20%;
-                }
-         
-        </style>
 </head>
 
 <body>
-    <h3 class="alert alert-secondary" role="alert">Luxury cars</h3>
+    <h2 class="name_site" >ELITE CARS</h2>
+
+    <div id="result_form"   role="alert"></div>
+
+    <!-- BUTONS SHOW FORM -->
+    <div class="btn_form">
+        <h4 style="text-align: left;">Buying cars only after REGISRATION !</h4>
+        <button type="button" id="js_reg_show" class="alert alert-dark" role="alert">click for registration</button> 
+        <button type="button" id="js_log_show" class="alert alert-dark" role="alert">click here if you regisered</button>
+    </div><br>
+
+    <!-- buying form -->
+<div class="buy" id="buy_js">
+    <form method="POST" class="buy_form" id="buy_form">
+        <div >
+            <div >
+            <input type="text" class="form-control" name="firstname" placeholder="First name">
+            </div><br>
+            <div >
+            <input type="text" class="form-control" name="lastname" placeholder="Last name">
+            </div>              
+        </div><br>
+        <select class="custom-select mr-sm-3 select_pay" id="inlineFormCustomSelect" name="payments">
+            <option disabled selected>Choose pay variant</option>
+            <option value="credit card">credit cart</option>
+            <option value="cash">cash</option>
+            <input id="hiddenId" type=hidden    name="id" value="">
+        </select>
+        <button type="submit" class="btn btn-primary btn_buy" id="btn_buy" >Buy this car</button><br><br>
+        <button type="button" class="btn btn-primary btn_cancel" >Cancel</button>
+    </form>
     
+    </div><br>
+
+    <!-- RESULT CARS LIST -->
     <div  id="cars" class="car" ><h4>Cars list</h4></div>
-    <div id="result_form"   role="alert"></div> 
-    <div  id="oneCar" class="car1" ></div>
+ 
+
     <div class="form">
+
+        <!-- REGISTER FORM -->
         <form method="POST" id="ajax_form" action="" >
             <input type="text" name="name" placeholder="name" /><br>
             <input type="text" name="last_name" placeholder="last name" /><br>
             <input type="email" name="email" placeholder="email" /><br>
             <input type="password" name="passwd" placeholder="passwd" /><br>
             <input type="password" name="confirm_passwd" placeholder="confirm passwd" /><br>
-            <input type="submit" id="btn_send" class="btn btn-primary" value="send" />
+            <input type="submit" id="btn_send" class="btn btn-primary" value="Register" />
         </form><br>
   
+        <!-- LOGIN FORM -->
         <form method="PUT" action="" id="log_form">
             <div class="form-group">
             <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -64,226 +70,100 @@
             <div class="form-group">
             <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <input  type="submit" id="btn_log" class="btn btn-primary"value="send"/>
+            <input  type="submit" id="btn_log" class="btn btn-primary"value="Log in"/>
         </form>
+    </div><br>
 
+
+<!-- FORM FIND BY PARAMS -->
+    <div class="params">
+            <h4 >Find car by params</h4>
+            <form method="POST">
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-4">        
+                    <select class="custom-select mr-sm-2" name="brand">
+                        <option disabled selected>Choose brand</option>
+                        <option value="skoda">Skoda</option>
+                        <option value="audi">Audi</option>
+                        <option value="toyota">Toyota</option>
+                    </select>
+                    
+                    <select class="custom-select mr-sm-2"  name="year">
+                        <option  disabled selected>Choose year</option>
+                        <option value="2010">2010</option>
+                        <option value="2012">2012</option>
+                        <option value="2015">2015</option>
+                    </select>
+                    <select class=" custom-select mr-sm-2 "  name="model">
+                        <option disabled selected>Choose model</option>
+                        <option value="tt">tt</option>
+                        <option value="fabia">fabia</option>
+                        <option value="colola">colola</option>
+                        <option value="octavia">octavia</option>
+                    </select>
+                    <select class="custom-select mr-sm-2" name="max_speed">
+                        <option disabled selected>Choose max_speed</option>
+                        <option value="180">180</option>
+                        <option value="200">200</option>
+                        <option value="220">220</option>
+                        <option value="225">225</option>
+                    </select>
+                    <select class="custom-select mr-sm-2"  name="engine_capacity">
+                        <option disabled selected >Choose engine_capacity</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <select class="custom-select mr-sm-2"  name="color">
+                        <option disabled selected>Choose color</option>
+                        <option value="black">black</option>
+                        <option value="white">white</option>
+                        <option value="red">red</option>
+                    </select>
+                    <select class="custom-select mr-sm-2" name="price">
+                        <option disabled selected>Choose price</option>
+                        <option value="180000">180000</option>
+                        <option value="200000">200000</option>
+                        <option value="250000">250000</option>
+                        <option value="270000">270000</option>
+                    </select>
+                    </div>
+                    <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary">Run -></button>
+                    </div>
+                </div>
+            </form>
     </div>
 
+<!-- INFO ONE CAR -->
+    <div  id="oneCar" class="car1" ></div>
 
 
 
+
+<!-- TEMPLATE FOR CAR BY ID -->
     <script type="text/template" id="template_car1">
         <ul  >
+            <li class = "car-list0  alert alert-primary " type="button" style="text-align: center; font-weight:700;" role="alert">x--C L O S E--x</li>
             <li class = "car-list1  alert alert-primary "role="alert"></li>
             <li class = "car-list2  alert alert-primary "role="alert"></li>
             <li class = "car-list3  alert alert-primary "role="alert"></li>
             <li class = "car-list4  alert alert-primary "role="alert"></li>
             <li class = "car-list5  alert alert-primary "role="alert"></li>
             <li class = "car-list6  alert alert-primary "role="alert"></li>
-            <button type="button" class = " button1 btn alert alert-secondary "role="alert" data-id="1"></button>
+            <button type="button" class = " button1 btn alert alert-secondary "role="alert" ></button>
         </ul>
     </script>
 
 
-
-
+<!-- TEMPLATE FOR CARS LIST -->
     <script type="text/template" id="template_car">
-            <ul  >
-                <li class = "cars-list  alert alert-primary "role="alert"></li>
+            <ul >
+                <li class = "cars-list  alert alert-dark "role="alert"></li>
                 <button type="button" class = " button btn alert alert-secondary "role="alert"></button>
-            </ul>
-            
+            </ul>           
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script>
-        (function($){
-            var $cars = $('#cars');
-            var $oneCar= $('#oneCar')
-            var template_car = $('#template_car').text();
-            var template_car1 = $('#template_car1').text();
-
-            function buildCars(cars) {
-                $(cars).each(function(index, val) {
-                    var $car = $(template_car);
-                    $car.find('.cars-list').text(val.id + '.' +' '+ val.brand +' '+ val.model);
-                    $car.find('.button').text('watch ->'+val.model).data('id', val.id);
-                    $car.appendTo($cars);
-                });
-            
-            
-                $('body').on('click', "button", function() {
-                var $this = $(this), 
-                    id = $this.data('id');
-                    //alert(id);
-                    GetDetails(id); // название функции не айс
-                })
-            }
-
-
-            
-            
-            function buildOneCar(oneCar)
-            {
-                $(oneCar).each(function(index, val) { console.log(val);
-                    var $car1 = $(template_car1);
-                    $car1.find('.car-list1').text("engine_capacity: "+val.engine_capacity+" L");
-                    $car1.find('.car-list2').text("color: " + val.color);
-                    $car1.find('.car-list3').text("model: " + val.model);
-                    $car1.find('.car-list4').text("max_speed: " + val.max_speed + "km/h");
-                    $car1.find('.car-list5').text("price: " + val.price + "uan");
-                    $car1.find('.car-list6').text("year : " + val.year);
-                    $car1.find('.button1').text('buy ->'+val.model);
-                    $car1.appendTo($oneCar);
-                })
-            }
-
-
-
-            function GetDetails(id){
-                $.ajax({
-                // url: 'http://mysite.local/REST/server/api/carShop/oneCar/'+id+'/',
-                url: '/~user15/php/REST/client/api/carShop/oneCar/'+id+'/',
-                method: 'GET',
-                data: {
-                    results: 50,
-                    seed: 'test'
-                },
-                success: function(data) {
-     
-                    //console.log(data);
-                    buildOneCar(data);
-                    //sendId();
-                },
-                error: function(e) {
     
-                    console.log('ajax error', e);
-                },
-                complete: function() {
-                    console.log('allways runned')
-                }
-                
-                })
-
-
-            }
-            
-            $.ajax({
-                // url: 'http://mysite.local/REST/server/api/carShop/allCars/',
-				                url: '/~user15/php/REST/client/api/carShop/allCars/',
-
-                method: 'GET',
-                data: {
-                    results: 50,
-                    seed: 'test'
-                },
-                success: function(data) {
-     
-                    console.log(data);
-                    buildCars(data);
-                    //sendId();
-                },
-                error: function(e) {
-    
-                    console.log('ajax error', e);
-                },
-                complete: function() {
-                    console.log('allways runned')
-                }
-            })
-
-
-
-            function sendPutAjax(result_form,log_form,url){
-                
-                $.ajax({
-                    url:     url, //url страницы 
-                    type:     "PUT", //метод отправки
-                    dataType: "html", //формат данных
-                    data: $("#"+log_form).serialize(),  // Сеарилизуем объект
-                    success: function(response) { //Данные отправлены успешно
-                    //console.log(response);
-                        result = $.parseJSON(response);
-                        console.log(result);
-                        //result = response;
-                        // $('#result_form').html('login: '+result.loginstatus);
-                            // if (result.loginstatus == 'OK'){
-                            //     document.cookie = "uid="+result.email;
-                            //     document.cookie = "key="+result.key;
-                            //     document.cookie = "name="+result.name;
-                            // }else{
-                            //     document.cookie = "uid="+result.email;document.cookie = "key=0";
-                            //     document.cookie = "name="+'guest';
-                            // }
-
-                    },
-                    error: function(response) { // Данные не отправлены
-                        $('#result_form').html('Ошибка. Данные не отправлены.');
-                    }
-                });
-       
-   }
-
-
-            
-//button for log form
-            $("#btn_log").click(
-            function(){
-                sendPutAjax('result_form', 'log_form', '/~user15/php/REST/client/api/carShop/log/');
-            return false; 
-            }
-            );
-            
-            
-        }(jQuery))
-    </script>
- 
-       
-        <script>
-        $( document ).ready(function() {
-            $("#btn_send").click(
-                function(){
-                    sendAjaxForm('result_form', 'ajax_form', 
-                    // 'http://mysite.local/REST/server/api/carShop/reg'
-                    '/~user15/php/REST/client/api/carShop/reg'
-                    );
-                    return false; 
-                }
-            );
-        });
- 
-
-        </script>
-
-
-        <script>
-            function sendAjaxForm(result_form, ajax_form, url) {
-                
-                $.ajax({
-                    url:     url, //url страницы (action_ajax_form.php)
-                    type:     "POST", //метод отправки
-                    dataType: "html", //формат данных
-                    data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
-                    success: function(response) { //Данные отправлены успешно
-                        
-                        result = $.parseJSON(response);//console.log(result);
-                        // result = response;
-                        console.log(result);
-                        if (result.success){
-                            $('#result_form').addClass(".alert alert-success").html(result.success);
-                        }else{
-                            $('#result_form').addClass(".alert alert-danger error").html(result.error);
-                        }
-                        
-                       
-                        
-                    },
-                    error: function(response) { // Данные не отправлены
-                        $('#result_form').html('Ошибка. Данные не отправлены.');
-                    }
-                });
-                
-            }
-        </script>
+    <script src="js/app.js"></script>
         
 </body>
 </html>

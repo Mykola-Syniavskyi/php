@@ -8,8 +8,6 @@ class restServer
     protected $nameMethod;
     protected $errors = array();
     
-
-
     public function parsUrl()
     { //print_r($_SERVER['REQUEST_URI']);
        if  ($_SERVER['REQUEST_URI'])
@@ -17,8 +15,8 @@ class restServer
            $arrMethod= array();
            $arrParams= array();
            $this->url= $_SERVER['REQUEST_URI'];  
-            $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
-            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
+            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
+            $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
             $this->method = $_SERVER['REQUEST_METHOD'];
             foreach ($arrRez as $key=>$val)
             {
@@ -31,9 +29,7 @@ class restServer
                 {
                      array_push($arrParams, $val);
                      $this->params = $arrParams;
-
                 }
-
             
                 //   print_r($this->params[0]);
              }
@@ -41,23 +37,20 @@ class restServer
              $this->getSortVuew();
        }
     }
-
-
     
     public function getMethod()
-      {  // print_r($this->method);
+      {  //print_r($this->method);
                 switch($this->method)
         {   
             case 'GET':
             //echo  123;
                 $this->setMethod('get'.ucfirst($this->nameMethod), $this->params[0]);
-
-
                 break;
             case 'DELETE':
                 $this->setMethod('delete'.ucfirst($this->nameMethod), $this->params[0]);
                 break;
             case 'POST':
+            
                 $this->params = '';
                 $this->params  = $_POST;
                 $this->setMethod('post'.ucfirst($this->nameMethod), $this->params);
@@ -71,13 +64,11 @@ class restServer
                 return false;
         }
     }
-
     
     // public function Test($param)
     // {
     //     echo "hello, $param";
     // }
-
     function setMethod($method, $param=false)
     { 
          
@@ -91,8 +82,6 @@ class restServer
             $this->errors = '404 Sorry, we cant find this action!';
         }
     }
-
-
     public function getErrors()
     {
         if (!empty($this->errors))
@@ -100,8 +89,6 @@ class restServer
             return $this->errors;
         }
     }
-
     
     
-
 }
