@@ -21,6 +21,8 @@ class carShop extends restServer
     protected $model;
     protected $price;
     protected $year;
+    protected $logEmail;
+    protected $logPasswd;
     
     
 
@@ -233,11 +235,50 @@ class carShop extends restServer
         
     }
 
-
+    
 
     public function putLog($params)
-    {   
-       return $this->vuewRez($params);
+    {   if (sizeof($params))
+        {
+            foreach ($params as $key=> $value)
+            {
+                if ($key == 'email')
+                {
+                    $this->logEmail = trim(htmlspecialchars($value));
+                }
+                if ($key == 'passwd')
+                {
+                    $this->logPasswd = md5(htmlspecialchars(trim($value)));
+                }
+            }
+            //return  $this->vuewRez(array(1=>$this->logPasswd));
+            $arr = array();
+            $dbh = new PDO(DSN, USER, PASSWD);
+            $quer = "SELECT name, lastname FROM users WHERE email = '$this->logEmail' AND password = '$this->logPasswd'"; //print_r($quer);
+            foreach($dbh->query($quer) as $row) 
+           { 
+                $tmp_arr = array('name'=>$row['name'],'lastname'=>$row['lastname']);
+                array_push($arr, $tmp_arr); 
+           } 
+           if (sizeof($arr))
+           {
+               return $this->vuewRez($arr); 
+           }
+           else 
+           {
+                return $this->vuewRez(array('error'=>'this password or email does not exist !'));
+           }
+           
+
+
+
+
+        }
+        else
+        {
+            return $this->vuewRez(array('error'=> 'sorry, enter your email and password'));
+        }
+       //return $this->vuewRez($params);
     }
 
 
@@ -317,9 +358,9 @@ class carShop extends restServer
             //return $this->vuewRez($formData);
         }
         else
-                {
-                    return $this->vuewRez(array('error'=>'no data'));
-                }
+        {
+            return $this->vuewRez(array('error'=>'no data'));
+        }
         
     }
     

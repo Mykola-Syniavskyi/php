@@ -12,14 +12,16 @@
 
 <body>
     <h2 class="name_site" >ELITE CARS</h2>
+    
+    <div id="user"></div>
+    <button id="btn_logout">Log out</button>
 
     <div id="result_form"   role="alert"></div>
 
     <!-- BUTONS SHOW FORM -->
     <div class="btn_form">
         <h4 style="text-align: left; color: rgb(197, 51, 51)!important;">Buying cars only after REGISRATION !</h4>
-        <button type="button" id="js_reg_show" class="alert alert-dark" role="alert">click for registration</button> 
-        <button type="button" id="js_log_show" class="alert alert-dark" role="alert">click here if you regisered</button>
+        <button type="button" id="js_log_show" class="alert alert-dark" role="alert">Log in</button>
     </div><br>
 
     <!-- buying form -->
@@ -51,6 +53,20 @@
 
     <div class="form">
 
+        
+        <!-- LOGIN FORM -->
+        <form method="PUT" action="" id="log_form">
+            <div class="form-group">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <input  type="submit" id="btn_log" class="btn btn-primary"value="Log in"/>
+            <button type="button" id="js_reg_show" class="alert alert-dark" role="alert">Registration</button> 
+        </form><br>
+
         <!-- REGISTER FORM -->
         <form method="POST" id="ajax_form" action="" >
             <input type="text" name="name" placeholder="name" /><br>
@@ -60,18 +76,6 @@
             <input type="password" name="confirm_passwd" placeholder="confirm passwd" /><br>
             <input type="submit" id="btn_send" class="btn btn-primary" value="Register" />
         </form><br>
-  
-        <!-- LOGIN FORM -->
-        <form method="PUT" action="" id="log_form">
-            <div class="form-group">
-            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-            <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <input  type="submit" id="btn_log" class="btn btn-primary"value="Log in"/>
-        </form>
     </div><br>
 
 
@@ -128,16 +132,16 @@
                     </select>
                     </div>
                     <div class="col-auto my-1">
-                    <button type="submit" class="btn btn-primary" id="btn_find_byparams">Run -></button>
+                    <button type="submit" class="btn btn-primary" id="btn_find_byparams">Run -></button><br>
                     </div>
                 </div>
             </form>
     </div>
 
 <!-- INFO ONE CAR -->
-    <div  id="oneCar" class="car1" ></div>
-
-
+    <div  id="oneCar" class="car1" ></div><br>
+    <h4 class="h_rez_params">Result of searching cars:</h4>
+    <div  id="cars_params" class="car_params " ></div>
 
 
 <!-- TEMPLATE FOR CAR BY ID -->
@@ -157,10 +161,20 @@
 
 <!-- TEMPLATE FOR CARS LIST -->
     <script type="text/template" id="template_car">
+           
             <ul >
                 <li class = "cars-list  alert alert-dark "role="alert"></li>
                 <button type="button" class = " button btn alert alert-secondary "role="alert"></button>
             </ul>           
+    </script>
+
+
+    <!-- TEMPLATE FOR CARS LIST SEARCHING BY PARMS-->
+    <script type="text/template" id="template_car_byParams">
+        <ul >
+            <li class = "cars_list_byParams  alert alert-dark "role="alert"></li>
+            <button type="button" class = " button btn alert alert-secondary "role="alert"></button>
+        </ul>           
     </script>
     
     <script src="js/app.js"></script>
