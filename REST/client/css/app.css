@@ -3,6 +3,7 @@ body{
     background-image: url('../pic/2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    /* background: black; */
     }
 h3 ,h2{
     text-align: center;
@@ -85,5 +86,15 @@ h4{
     width: 30%;
 }
 #user{
-    color:white;
+    color:red;
+}
+.prompt{
+    background: rgba(255, 0, 0, 0.452);
+    width: 40%;
+    border-radius: 3%;
+    clear: both;
+    color: aliceblue;
+}
+h5{
+    text-align: center;
 }

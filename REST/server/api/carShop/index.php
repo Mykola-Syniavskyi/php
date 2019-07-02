@@ -254,10 +254,10 @@ class carShop extends restServer
             //return  $this->vuewRez(array(1=>$this->logPasswd));
             $arr = array();
             $dbh = new PDO(DSN, USER, PASSWD);
-            $quer = "SELECT name, lastname FROM users WHERE email = '$this->logEmail' AND password = '$this->logPasswd'"; //print_r($quer);
+            $quer = "SELECT id, name, lastname, password FROM users WHERE email = '$this->logEmail' AND password = '$this->logPasswd'"; //print_r($quer);
             foreach($dbh->query($quer) as $row) 
            { 
-                $tmp_arr = array('name'=>$row['name'],'lastname'=>$row['lastname']);
+                $tmp_arr = array('name'=>$row['name'],'lastname'=>$row['lastname'],'id'=>$row['id'] ,'password'=>$row['password']);
                 array_push($arr, $tmp_arr); 
            } 
            if (sizeof($arr))
@@ -266,13 +266,9 @@ class carShop extends restServer
            }
            else 
            {
-                return $this->vuewRez(array('error'=>'this password or email does not exist !'));
+                return $this->vuewRez(array('error'=>'this password or email does not exist, or you need to register !'));
            }
            
-
-
-
-
         }
         else
         {
@@ -423,17 +419,16 @@ class carShop extends restServer
                 $tmp_arr = array('id'=>$row['id'],'model'=>$row['model'], 'engine_capacity'=>$row['engine_capacity'],'year'=>$row['year'] , 'color'=>$row['color'], 'max_speed'=>$row['max_speed'], 'brand'=>$row['brand'], 'price'=>$row['price']  );
                 array_push($arr, $tmp_arr); 
            } 
-           return $this->vuewRez($arr);  
-        }
-        else
-        {
-            return  $this->vuewRez(array('error'=>'please select even thought one parametr !'));   
-        }
-
-
-        
+           if (sizeof($arr))
+           {
+                return $this->vuewRez($arr); 
+           }
+           else
+           {
+                return  $this->vuewRez(array('error'=>'please select even thought one parametr !')); 
+           }    
     }
-    
+}
 
 
 
