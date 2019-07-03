@@ -10,10 +10,9 @@ class carShop extends restServer
     protected $lastname;
     protected $passwd;
     protected $confirmpasswd;
-    protected $payName;
-    protected $payLastName;
+    protected $PayUserId;
     protected $paymentsType;
-    protected $payID;
+    protected $PayCarId;
     protected $brand;
     protected $color;
     protected $engine_capacity;
@@ -23,6 +22,7 @@ class carShop extends restServer
     protected $year;
     protected $logEmail;
     protected $logPasswd;
+    protected $userId;// for show order
     
     
 
@@ -286,40 +286,19 @@ class carShop extends restServer
         { //return $this->vuewRez($formData);
             foreach ($formData as $key => $value)
             {
-               if ($key == 'firstname')
+               if ($key == 'user_id')
                {
-                    $this->payName = $value;
+                    $this->PayUserId = $value;
                }
-               if ($key == 'lastname')
-               {
-                $this->payLastName = $value;
-               }
+               
                if ($key == 'payments')
                {
                 $this->paymentsType = $value;
                }
-               if ($key == 'id')
+               if ($key == 'car_id')
                {
-                $this->payID = $value;
+                $this->PayCarId = $value;
                }
-            }
-
-            if (!empty($this->payName))
-            {
-                $this->payName = trim(htmlspecialchars($this->payName));
-            }
-            else 
-            {
-                return $this->vuewRez(array('error'=> 'sorry, enter your name'));
-            }
-
-            if (!empty($this->payLastName))
-            {
-                $this->payLastName = trim(htmlspecialchars($this->payLastName));
-            }
-            else 
-            {
-                return $this->vuewRez(array('error'=> 'sorry, enter your last name'));
             }
  
             if (!empty($this->paymentsType))
@@ -334,13 +313,12 @@ class carShop extends restServer
 
             //return $this->vuewRez(array('firstname' =>"$this->payName"));
             $dbh = new PDO(DSN, USER, PASSWD);
-            $quer = "INSERT INTO orders (car_id, payments, lastname, firstname)values(:id,:payments,:lastname,:firstname)";
+            $quer = "INSERT INTO orders (car_id, payments, user_id)values(:car_id,:payments,:user_id)";
             $sth = $dbh->prepare($quer);
             //return $this->vuewRez([$typePay, $lastname, $firstname]);
-            $sth->bindParam(':id',$this->payID,PDO::PARAM_INT);
+            $sth->bindParam(':car_id',$this->PayCarId,PDO::PARAM_INT);
             $sth->bindParam(':payments',$this->paymentsType,PDO::PARAM_STR);
-            $sth->bindParam(':lastname',$this->payLastName,PDO::PARAM_STR);
-            $sth->bindParam(':firstname',$this->payName,PDO::PARAM_STR);
+            $sth->bindParam(':user_id',$this->PayUserId,PDO::PARAM_INT);
             $rez = $sth->execute(); 
             if (true === $rez)
             {
@@ -512,6 +490,39 @@ class carShop extends restServer
         }
     }
 
+
+    public function postShowOrder($userId)
+    {   //var_dump($userId);
+        if (sizeof($userId))
+        {
+            $this->userId = (int)trim(htmlspecialchars($userId['user_id']));
+            $arr = array();
+            $dbh = new PDO(DSN, USER, PASSWD);
+            $quer = "SELECT cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand,orders.payments, orders.id as order_id, users.name,users.lastname, users.email  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id join orders on orders.car_id = cars.id join users on orders.user_id = users.id where orders.user_id= $this->userId;";
+            // $quer = "SELECT cars.id, cars.engine_capacity,cars.max_speed,cars.price,cars.year, model.model, color.color, brand.brand,orders.payments, orders.id as order_id, users.name,users.lastname, users.email  from cars  join   model on cars.id=model.id join color_cars on color_cars.car_id=cars.id join color on color.id=color_cars.color_id join brand on brand.id=cars.id join orders on orders.car_id = cars.id join users on orders.user_id = users.id where orders.user_id= $this->userId;";
+            $dbh->query($quer); 
+            
+            foreach($dbh->query($quer) as $row) 
+           { //print_r($row);exit;
+                $tmp_arr = array('name'=>$row['name'], 'lastname'=>$row['lastname'], 'email'=>$row['email'],'order_id'=>$row['order_id'],'brand'=>$row['brand'], 'model'=>$row['model'],'engine_capacity'=>$row['engine_capacity'], 'max_speed'=>$row['max_speed'], 'year'=>$row['year'] , 'color'=>$row['color'],  'price'=>$row['price']  );
+                array_push($arr, $tmp_arr); 
+           } 
+           if (sizeof($arr))
+           {
+            return $this->vuewRez($arr);
+           }
+           else 
+           {
+               return $this->vuewRez(array('error'=>'you have nothing !')); 
+           }
+
+        }
+        else
+        {
+            return $this->vuewRez(array('error'=>'something was went wrong, we are fixing it !'));
+        }
+        
+    }
     
 }
 $obj = new carShop();
