@@ -15,8 +15,8 @@ class restServer
            $arrMethod= array();
            $arrParams= array();
            $this->url= $_SERVER['REQUEST_URI'];  
-            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
-            $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
+            $arrRez = explode('/',$this->nameMethod= substr($this->url, 37));//for classes
+            // $arrRez = explode('/',$this->nameMethod= substr($this->url, 25));//for home
             $this->method = $_SERVER['REQUEST_METHOD'];
             foreach ($arrRez as $key=>$val)
             {

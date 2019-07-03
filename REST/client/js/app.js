@@ -1,4 +1,5 @@
 (function($){
+    var server_url = 'api/carShop';
     var $cars = $('#cars');
     var $oneCar= $('#oneCar');
     var $carParam = $('#cars_params');
@@ -11,6 +12,7 @@
     var $car1 = $(template_car1);
     var $order = $(template_order)
     var $showOrder = $('#btn_order_show');
+    
     //GET USER FROM LOCAL STORAGE
     var $user = localStorage.getItem('name');
                 if (localStorage.getItem('name')){
@@ -31,6 +33,7 @@
             $car.find('.cars-list').text(val.id + '.' +' '+ val.brand +' '+ val.model);
             $car.find('.button').text('watch ->'+val.model).data('id', val.id);
             $car.appendTo($cars);
+            $('.order-list0').css('display', 'none');
         });
 
 
@@ -44,6 +47,7 @@
 
 //CLOSE WINDOW MY ORDERS
     $('body').on('click', ".order-list0", function() {
+        $('.order-list0').css('display', 'none');
         $oneCar.html('');
         })
     
@@ -174,8 +178,8 @@
     function GetDetails(id){
      
         $.ajax({
-        url: '/REST/server/api/carShop/oneCar/'+id+'/',
-        // url: '/~user15/php/REST/client/api/carShop/oneCar/'+id+'/',
+        // url: '/REST/server/api/carShop/oneCar/'+id+'/',
+        url: server_url + '/oneCar/'+id+'/',
         method: 'GET',
         data: {
             results: 50,
@@ -203,8 +207,8 @@
 
 
     $.ajax({
-        url: '/REST/client/api/carShop/allCars/',
-                        // url: '/~user15/php/REST/client/api/carShop/allCars/',
+        // url: '/REST/client/api/carShop/allCars/',
+                        url: server_url+'/allCars/',
         method: 'GET',
         data: {
             results: 50,
@@ -226,10 +230,24 @@
     })
 
 
+
+    //BUTTON LOGIN
+    $("#btn_log").click(
+        function(){
+            
+            sendPutAjax('result_form', 'log_form', 
+            // 'api/carShop/log/');
+            server_url + '/log/');
+        return false; 
+        }
+        );
+        
+
+
     // LOGIN FUNCTION
     function sendPutAjax(result_form,log_form,url){
         
-        $.ajax({
+        $.ajax({ 
             url:     url, //url страницы 
             type:     "PUT", //метод отправки
             dataType: "html", //формат данных
@@ -267,48 +285,34 @@
 
 }
     
-//BUTTON LOGIN
-    $("#btn_log").click(
-    function(){
-        
-        sendPutAjax('result_form', 'log_form', 
-        // 'api/carShop/log/');
-        '/REST/client/api/carShop/log/');
-    return false; 
-    }
-    );
-    
 
-
-
+//BUTON FIND PARAMS
     $( document ).ready(function() {
         $("#btn_find_byparams").click(
-            
              function(){ //alert(5);
                 findByParams('result_form', 'find_params_js', 
-                // '/~user15/php/REST/client/api/carShop/findCarByParams'
-               'http://mysite.local/REST/client/api/carShop/findCarByParams'
+                server_url + '/findCarByParams'
+            //    'http://mysite.local/REST/client/api/carShop/findCarByParams'
              );
                  return false; 
             }
         );
     });
 
+
+
+//FUNCTION FIND BY PARAMS
     function findByParams(result_form, find_params_js, url){
         $.ajax({
             url:     url, //url страницы (action_ajax_form.php)
             type:     "POST", //метод отправки
             dataType: "html", //формат данных
             data: $("#find_params_js").serialize(),// Сеарилизуем объект и добавляю айди кар
-                    
-            
             success: function(response) { //Данные отправлены успешно
-                
                 result = $.parseJSON(response);//console.log(result);
                 console.log(result);
                 if (result.success){
                     $('#result_form').addClass(".alert alert-success regAlert").html(result.success);
-
                 }else{
                     $('#result_form').addClass(".alert alert-danger error regAlert").html(result.error);
                 }
@@ -317,7 +321,6 @@
                 }else{
                     return false;
                 }
-
             },
             error: function(response) { // Данные не отправлены
                 $('#result_form').html('Ошибка. Данные не отправлены.');
@@ -326,21 +329,17 @@
     }
 
 
-
-
-
-
-
     //BUTTON SHOW ORDER
     $( document ).ready(function() {
         $("#btn_order_show").click(  
             function(){ 
+                $('.order-list0').css('display', 'block');
                 var $userId =  $('#show_order_id');
                 $userId.val(localStorage.getItem('id'));
                 showOrder('result_form', 'send_id_user', 
-                'http://mysite.local/REST/client/api/carShop/showOrder'
-                // '/~user15/php/REST/client/api/carShop/showOrder'
-            ); 
+                // 'http://mysite.local/REST/client/api/carShop/showOrder'
+                server_url + '/showOrder'
+                ); 
                 return false; 
             }
         );
@@ -354,15 +353,8 @@ function showOrder(result_form, send_id_user, url ){
         type:     "POST", //метод отправки
         dataType: "html", //формат данных
         data: $("#send_id_user").serialize(),// Сеарилизуем объект и добавляю айди кар
-                
-        
         success: function(response) { //Данные отправлены успешно
-            
             result = $.parseJSON(response);//console.log(result);
-            
-            //$('#ajax_form')[0].reset();//clear form
-            // result = response;
-
             console.log(result);
             if (result.success){
 
@@ -388,22 +380,21 @@ function buildMyOrder(orders)
 {   $oneCar.html(''); //console.log(oneCar[0].id);
     $(orders).each(function(index, val) {
         console.log(val); //alert(val.order_id);
-        $order.find('.order-list').html("customer`s name: "+val.name + ";" + "customer`s last name: " + val.lastname + ";" +  "customer`s email: " 
-                    + val.email + ";" + "order`s ID: " + val.order_id + ";" + "brand: " + val.brand + ";" +  "model : " + val.model + ";" + "year: " + val.year + ";" + 
-                    "engine capacity: " + val.engine_capacity + " L"+ ";" + "max_speed: " + val.max_speed + " km/h" +";" + "color: " + val.color + ";" + "price: " + val.price + " uan" );
-        // $order.find('.order-list2').text("customer`s last name: " + val.lastname);
-        // $order.find('.order-list3').text("customer`s email: " + val.email);
-        // $order.find('.order-list4').text("order`s ID: " + val.order_id);
-        // $order.find('.order-list5').text("brand: " + val.brand);
-        // $order.find('.order-list6').text("model : " + val.model);
-        // $order.find('.order-list7').text("year: " + val.year);
-        // $order.find('.order-list8').text("engine capacity: " + val.engine_capacity + " L");
-        // $order.find('.order-list9').text("max_speed: " + val.max_speed + " km/h");
-        // $order.find('.order-list10').text("color: " + val.color);
-        // $order.find('.order-list11').text("price: " + val.price + " uan");
-         $order.appendTo($oneCar);
+       var $test = $order.clone();
+        // $test.find('.order-list1').text("customer`s name: " + val.name );
+        // $test.find('.order-list2').text("customer`s last name: " + val.lastname);
+        // $test.find('.order-list3').text("customer`s email: " + val.email);
+        $test.find('.order-list4').text("order`s ID: " + val.order_id);
+        $test.find('.order-list5').text("brand: " + val.brand);
+        $test.find('.order-list6').text("model : " + val.model);
+        $test.find('.order-list7').text("year: " + val.year);
+        $test.find('.order-list8').text("engine capacity: " + val.engine_capacity + " L");
+        $test.find('.order-list9').text("max_speed: " + val.max_speed + " km/h");
+        $test.find('.order-list10').text("color: " + val.color);
+        $test.find('.order-list11').text("price: " + val.price + " uan");
+         $test.appendTo($oneCar);
    
-    });       // $order.appendTo($oneCar);
+    });       
 }
 
     
@@ -417,8 +408,8 @@ $( document ).ready(function() {
     $("#btn_send").click(
         function(){
             sendAjaxForm('result_form', 'ajax_form', 
-            'http://mysite.local/REST/client/api/carShop/reg'
-            // '/~user15/php/REST/client/api/carShop/reg'
+            // 'http://mysite.local/REST/client/api/carShop/reg'
+            server_url + '/reg'
             );
             return false; 
         }
@@ -473,8 +464,8 @@ $( document ).ready(function() {
                 var $userId = $('#hiddenIdUser');
                 $userId.val(localStorage.getItem('id'));
                 sendAjaxBuyForm('result_form', 'buy_form', 
-                'http://mysite.local/REST/client/api/carShop/buy'
-                // '/~user15/php/REST/client/api/carShop/buy'
+                // 'http://mysite.local/REST/client/api/carShop/buy'
+                server_url + '/buy'
                 );
                 var $buyCar = $("#buy_js");
                 var buy_form = $("#buy_form");

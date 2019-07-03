@@ -240,6 +240,7 @@ class carShop extends restServer
     public function putLog($params)
     {   if (sizeof($params))
         {
+            // return $this->vuewRez($arr);
             foreach ($params as $key=> $value)
             {
                 if ($key == 'email')
@@ -266,13 +267,13 @@ class carShop extends restServer
            }
            else 
            {
-                return $this->vuewRez(array('error'=>'this password or email does not exist, or you need to register !'));
+                return $this->vuewRez(array('error'=>LOGFORM));
            }
            
         }
         else
         {
-            return $this->vuewRez(array('error'=> 'sorry, enter your email and password'));
+            return $this->vuewRez(array('error'=> FORM));
         }
        //return $this->vuewRez($params);
     }
@@ -383,7 +384,7 @@ class carShop extends restServer
             }
             else
             {
-                return $this->vuewRez(array('error'=>'select year require !'));
+                return $this->vuewRez(array('error'=>YEAR));
             }
             
             //  return $this->vuewRez(array('year'=>$this->year));
