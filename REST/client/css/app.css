@@ -39,6 +39,18 @@ span{
     clear: left;
     color: red !important;
 }
+.cars-list{
+    border: 2px solid rgba(255, 5, 5, 0.788);
+
+}
+.button{
+    border: 2px solid rgba(255, 5, 5, 0.788);
+}
+.button:hover{
+    background-color: rgba(255, 5, 5, 0.788);
+    color: white;
+    border: 2px solid rgba(255, 5, 5, 0.788);
+}
 .car1{
         width:30%;
         float: left;

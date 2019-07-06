@@ -1,5 +1,5 @@
 <?php
-include 'restServer.php';
+include '../libs/restServer.php';
 class carShop extends restServer
 {
     protected $sortVuew;
@@ -168,9 +168,7 @@ class carShop extends restServer
                if ($key =='confirm_passwd')
                {
                 $this->confirmpasswd  = array($key => $val);         
-               }
-               
-               
+               }  
             }
            $name = $this->name['name'];
            $lastname = $this->lastname['last_name'];
@@ -183,7 +181,7 @@ class carShop extends restServer
            }
            else
            {
-                return $this->vuewRez(array('error'=>'your Email isnt VALID !'));
+                return $this->vuewRez(array('error'=>ERR_EMAIL));
            }
            
            $passwd = $this->passwd['passwd'];
@@ -195,7 +193,7 @@ class carShop extends restServer
            }
            else
            {
-                return $this->vuewRez(array('error'=>'enter password more then 3 symbols !'));
+                return $this->vuewRez(array('error'=>COUNT_ERR_SYMBOL_PASSWD));
            }
            $confirmpasswd = md5(trim(htmlspecialchars($this->confirmpasswd['confirm_passwd'])));
            
@@ -206,7 +204,7 @@ class carShop extends restServer
            }
            else 
            {
-                return $this->vuewRez(array('error'=> 'please enter min 4  symbols in the parol fild and min 3 symbols in the other filds !'));
+                return $this->vuewRez(array('error'=> COUNT_ERR_SYMBOL));
            }
            if (trim($passwd) === trim($confirmpasswd))
            {
@@ -216,7 +214,7 @@ class carShop extends restServer
                 $rez=$stmt->execute(); //var_dump($rez);
                 if (true === $rez)
                 {
-                    return $this->vuewRez(array('success'=> 'congrats, you are registered!'));
+                    return $this->vuewRez(array('success'=> REGISTER_SUCCESS));
                 }
                 else 
                 {
@@ -227,12 +225,9 @@ class carShop extends restServer
                 }
                 else
                 {
-                    return $this->vuewRez(array('error'=>'parols are not equal'));
-                }
-           
-                
-        } 
-        
+                    return $this->vuewRez(array('error'=>PASSWD_ERROR));
+                }    
+        }     
     }
 
     
@@ -308,7 +303,7 @@ class carShop extends restServer
             }
             else 
             {
-                return $this->vuewRez(array('error'=> 'sorry, check type paying'));
+                return $this->vuewRez(array('error'=> PAY_ERROR));
             }
 
 
@@ -323,11 +318,11 @@ class carShop extends restServer
             $rez = $sth->execute(); 
             if (true === $rez)
             {
-                return $this->vuewRez(array('success'=> 'congrats, you bought this car! Our meneger will call you!'));
+                return $this->vuewRez(array('success'=> BUY_SUCCESS));
             }
             else
             {
-                return $this->vuewRez(array('error'=> 'sorry, you did not buy this  car!'));
+                return $this->vuewRez(array('error'=> BUY_ERROR));
             }
  
             //return $this->vuewRez($formData);
@@ -404,14 +399,10 @@ class carShop extends restServer
            }
            else
            {
-                return  $this->vuewRez(array('error'=>'please select even thought one parametr !')); 
+                return  $this->vuewRez(array('error'=>SEARCH_PARAMS)); 
            }    
     }
 }
-
-
-
-
 
 
     public function addEngine_capacity()
@@ -523,8 +514,7 @@ class carShop extends restServer
             return $this->vuewRez(array('error'=>'something was went wrong, we are fixing it !'));
         }
         
-    }
-    
+    }   
 }
 $obj = new carShop();
 $obj->parsUrl();

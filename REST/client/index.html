@@ -20,7 +20,7 @@
 
     <!-- BUTONS SHOW FORM -->
     <div class="btn_form">
-        <button type="button" id="js_log_show" class="alert alert-dark" role="alert">Log in</button><br>
+        <button type="button" id="js_log_show" class="alert alert-dark button" role="alert">Log in</button><br>
         <form action="" method="POST" id="send_id_user">
             <input type=hidden name="user_id" value="" id="show_order_id">
             <button type="submit" id="btn_order_show" class="alert alert-dark" role="alert">Show my orders</button>
@@ -46,10 +46,8 @@
     <!-- RESULT CARS LIST -->
     <div  id="cars" class="car" ><h4>Cars list</h4></div>
  
-
     <div class="form">
 
-        
         <!-- LOGIN FORM -->
         <form method="PUT" action="" id="log_form">
             <div class="form-group">
@@ -59,8 +57,8 @@
             <div class="form-group">
                 <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <input  type="submit" id="btn_log" class="btn btn-primary"value="Log in"/>
-            <button type="button" id="js_reg_show" class="alert alert-dark" role="alert">Registration</button> 
+            <input  type="submit" id="btn_log" class="btn btn-primary button"value="Log in"/>
+            <button type="button" id="js_reg_show" class="alert alert-dark button" role="alert">Registration</button> 
         </form><br>
 
         <!-- REGISTER FORM -->
@@ -70,10 +68,9 @@
             <input type="email" name="email" placeholder="email" /><br>
             <input type="password" name="passwd" placeholder="passwd" /><br>
             <input type="password" name="confirm_passwd" placeholder="confirm passwd" /><br>
-            <input type="submit" id="btn_send" class="btn btn-primary" value="Register" />
+            <input type="submit" id="btn_send" class="btn btn-primary button" value="Register" />
         </form><br>
     </div><br>
-
 
 <!-- FORM FIND BY PARAMS -->
     <div class="params">
@@ -134,14 +131,15 @@
             </form>
     </div>
 
-<!-- INFO ONE CAR -->
+<!-- BUTTON FOR CLOSING MY ORDER -->
     <ul class="car1">  
         <li class = "order-list0  alert alert-primary " type="button" style="text-align: center; font-weight:700;" role="alert">x--C L O S E &nbsp O R D E R--x</li>
     </ul>
+
+    <!-- INFO ONE CAR -->
     <div  id="oneCar" class="car1" ></div><br>
     <h4 class="h_rez_params">Result of searching cars:</h4>
     <div  id="cars_params" class="car_params " ></div>
-
 
 <!-- TEMPLATE FOR CAR BY ID -->
     <script type="text/template" id="template_car1">
@@ -157,13 +155,8 @@
         </ul>
     </script>
 
-
-
     <!-- TEMPLATE FOR MY ORDER -->
-    <script type="text/template" id="template_my_order">
-       
-        
-        
+    <script type="text/template" id="template_my_order"> 
         <ul  >
             <!-- <li class = "order-list1  alert alert-primary "role="alert"></li>
              <li class ="order-list2  alert alert-primary "role="alert"></li>
@@ -176,12 +169,8 @@
             <li class = "order-list9  alert alert-primary "role="alert"></li>
             <li class = "order-list10  alert alert-primary "role="alert"></li>
             <li class = "order-list11  alert alert-primary "role="alert"></li><br> 
-        </ul>
-        
+        </ul>    
     </script>
-
-
-
 
 
 <!-- TEMPLATE FOR CARS LIST -->
